@@ -1,29 +1,32 @@
-# website
+# 武汉轻工大学数计学院算法协会网站
 
-## Project setup
+## 构建方式
+首先运行
 ```
 npm install
 ```
+安装所有依赖。
 
-### Compiles and hot-reloads for development
+运行
 ```
 npm run serve
 ```
+来启动开发服务器（支持热重载）。
 
-### Compiles and minifies for production
+运行
 ```
 npm run build
 ```
+进行完整的用于生产的构建，
 
-### Run your unit tests
+运行
 ```
 npm run test:unit
 ```
+进行单元测试。
 
-### Lints and fixes files
+运行
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+进行lint检查错误。
