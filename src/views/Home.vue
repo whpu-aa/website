@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/aa.png" />
+    <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="欢迎来到武汉轻工大学算法协会的网站" />
   </div>
 </template>
