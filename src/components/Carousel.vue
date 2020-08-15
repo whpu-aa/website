@@ -18,7 +18,7 @@
           :key="item.id"
           @click.prevent="change(item.id)"
           v-for="item in ImgSrcArr"
-          :class="item.id == liu_img_num ? 'active' : ''"
+          :class="item.id == current_img_num ? 'active' : ''"
         ></a>
       </div>
     </div>
@@ -44,25 +44,25 @@ export default {
 
   data() {
     return {
-      liu_img_num: 0, //控制显示某一张图片的id,当liu_img_num与id相等时候则显示
-      liu_time: "" //接受Interval计时器的返回值,在mouted里面初始化
+      current_img_num: 0, //控制显示某一张图片的id,当current_img_num与id相等时候则显示
+      timer_id: "" //接受Interval计时器的返回值,在mouted里面初始化
     };
   },
   methods: {
     change: function(id) {
       //点击按钮则重置计时器
-      this.liu_img_num = id;
+      this.current_img_num = id;
       this.timestop();
       this.timestart();
     },
     timestop: function() {
-      clearInterval(this.liu_time);
+      clearInterval(this.timer_id);
     },
     timestart: function() {
-      this.liu_time = setInterval(() => {
-        this.liu_img_num++;
-        if (this.liu_img_num == this.ImgSrcArr.length) {
-          this.liu_img_num = 0;
+      this.timer_id = setInterval(() => {
+        this.current_img_num++;
+        if (this.current_img_num == this.ImgSrcArr.length) {
+          this.current_img_num = 0;
         }
       }, this.IntervalTime);
     }
@@ -70,7 +70,7 @@ export default {
   computed: {
     imgactive: function() {
       //考虑到v-if和v-for的冲突问题,在此使用计算属性来筛选
-      var num = this.liu_img_num;
+      var num = this.current_img_num;
       return this.ImgSrcArr.filter(function(img) {
         return img.id == num;
       });
@@ -78,7 +78,10 @@ export default {
   },
   mounted() {
     this.timestart();
-  }
+  },
+  destroyed() {
+    this.timestop();
+  },
 };
 </script>
 <style scoped>
@@ -128,12 +131,6 @@ export default {
 .table .active {
   background: #42b983;
 }
-.tab {
-  position: absolute;
-  left: 40%;
-  bottom: 0;
-}
-
 .fade-enter-active {
   transform: translateX(0px);
   opacity: 1;
