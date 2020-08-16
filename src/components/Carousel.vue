@@ -81,7 +81,7 @@ export default {
   },
   destroyed() {
     this.timestop();
-  },
+  }
 };
 </script>
 <style scoped>
