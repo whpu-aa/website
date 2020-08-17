@@ -79,7 +79,7 @@ export default {
   mounted() {
     this.timestart();
   },
-  destroyed() {
+  beforeDestroy() {
     this.timestop();
   }
 };
