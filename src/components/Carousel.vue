@@ -17,7 +17,7 @@
         <a
           :key="item.id"
           @click.prevent="change(item.id)"
-          v-for="item in ImgSrcArr"
+          v-for="item in imgSrcArr"
           :class="item.id == current_img_num ? 'active' : ''"
         ></a>
       </div>
@@ -28,10 +28,10 @@
 <script>
 export default {
   name: "MyCarousel",
-  props: ["ImgSrcArr", "IntervalTime"],
+  props: ["imgSrcArr", "intervalTime"],
 
   //接受两个参数,第一个为地址对象数组,须有id和src内容,src使用require()即可
-  // imgsrcarr:[
+  // imgSrcArr:[
   //             {
   //                 id:0,
   //                 src:require('../assets/logo.png'),
@@ -61,17 +61,17 @@ export default {
     timestart: function() {
       this.timer_id = setInterval(() => {
         this.current_img_num++;
-        if (this.current_img_num == this.ImgSrcArr.length) {
+        if (this.current_img_num == this.imgSrcArr.length) {
           this.current_img_num = 0;
         }
-      }, this.IntervalTime);
+      }, this.intervalTime);
     }
   },
   computed: {
     imgactive: function() {
       //考虑到v-if和v-for的冲突问题,在此使用计算属性来筛选
       var num = this.current_img_num;
-      return this.ImgSrcArr.filter(function(img) {
+      return this.imgSrcArr.filter(function(img) {
         return img.id == num;
       });
     }
