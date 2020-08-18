@@ -7,7 +7,10 @@
 
 <style scoped>
 .nav {
-  padding: 30px;
+  position: fixed;
+  top: 0;
+  height: 48px; /* 如果你改变这个高度，也需要在App.vue里面改变div#app的margin-top来留出相同的空位 */
+  width: 100%;
 }
 
 .nav a {
