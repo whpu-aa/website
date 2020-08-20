@@ -3,6 +3,7 @@
     <img class="logo" src="@/assets/logo.png" />
     <router-link to="/">主页</router-link>
     <router-link to="/about">关于我们</router-link>
+    <router-link to="/NewsArticles">新闻文章</router-link>
   </nav>
 </template>
 
