@@ -1,21 +1,23 @@
 <template>
   <div class="bgbody">
     <!--左边点击的区域-->
-    <div class="left" name="left" id="left">
+    <div class="left">
       <ul class="rocker">
         <li :key="index" v-for="(item,index) in block">
           <a v-bind:href="item.url" target="myframe">{{item.ename}}</a>
         </li>
       </ul>
     </div>
+    <!--中间显示窗口-->
     <div class="cen">
       <iframe height="100%" width="100%" name="myframe" scrolling="yes" frameborder="0"></iframe>
     </div>
+    <div class="clear"></div>
   </div>
 </template>
 <script>
 export default {
-  name: "group_page",
+  name: "GroupPage",
   data() {
     return {
       block: [
@@ -42,7 +44,6 @@ export default {
 }
 .bgbody {
   /*body背景*/
-  display: table;
   background: url(../assets/group_pic/bg.png);
 }
 .rocker {
@@ -51,9 +52,8 @@ export default {
 a {
   font-size: x-large;
   height: 100%;
-  display: grid;
+  display: block;
   color: white;
-  list-style: none;
   text-decoration: none;
 }
 .left {
@@ -66,13 +66,6 @@ a {
   position: relative;
   float: left;
 }
-dd {
-  border: 1px solid black;
-  margin: 0;
-  opacity: 0;
-  background-color: white;
-  color: black;
-}
 .rocker li {
   background-image: url(../assets/group_pic/webmaker/rocker.png);
   border: 1px solid black;
@@ -84,5 +77,8 @@ dd {
 }
 .rocker li:hover {
   background-image: url(../assets/group_pic/webmaker/rocker2.png);
+}
+.clear {
+  clear: both;
 }
 </style>   
