@@ -15,7 +15,7 @@
   </div>
 </template>
  
-  <script>
+      <script>
 export default {
   name: "group_page",
   data() {
