@@ -22,7 +22,8 @@ const routes = [
   {
     path: "/NewsArticles",
     name: "NewsArticles",
-    component: () => import("../views/NewsArticles.vue")
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/NewsArticles.vue")
   }
 ];
 
