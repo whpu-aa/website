@@ -3,14 +3,20 @@
     <!--左边点击的区域-->
     <div class="left">
       <ul class="rocker">
-        <li :key="index" v-for="(item,index) in block">
-          <a v-bind:href="item.url" target="myframe">{{item.ename}}</a>
+        <li :key="index" v-for="(item, index) in block">
+          <a v-bind:href="item.url" target="myframe">{{ item.ename }}</a>
         </li>
       </ul>
     </div>
     <!--中间显示窗口-->
     <div class="cen">
-      <iframe height="100%" width="100%" name="myframe" scrolling="yes" frameborder="0"></iframe>
+      <iframe
+        height="100%"
+        width="100%"
+        name="myframe"
+        scrolling="yes"
+        frameborder="0"
+      ></iframe>
     </div>
     <div class="clear"></div>
   </div>
@@ -30,7 +36,7 @@ export default {
     };
   }
 };
-</script>  
+</script>
 <style scoped>
 .cen {
   /*主页中间最大的div*/
@@ -81,4 +87,4 @@ a {
 .clear {
   clear: both;
 }
-</style>   
+</style>
