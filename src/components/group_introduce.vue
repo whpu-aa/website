@@ -8,14 +8,12 @@
         </li>
       </ul>
     </div>
-
     <div class="cen">
       <iframe height="100%" width="100%" name="myframe" scrolling="yes" frameborder="0"></iframe>
     </div>
   </div>
 </template>
- 
-      <script>
+<script>
 export default {
   name: "group_page",
   data() {
@@ -42,12 +40,11 @@ export default {
   opacity: 0.8;
   background: url("../assets/group_pic/snow.png");
 }
-.bgbody /*body背景*/
- {
+.bgbody {
+  /*body背景*/
   display: table;
   background: url(../assets/group_pic/bg.png);
 }
-
 .rocker {
   margin: 100px 0px;
 }
@@ -59,7 +56,6 @@ a {
   list-style: none;
   text-decoration: none;
 }
-
 .left {
   background-color: white;
   border-radius: 100px;
