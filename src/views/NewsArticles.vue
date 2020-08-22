@@ -1,8 +1,7 @@
 <template>
   <div class="NewsArticles">
     <div class="article">
-      {{ title }}
-      <br />
+      <h3>{{ title }}</h3>
       <pre><p :key="index" v-for="(item, index) in msg_center" class="msgcenter">{{ item }}</p></pre>
       <pre><p :key="index" v-for="(item, index) in msg_left" class="msgleft">{{ item }}</p></pre>
     </div>
@@ -34,11 +33,14 @@ export default {
 
 <style scoped>
 .NewsArticles {
+  font-size: 100%;
+  display: flex;
+  flex-direction: row;
   width: 100%;
 }
 .article {
   border-radius: 3%;
-  position: absolute;
+  display: flexbox;
   z-index: -10;
   margin: 5%;
   height: auto;
@@ -47,19 +49,14 @@ export default {
 }
 .morearticle {
   margin: 5%;
+  display: flexbox;
   border-radius: 3%;
-  position: absolute;
-  right: 0;
   z-index: -10;
   width: 35%;
   background-color: rgb(211, 211, 211);
 }
 pre {
   white-space: pre-wrap; /*css-3*/
-  white-space: -moz-pre-wrap; /*Mozilla,since1999*/
-  white-space: -pre-wrap; /*Opera4-6*/
-  white-space: -o-pre-wrap; /*Opera7*/
-  word-wrap: break-word; /*InternetExplorer5.5+*/
 }
 .msgcenter {
   text-align: center;
