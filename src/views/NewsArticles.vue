@@ -33,24 +33,25 @@ export default {
 
 <style scoped>
 .NewsArticles {
+  padding-top: 5%;
   font-size: 100%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  width: 100%;
+  align-items: baseline;
 }
 .article {
   border-radius: 3%;
   display: flexbox;
-  margin: 5%;
   height: auto;
-  width: 50%;
+  flex-basis: 50%;
   background-color: rgb(211, 211, 211); /* 颜色未定 ,后期统一背板颜色 */
 }
 .morearticle {
-  margin: 5%;
   display: flexbox;
   border-radius: 3%;
-  width: 35%;
+  flex-basis: 30%;
   background-color: rgb(211, 211, 211);
 }
 pre {
