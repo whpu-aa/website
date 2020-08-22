@@ -43,13 +43,11 @@ export default {
 }
 .article {
   border-radius: 3%;
-  display: flexbox;
   height: auto;
   flex-basis: 50%;
   background-color: rgb(211, 211, 211); /* 颜色未定 ,后期统一背板颜色 */
 }
 .morearticle {
-  display: flexbox;
   border-radius: 3%;
   flex-basis: 30%;
   background-color: rgb(211, 211, 211);
