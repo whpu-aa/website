@@ -41,7 +41,6 @@ export default {
 .article {
   border-radius: 3%;
   display: flexbox;
-  z-index: -10;
   margin: 5%;
   height: auto;
   width: 50%;
@@ -51,7 +50,6 @@ export default {
   margin: 5%;
   display: flexbox;
   border-radius: 3%;
-  z-index: -10;
   width: 35%;
   background-color: rgb(211, 211, 211);
 }
