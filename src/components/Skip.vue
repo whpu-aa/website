@@ -8,11 +8,6 @@
 <script>
 export default {
   name: "Skip",
-  data() {
-    return {
-      number: null
-    };
-  },
   props: {
     targetHref: String,
     iconSrc: String,
