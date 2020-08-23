@@ -10,12 +10,26 @@
         <p>其他新闻</p>
         <!--跳转至其他文章-->
         <div class="articleList">
-          <skip :src='skip_src' :href='skip_href' :articleContents='articles_contents'></skip>
-          <skip :src='skip_src' :href='skip_href' :articleContents='articles_contents'></skip>
-          <skip :src='skip_src' :href='skip_href' :articleContents='articles_contents'></skip>
+          <skip
+            :src="skip_src"
+            :href="skip_href"
+            :articleContents="articles_contents"
+          ></skip>
+          <skip
+            :src="skip_src"
+            :href="skip_href"
+            :articleContents="articles_contents"
+          ></skip>
+          <skip
+            :src="skip_src"
+            :href="skip_href"
+            :articleContents="articles_contents"
+          ></skip>
         </div>
         <!--跳转到新闻目录-->
-        <a class="readMore" href="http://www.baidu.com" target="_block">阅读更多新闻</a>
+        <a class="readMore" href="http://www.baidu.com" target="_block"
+          >阅读更多新闻</a
+        >
       </div>
       <!--跳转至其他页面，例如日常题目，协会介绍等等-->
       <div class="otherRecommended">
@@ -29,7 +43,7 @@
 import Skip from "../components/Skip";
 export default {
   components: {
-    "skip": Skip
+    skip: Skip
   },
   data() {
     return {
@@ -51,7 +65,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .NewsArticles {
