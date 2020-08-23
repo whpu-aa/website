@@ -2,12 +2,10 @@
   <a
     class="toMoreArticles"
     :class="{ over: number == 0 }"
-    :href="href"
+    :href="targetHref"
     target="_block"
-    @mouseover="mouseOver"
-    @mouseleave="mouseLeave"
   >
-    <img class="moreArticlesIcon" :src="require('@/assets/' + src)" />
+    <img class="moreArticlesIcon" :src="require('@/assets/' + iconSrc)" />
     <div class="articleContents">{{ articleContents }}</div>
   </a>
 </template>
@@ -21,29 +19,21 @@ export default {
     };
   },
   props: {
-    href: String,
-    src: String,
+    targetHref: String,
+    iconSrc: String,
     articleContents: String
-  },
-  methods: {
-    mouseOver() {
-      this.number = 0;
-    },
-    mouseLeave() {
-      this.number = null;
-    }
   }
 };
 </script>
 
 <style scoped>
+a:hover {
+  color: aqua;
+}
 a {
   text-decoration: none;
   color: black;
   margin: 10px;
-}
-.over {
-  color: aqua;
 }
 .toMoreArticles {
   display: flex;
