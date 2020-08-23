@@ -1,10 +1,5 @@
 <template>
-  <a
-    class="toMoreArticles"
-    :class="{ over: number == 0 }"
-    :href="targetHref"
-    target="_block"
-  >
+  <a class="toMoreArticles" :href="targetHref" target="_block">
     <img class="moreArticlesIcon" :src="require('@/assets/' + iconSrc)" />
     <div class="articleContents">{{ articleContents }}</div>
   </a>
