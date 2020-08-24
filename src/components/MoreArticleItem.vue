@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "Skip",
+  name: "MoreArticleItem",
   props: {
     targetHref: String,
     iconSrc: String,

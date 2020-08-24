@@ -10,21 +10,21 @@
         <p>其他新闻</p>
         <!--跳转至其他文章-->
         <div class="articleList">
-          <skip
+          <more-article-item
             :iconSrc="skip_icon_src"
             :targetHref="skip_href"
             :articleContents="articles_contents"
-          ></skip>
-          <skip
+          ></more-article-item>
+          <more-article-item
             :iconSrc="skip_icon_src"
             :targetHref="skip_href"
             :articleContents="articles_contents"
-          ></skip>
-          <skip
+          ></more-article-item>
+          <more-article-item
             :iconSrc="skip_icon_src"
             :targetHref="skip_href"
             :articleContents="articles_contents"
-          ></skip>
+          ></more-article-item>
         </div>
         <!--跳转到新闻目录-->
         <a class="readMore" href="http://www.baidu.com" target="_block"
@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import Skip from "../components/Skip";
+import MoreArticleItem from "../components/MoreArticleItem";
 export default {
   components: {
-    skip: Skip
+    MoreArticleItem
   },
   data() {
     return {
