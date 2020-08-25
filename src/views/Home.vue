@@ -1,9 +1,7 @@
 <template>
   <div class="home">
     <aside class="left">
-      <div id="group-introduction" class="component sample-component">
-        <router-link to="/GroupIntroduce">部门介绍</router-link>
-      </div>
+     <group/>
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
     <div class="main">
@@ -19,8 +17,12 @@
 </template>
 
 <script>
+import Group from "../components/Group";
 export default {
-  name: "Home"
+  name: "Home",
+  components:{
+    'group':Group
+  }
 };
 </script>
 
@@ -72,16 +74,6 @@ export default {
   font-size: 4em;
 }
 
-#group-introduction {
-  height: 500px;
-  border-radius: 8px;
-  display: block;
-  margin-bottom: 20px;
-  background-color: royalblue;
-
-  /*background-color: cornflowerblue; /* 仅用来展示，在替换为真正的组件后删除 */
-}
-
 #about-us {
   height: 200px;
 
@@ -107,13 +99,5 @@ export default {
 
   background-color: moccasin;
 }
-#group-introduction a:hover {
-  background: url(../assets/group_pic/group.gif) center;
-}
-#group-introduction a {
-  display: block;
-  height: 100%;
-  text-decoration: none;
-  line-height: 500px;
-}
+
 </style>
