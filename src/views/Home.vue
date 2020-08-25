@@ -2,7 +2,7 @@
   <div class="home">
     <aside class="left">
       <div id="group-introduction" class="component sample-component">
-        <a href="http://www.baidu.com" target="_blank">部门介绍</a>
+       <router-link to="/GroupIntroduce">部门介绍</router-link>
       </div>
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
