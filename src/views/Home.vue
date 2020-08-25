@@ -2,14 +2,16 @@
   <div class="home">
     <aside class="left">
       <div id="group-introduction" class="component sample-component">
-       <router-link to="/GroupIntroduce">部门介绍</router-link>
+        <router-link to="/GroupIntroduce">部门介绍</router-link>
       </div>
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
     <div class="main">
       <div class="main-top">
         <div id="carousel" class="component sample-component">轮播图</div>
-        <div id="daily-problem" class="component sample-component">日常题目</div>
+        <div id="daily-problem" class="component sample-component">
+          日常题目
+        </div>
       </div>
       <div id="news" class="component sample-component">新闻</div>
     </div>

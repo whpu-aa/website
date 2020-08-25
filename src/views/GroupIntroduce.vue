@@ -47,7 +47,7 @@ export default {
   position: relative;
   opacity: 0.8;
   background: url("../assets/group_pic/snow.png");
-  border:solid 10px white;
+  border: solid 10px white;
   border-radius: 10px;
 }
 .bgbody {
