@@ -47,6 +47,8 @@ export default {
   position: relative;
   opacity: 0.8;
   background: url("../assets/group_pic/snow.png");
+  border:solid 10px white;
+  border-radius: 10px;
 }
 .bgbody {
   /*body背景*/
@@ -64,7 +66,7 @@ a {
 }
 .left {
   background-color: white;
-  border-radius: 100px;
+  border-radius: 25px;
   opacity: 0.7;
   margin: 10% -8px;
   width: 400px;

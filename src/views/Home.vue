@@ -2,16 +2,14 @@
   <div class="home">
     <aside class="left">
       <div id="group-introduction" class="component sample-component">
-        小组介绍
+        <a href="http://www.baidu.com" target="_blank">部门介绍</a>
       </div>
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
     <div class="main">
       <div class="main-top">
         <div id="carousel" class="component sample-component">轮播图</div>
-        <div id="daily-problem" class="component sample-component">
-          日常题目
-        </div>
+        <div id="daily-problem" class="component sample-component">日常题目</div>
       </div>
       <div id="news" class="component sample-component">新闻</div>
     </div>
@@ -75,10 +73,11 @@ export default {
 #group-introduction {
   height: 500px;
   border-radius: 8px;
-
+  display: block;
   margin-bottom: 20px;
+  background-color: royalblue;
 
-  background-color: cornflowerblue; /* 仅用来展示，在替换为真正的组件后删除 */
+  /*background-color: cornflowerblue; /* 仅用来展示，在替换为真正的组件后删除 */
 }
 
 #about-us {
@@ -105,5 +104,14 @@ export default {
   height: 800px;
 
   background-color: moccasin;
+}
+#group-introduction a:hover {
+  background: url(../assets/group_pic/group.gif) center;
+}
+#group-introduction a {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  line-height: 500px;
 }
 </style>
