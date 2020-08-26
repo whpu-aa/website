@@ -1,5 +1,5 @@
 <template>
-  <div id="group-introduction" class="component">
+  <div id="group-introduction">
     <router-link to="/GroupIntroduce">部门介绍</router-link>
   </div>
 </template>
