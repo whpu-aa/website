@@ -4,7 +4,7 @@
   </div>
 </template>
 <style>
-.about{
+.about {
   text-align: center;
   color: blue;
 }
