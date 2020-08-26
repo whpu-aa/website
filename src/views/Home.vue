@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <aside class="left">
-     <group/>
+      <group class="component" />
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
     <div class="main">
@@ -20,8 +20,8 @@
 import Group from "../components/Group";
 export default {
   name: "Home",
-  components:{
-    'group':Group
+  components: {
+    group: Group
   }
 };
 </script>
@@ -99,5 +99,4 @@ export default {
 
   background-color: moccasin;
 }
-
 </style>

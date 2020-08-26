@@ -23,13 +23,17 @@ const routes = [
     path: "/NewsArticles",
     name: "NewsArticles",
     component: () =>
-      import(/* webpackChunkName: "news-articles" */ "../views/NewsArticles.vue")
+      import(
+        /* webpackChunkName: "news-articles" */ "../views/NewsArticles.vue"
+      )
   },
   {
     path: "/GroupIntroduce",
     name: "GroupIntroduce",
     component: () =>
-      import(/* webpackChunkName: "group-introduce" */ "../views/GroupIntroduce.vue")
+      import(
+        /* webpackChunkName: "group-introduce" */ "../views/GroupIntroduce.vue"
+      )
   }
 ];
 
