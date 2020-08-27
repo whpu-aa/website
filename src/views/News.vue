@@ -34,7 +34,7 @@ export default {
   text-align: center;
   line-height: 60px;
 }
-.search{
+.search {
   min-width: 200px;
 }
 </style>
