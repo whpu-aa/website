@@ -10,7 +10,13 @@
     </div>
     <!--中间显示窗口-->
     <div class="cen">
-      <iframe height="100%" width="100%" name="myframe" scrolling="yes" frameborder="0"></iframe>
+      <iframe
+        height="100%"
+        width="100%"
+        name="myframe"
+        scrolling="yes"
+        frameborder="0"
+      ></iframe>
     </div>
   </div>
 </template>
@@ -51,7 +57,7 @@ export default {
   height: 800px;
 }
 .rocker {
-margin-right: 35px;
+  margin-right: 35px;
 }
 a {
   font-size: x-large;
