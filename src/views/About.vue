@@ -7,10 +7,10 @@
       <!--顶端索引-->
       <div class="headIndex">
         <router-link to="/">主页</router-link>
-        <span>></span>
+        <span>&gt;</span>
         <router-link to="/about">关于我们</router-link>
-        <span>></span>
-        <span>{{ association_introduction }}</span>
+        <span>&gt;</span>
+        <span>{{ currentItem }}</span>
       </div>
       <div class="majorStructure">
         <!--左边导航栏-->
@@ -18,7 +18,7 @@
           <h2>协会概况</h2>
           <ul>
             <li
-              @click="association_introduction = site.item"
+              @click="currentItem = site.item"
               :key="index"
               v-for="(site, index) in sites1"
             >
@@ -28,16 +28,14 @@
         </div>
         <!--中间显示对应内容-->
         <div class="middleBlock">
-          <DetailsComponent
-            :item_name="association_introduction"
-          ></DetailsComponent>
+          <DetailComponent :itemName="currentItem"></DetailComponent>
         </div>
         <!--右边导航栏-->
         <div class="rightColumn">
           <h2>协会概况</h2>
           <ul>
             <li
-              @click="association_introduction = site.item"
+              @click="currentItem = site.item"
               :key="index"
               v-for="(site, index) in sites2"
             >
@@ -49,13 +47,12 @@
     </div>
   </div>
 </template>
-
 <script>
-import DetailComponent from "../components/DetailComponents.vue";
+import DetailComponent from "../components/DetailComponent.vue";
 export default {
-  name: "Association",
+  name: "About",
   components: {
-    DetailsComponent: DetailComponent
+    DetailComponent: DetailComponent
   },
   data() {
     return {
@@ -72,7 +69,7 @@ export default {
         { item: "技术专栏" },
         { item: "活动纪实" }
       ],
-      association_introduction: "协会简介"
+      currentItem: "协会简介"
     };
   }
 };

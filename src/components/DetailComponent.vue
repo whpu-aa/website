@@ -1,15 +1,15 @@
 <template>
   <div class="textCommonent">
-    <div v-if="item_name == '协会简介'">
-      <h3>{{ item_name }}</h3>
+    <div v-if="itemName == '协会简介'">
+      <h3>{{ itemName }}</h3>
       <p>
         算法协会是一个以计算机软件算法为核心的组织，
         它力求以严格、规范、先进的模式，为广大学生提供一个学习、监督、交流的平台，
         为培养专业、全面、领先的计算机高技术型人才服务。
       </p>
     </div>
-    <div v-else-if="item_name == '协会负责人'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '协会负责人'">
+      <h3>{{ itemName }}</h3>
       <p>
         刘德，男，软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。
       </p>
@@ -20,11 +20,11 @@
         周云，男，软工1801班，算法协会副会长，入党积极分子。兴趣爱好是跑步，打羽毛球，看动漫。专业基础知识掌握牢固，面对困难乐观积极进取，能主动探索自己的知识盲区，拓宽自己的眼界。希望在数计学院算法协会不仅能学习各种优化算法，提升自己的编程能力，更能在与协会成员磨合过程中，提升自己的团队协作能力。
       </p>
     </div>
-    <div v-else-if="item_name == '协会机构'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '协会机构'">
+      <h3>{{ itemName }}</h3>
     </div>
-    <div v-else-if="item_name == '协会章程'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '协会章程'">
+      <h3>{{ itemName }}</h3>
       <p>
         制定管理制度：协会的正常运行和发展离不开完善的规章制度。目前协会刚刚起步，针对协会当前运营及工作情况，主要对协会成员日常题目训练，题目讲解以及参加会议情况等进行考察并制定相关的管理制度。
         算法协会管理组将主要负责对协会成员日常活动的考察，并建立完善相关制度。
@@ -38,20 +38,20 @@
         由于协会仍在不断建设之中，各项制度措施会不断完善，我们会在不断摸索中建立健全各项制度。
       </p>
     </div>
-    <div v-else-if="item_name == '联系我们'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '联系我们'">
+      <h3>{{ itemName }}</h3>
     </div>
-    <div v-else-if="item_name == '成员风采'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '成员风采'">
+      <h3>{{ itemName }}</h3>
     </div>
-    <div v-else-if="item_name == '招新专区'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '招新专区'">
+      <h3>{{ itemName }}</h3>
     </div>
-    <div v-else-if="item_name == '技术专栏'">
-      <h3>{{ item_name }}</h3>
+    <div v-else-if="itemName == '技术专栏'">
+      <h3>{{ itemName }}</h3>
     </div>
     <div v-else>
-      <h3>{{ item_name }}</h3>
+      <h3>{{ itemName }}</h3>
     </div>
   </div>
 </template>
@@ -59,10 +59,7 @@
 export default {
   name: "DetailComponent",
   props: {
-    item_name: String
-  },
-  Data() {
-    return {};
+    itemName: String
   }
 };
 </script>
