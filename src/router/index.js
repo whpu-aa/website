@@ -34,6 +34,12 @@ const routes = [
       import(
         /* webpackChunkName: "group-introduce" */ "../views/GroupIntroduce.vue"
       )
+  },
+  {
+    path: "/News",
+    name: "News",
+    component: () =>
+      import(/* webpackChunkName: "group-introduce" */ "../views/News.vue")
   }
 ];
 
