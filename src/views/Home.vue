@@ -15,6 +15,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Group from "../components/Group";
 export default {

@@ -47,6 +47,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import DetailComponent from "../components/DetailComponent.vue";
 export default {
@@ -74,6 +75,7 @@ export default {
   }
 };
 </script>
+
 <style>
 .about {
   width: 100%;
