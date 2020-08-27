@@ -10,15 +10,15 @@
         <span>></span>
         <router-link to="/about">关于我们</router-link>
         <span>></span>
-        <span>{{ message }}</span>
+        <span>{{ association_introduction }}</span>
       </div>
-      <div class="box">
+      <div class="majorStructure">
         <!--左边导航栏-->
-        <div class="left">
+        <div class="leftColumn">
           <h2>协会概况</h2>
           <ul>
             <li
-              @click="(count = site.id), (message = site.item)"
+              @click="association_introduction = site.item"
               :key="index"
               v-for="(site, index) in sites1"
             >
@@ -27,15 +27,17 @@
           </ul>
         </div>
         <!--中间显示对应内容-->
-        <div class="middle">
-          <DetailsComponent :number="count"></DetailsComponent>
+        <div class="middleBlock">
+          <DetailsComponent
+            :item_name="association_introduction"
+          ></DetailsComponent>
         </div>
         <!--右边导航栏-->
-        <div class="right">
+        <div class="rightColumn">
           <h2>协会概况</h2>
           <ul>
             <li
-              @click="(count = site.id), (message = site.item)"
+              @click="association_introduction = site.item"
               :key="index"
               v-for="(site, index) in sites2"
             >
@@ -58,20 +60,19 @@ export default {
   data() {
     return {
       sites1: [
-        { item: "协会简介", id: 1 },
-        { item: "协会负责人", id: 2 },
-        { item: "协会机构", id: 3 },
-        { item: "协会章程", id: 4 },
-        { item: "联系我们", id: 5 }
+        { item: "协会简介" },
+        { item: "协会负责人" },
+        { item: "协会机构" },
+        { item: "协会章程" },
+        { item: "联系我们" }
       ],
       sites2: [
-        { item: "成员风采", id: 6 },
-        { item: "招新专区", id: 7 },
-        { item: "技术专栏", id: 8 },
-        { item: "活动纪实", id: 9 }
+        { item: "成员风采" },
+        { item: "招新专区" },
+        { item: "技术专栏" },
+        { item: "活动纪实" }
       ],
-      count: 1,
-      message: "协会简介"
+      association_introduction: "协会简介"
     };
   }
 };
@@ -101,11 +102,11 @@ export default {
   text-align: left;
   background-color: peachpuff;
 }
-.box {
+.majorStructure {
   width: 100%;
   height: fit-content;
 }
-.left {
+.leftColumn {
   width: 15%;
   min-height: 470px;
   border-radius: 5px;
@@ -135,14 +136,14 @@ li {
 li:hover {
   background-color: #869bae;
 }
-.middle {
+.middleBlock {
   width: 67%;
   min-height: 470px;
   margin-right: 12px;
   border: solid 1px thistle;
   float: left;
 }
-.right {
+.rightColumn {
   width: 15%;
   min-height: 470px;
   border-radius: 5px;
