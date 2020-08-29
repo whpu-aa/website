@@ -39,7 +39,7 @@ const routes = [
     path: "/News",
     name: "News",
     component: () =>
-      import(/* webpackChunkName: "group-introduce" */ "../views/News.vue")
+      import(/* webpackChunkName: "news" */ "../views/News.vue")
   }
 ];
 
