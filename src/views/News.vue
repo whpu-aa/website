@@ -2,7 +2,7 @@
   <div :class="main">
     <el-header>
       <el-input
-        v-model="input"
+        v-model="inputText"
         placeholder="请输入内容"
         class="search"
       ></el-input>
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      searchtext: "",
+      inputText: "",
       skip_icon_src: "logo.png",
       skip_href: "http://www.baidu.com",
       articles_contents: "文章内容"
@@ -40,6 +40,9 @@ export default {
 };
 </script>
 <style scoped>
+.more-article {
+  height: 200px;
+}
 .main {
   display: flex;
 }
