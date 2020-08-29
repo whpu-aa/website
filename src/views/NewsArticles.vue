@@ -1,5 +1,5 @@
 <template>
-  <div class="main" :style="frontsize">
+  <div class="main" :style="{ fontSize: fontSize + 'vw' }">
     <el-button-group class="FontSizeButton">
       <el-button type="primary" @click="FrontSizeMinus()"
         >Aa<i class="el-icon-minus"></i
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      frontsize: "font-size:1.5vw;",
+      fontSize: 1.5,
       title: "文章标题",
       msg_center: [
         "原标题：拜登正式接受美国民主党总统候选人提名",
@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     FrontSizeMinus: function() {
-      var num = parseFloat(this.frontsize.replace(/[^0-9]/gi, ""));
+      var num = this.fontSize * 10;
       num -= 1;
       num /= 10;
       if (num < 1) {
@@ -85,20 +85,19 @@ export default {
           confirmButtonText: "确定"
         });
       }
-      this.frontsize = "font-size:" + num.toFixed(1).toString() + "vw";
+      this.fontSize = num;
     },
     FrontSizePlus: function() {
-      var num = parseFloat(this.frontsize.replace(/[^0-9]/gi, ""));
-      console.log(num);
+      var num = this.fontSize * 10;
       num += 1;
       num /= 10;
-      if (num >= 3) {
-        num = 3;
+      if (num > 2) {
+        num = 2;
         this.$alert("已经达到字体最大", "提示", {
           confirmButtonText: "确定"
         });
       }
-      this.frontsize = "font-size:" + num.toFixed(1).toString() + "vw";
+      this.fontSize = num;
     }
   }
 };
