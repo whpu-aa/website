@@ -64,8 +64,8 @@ export default {
   }
 };
 </script>
-<style>
-h2 {
-  text-align: left;
+<style scoped>
+h3 {
+  text-align: center;
 }
 </style>

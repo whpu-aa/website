@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .about {
   width: 100%;
   min-height: 600px;
@@ -85,7 +85,7 @@ export default {
 .title {
   width: 100%;
   height: 60px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Tahoma, sans-serif;
   font-size: xx-large;
   background-color: #88b0c5;
   text-align: center inherit;
