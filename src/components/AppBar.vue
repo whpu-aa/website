@@ -5,6 +5,7 @@
     <router-link to="/about">关于我们</router-link>
     <router-link to="/NewsArticles">新闻文章</router-link>
     <router-link to="/GroupIntroduce">部门介绍</router-link>
+    <router-link to="/News">新闻</router-link>
   </nav>
 </template>
 
