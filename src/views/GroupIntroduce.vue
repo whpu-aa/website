@@ -18,7 +18,6 @@
         frameborder="0"
       ></iframe>
     </div>
-    <div class="clear"></div>
   </div>
 </template>
 <script>
@@ -41,8 +40,8 @@ export default {
 .cen {
   /*主页中间最大的div*/
   width: 900px;
-  margin: 10% 20px;
   height: 500px;
+  margin: auto 20px;
   float: left;
   position: relative;
   opacity: 0.8;
@@ -53,9 +52,12 @@ export default {
 .bgbody {
   /*body背景*/
   background: url(../assets/group_pic/bg.png);
+  display: flex;
+  align-items: center;
+  height: 800px;
 }
 .rocker {
-  margin: 100px 0px;
+  margin-right: 35px;
 }
 a {
   font-size: x-large;
@@ -68,25 +70,21 @@ a {
   background-color: white;
   border-radius: 25px;
   opacity: 0.7;
-  margin: 10% -8px;
   width: 400px;
   height: 500px;
-  position: relative;
-  float: left;
+  display: flex;
+  align-items: center;
 }
 .rocker li {
   background-image: url(../assets/group_pic/webmaker/rocker.png);
   border: 1px solid black;
-  text-align: center;
   width: 300px;
   height: 50px;
   list-style: none;
   border-radius: 25px;
+  box-shadow: 10px 10px 5px rgb(106, 106, 245);
 }
 .rocker li:hover {
   background-image: url(../assets/group_pic/webmaker/rocker2.png);
-}
-.clear {
-  clear: both;
 }
 </style>
