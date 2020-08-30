@@ -20,25 +20,15 @@
           <!--跳转至其他文章-->
           <div class="articleList">
             <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
-            ></more-article-item>
-            <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
-            ></more-article-item>
-            <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
+              v-for="info in infos"
+              :key="info.id"
+              :info="info"
             ></more-article-item>
           </div>
           <!--跳转到新闻目录-->
-          <a class="readMore" href="http://www.baidu.com" target="_block"
-            >阅读更多新闻</a
-          >
+          <div class="readMore">
+            <router-link to="/News">阅读更多新闻</router-link>
+          </div>
         </div>
         <!--跳转至其他页面，例如日常题目，协会介绍等等-->
         <div class="otherRecommended">
@@ -71,7 +61,28 @@ export default {
       ],
       skip_icon_src: "logo.png",
       skip_href: "http://www.baidu.com",
-      articles_contents: "文章内容"
+      articles_contents: "文章内容",
+      /*传递给子组件的对象数组 */
+      infos: [
+        {
+          id: 1,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 2,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 3,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        }
+      ]
     };
   },
   methods: {
@@ -166,6 +177,7 @@ a {
   min-height: 30px;
   height: auto;
   background-color: rgb(180, 180, 180);
+  margin: 10px;
 }
 .otherRecommended {
   border-radius: 4px;

@@ -1,7 +1,10 @@
 <template>
-  <a class="toMoreArticles" :href="targetHref" target="_block">
-    <img class="moreArticlesIcon" :src="require('@/assets/' + iconSrc)" />
-    <div class="articleContents">{{ articleContents }}</div>
+  <a class="toMoreArticles" :href="target.targetHref" target="_block">
+    <img
+      class="moreArticlesIcon"
+      :src="require('@/assets/' + target.iconSrc)"
+    />
+    <div class="articleContents">{{ target.articleContents }}</div>
   </a>
 </template>
 
@@ -9,9 +12,15 @@
 export default {
   name: "MoreArticleItem",
   props: {
-    targetHref: String,
-    iconSrc: String,
-    articleContents: String
+    /*接收父组件传递的对象，含有targetHerf,iconSrc,articleContents */
+    info: {
+      type: Object
+    }
+  },
+  data() {
+    return {
+      target: this.info
+    };
   }
 };
 </script>
@@ -32,7 +41,7 @@ a {
 }
 .moreArticlesIcon {
   width: 150px;
-  height: 75px; /*图片大小根据具体情况调整 */
+  height: 75px; /*图片大小根据具体情况在父组件使用深度作用选择器调整 */
   object-fit: cover;
   margin: 10px;
 }
