@@ -4,35 +4,33 @@
     <div class="left">
       <ul class="rocker">
         <li :key="index" v-for="(item, index) in block">
-          <a v-bind:href="item.url" target="myframe">{{ item.ename }}</a>
+          <a href="javascript:;" @click="num = index">{{ item.ename }}</a>
         </li>
       </ul>
     </div>
     <!--中间显示窗口-->
     <div class="cen">
-      <iframe
-        height="100%"
-        width="100%"
-        name="myframe"
-        scrolling="yes"
-        frameborder="0"
-      ></iframe>
+      <gd v-bind:index="num"></gd>
     </div>
   </div>
 </template>
 <script>
+import groupDetail from "../components/GroupDetail";
 export default {
   name: "GroupPage",
   data() {
     return {
+      num: 0,
       block: [
-        { ename: "管理组", url: "http://www.baidu.com" },
-        { ename: "运行组", url: "http://www.taobao.com" },
-        { ename: "宣传组", url: "http://www.taobao.com" },
-        { ename: "人员介绍", url: "http://www.taobao.com" },
-        { ename: "five", url: "http://www.taobao.com" }
+        { ename: "管理组" },
+        { ename: "运行组" },
+        { ename: "宣传组" },
+        { ename: "人员介绍" }
       ]
     };
+  },
+  components: {
+    gd: groupDetail
   }
 };
 </script>
@@ -42,12 +40,10 @@ export default {
   width: 900px;
   height: 500px;
   margin: auto 20px;
-  float: left;
-  position: relative;
   opacity: 0.8;
-  background: url("../assets/group_pic/snow.png");
   border: solid 10px white;
   border-radius: 10px;
+  background-color: blanchedalmond;
 }
 .bgbody {
   /*body背景*/
