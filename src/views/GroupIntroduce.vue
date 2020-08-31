@@ -4,23 +4,25 @@
     <div class="left">
       <ul class="rocker">
         <li :key="index" v-for="(item, index) in block">
-          <a href="javascript:;" @click="num = index">{{ item.ename }}</a>
+          <a href="javascript:void(0);" @click="flag = item.ename">{{
+            item.ename
+          }}</a>
         </li>
       </ul>
     </div>
     <!--中间显示窗口-->
     <div class="cen">
-      <gd v-bind:index="num"></gd>
+      <gd v-bind:index="flag"></gd>
     </div>
   </div>
 </template>
 <script>
-import groupDetail from "../components/GroupDetail";
+import GroupDetail from "../components/GroupDetail";
 export default {
   name: "GroupPage",
   data() {
     return {
-      num: 0,
+      flag: "管理组", //确定显示的页面，默认为管理组
       block: [
         { ename: "管理组" },
         { ename: "运行组" },
@@ -30,7 +32,7 @@ export default {
     };
   },
   components: {
-    gd: groupDetail
+    gd: GroupDetail
   }
 };
 </script>
