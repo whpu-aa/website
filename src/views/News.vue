@@ -10,14 +10,9 @@
     </el-header>
     <el-main>
       <more-article-item
-        :iconSrc="skip_icon_src"
-        :targetHref="skip_href"
-        :articleContents="articles_contents"
-      ></more-article-item>
-      <more-article-item
-        :iconSrc="skip_icon_src"
-        :targetHref="skip_href"
-        :articleContents="articles_contents"
+        v-for="info in infos"
+        :key="info.id"
+        :info="info"
       ></more-article-item>
     </el-main>
   </div>
@@ -32,9 +27,21 @@ export default {
   data() {
     return {
       searchtext: "",
-      skip_icon_src: "logo.png",
-      skip_href: "http://www.baidu.com",
-      articles_contents: "文章内容"
+      /*传递给子组件的对象数组 */
+      infos: [
+        {
+          id: 1,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 2,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        }
+      ]
     };
   }
 };

@@ -20,25 +20,15 @@
           <!--跳转至其他文章-->
           <div class="articleList">
             <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
-            ></more-article-item>
-            <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
-            ></more-article-item>
-            <more-article-item
-              :iconSrc="skip_icon_src"
-              :targetHref="skip_href"
-              :articleContents="articles_contents"
+              v-for="info in infos"
+              :key="info.id"
+              :info="info"
             ></more-article-item>
           </div>
           <!--跳转到新闻目录-->
-          <a class="readMore" href="http://www.baidu.com" target="_block"
-            >阅读更多新闻</a
-          >
+          <div class="readMore">
+            <router-link to="/News">阅读更多新闻</router-link>
+          </div>
         </div>
         <!--跳转至其他页面，例如日常题目，协会介绍等等-->
         <div class="otherRecommended">
@@ -69,9 +59,27 @@ export default {
         "  据美联社报道，为其四天的美国民主党全国代表大会于17日正式开始。19日，来自美国50个州、哥伦比亚特区和海外领地的57个代表团逐一远程唱票。在北卡罗来纳州宣布计票结果后，拜登获得2448张党代表票，超过提名所需2374票，正式成为2020年美国总统选举民主党候选人，参加11月3日的总统大选，与共和党籍、74岁的现任总统特朗普角逐下一任美国总统",
         "  拜登1942年11月20日出生于美国宾夕法尼亚州，律师出身，1970年踏入政界，1972年首次当选联邦参议员，曾任参议院司法委员会和对外关系委员会主席，在奥巴马执政时期任美国副总统。当前是他第三次竞选总统。（海外网 李芳 张霓）"
       ],
-      skip_icon_src: "logo.png",
-      skip_href: "http://www.baidu.com",
-      articles_contents: "文章内容"
+      /*传递给子组件的对象数组 */
+      infos: [
+        {
+          id: 1,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 2,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 3,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        }
+      ]
     };
   },
   methods: {
@@ -166,6 +174,7 @@ a {
   min-height: 30px;
   height: auto;
   background-color: rgb(180, 180, 180);
+  margin: 10px;
 }
 .otherRecommended {
   border-radius: 4px;
