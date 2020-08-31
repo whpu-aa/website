@@ -1,10 +1,7 @@
 <template>
-  <a class="toMoreArticles" :href="target.targetHref" target="_block">
-    <img
-      class="moreArticlesIcon"
-      :src="require('@/assets/' + target.iconSrc)"
-    />
-    <div class="articleContents">{{ target.articleContents }}</div>
+  <a class="toMoreArticles" :href="info.targetHref" target="_block">
+    <img class="moreArticlesIcon" :src="require('@/assets/' + info.iconSrc)" />
+    <div class="articleContents">{{ info.articleContents }}</div>
   </a>
 </template>
 
@@ -12,15 +9,14 @@
 export default {
   name: "MoreArticleItem",
   props: {
-    /*接收父组件传递的对象，含有targetHerf,iconSrc,articleContents */
+    /*接收父组件传递的对象，含有targetHref,iconSrc,articleContents,
+      targetHerf: String, (需要使用超链跳转的URL)
+      iconSrc: String, (图片在assets文件夹中的位置)
+      articleContents: String, (文章内容简介)
+     */
     info: {
       type: Object
     }
-  },
-  data() {
-    return {
-      target: this.info
-    };
   }
 };
 </script>
