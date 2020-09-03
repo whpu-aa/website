@@ -5,25 +5,13 @@
       <ul class="rocker">
         <li :key="index" v-for="(item, index) in block">
           <a href="javascript:void(0);" @click="flag = item.ename">{{
-            item.ename
+          item.ename
           }}</a>
         </li>
       </ul>
     </div>
     <div class="right">
-      <table > 
-        <!-- v-bind:key="index" v-for="(item, index) in part" -->
-        <tr>{{ part[0] + ":" }}</tr>
-        <tr>{{ department[current].introduction }}</tr>
-        <div>------------------------------------------------------------------------------</div>
-        <tr>{{ part[1] + ":" }}</tr>
-        <tr>{{ department[current].manager }}</tr>
-        <div>------------------------------------------------------------------------------</div>
-        <tr>{{ part[2] + ":" }}</tr>
-        <tr :key="index" v-for="(name, index) in department[current].member">
-          <td>{{ name }}</td>
-        </tr>
-      </table>
+      
     </div>
     <!--中间显示窗口-->
     <div class="cen">
@@ -48,22 +36,6 @@ export default {
         { ename: "运行组"},
         { ename: "宣传组" },
       ],
-      part: ["部门介绍", "负责人介绍", "成员介绍"],
-
-      department: [{
-        introduction: "管理组的日常主要任务是......",
-        manager: "周云",
-        member: ["张翔轩", "袁菲", "邵嘉林", "黄鑫鑫"],
-      },{
-        introduction: "运行组的日常主要任务是......",
-        manager: "魏锦明",
-        member: ["张翔轩", "袁菲", "邵嘉林", "黄鑫鑫"],
-      },{
-        introduction: "宣传组的日常主要任务是......",
-        manager: "刘德",
-        member: ["张翔轩", "袁菲", "邵嘉林", "黄鑫鑫"],
-      }]
-
     };
   },
   components: {
@@ -73,7 +45,6 @@ export default {
 </script>
 
 <style scoped>
-
 .right {
   background-color: white;
   height: 500px;
@@ -86,7 +57,7 @@ export default {
   opacity: 0.8;
   border: solid 10px white;
   border-radius: 10px;
-  background-color: blanchedalmond;
+  background-color:white;
 }
 .bgbody {
   /*body背景*/
