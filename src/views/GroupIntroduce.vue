@@ -26,8 +26,12 @@ export default {
   data() {
     return {
       flag: "管理组", //确定显示的页面，默认为管理组
-      current: 0,
-      block: [{ ename: "管理组" }, { ename: "运行组" }, { ename: "宣传组" }]
+      block: [
+        { ename: "管理组" },
+        { ename: "运行组" },
+        { ename: "宣传组" },
+        { ename: "人员介绍" }
+      ]
     };
   },
   components: {
