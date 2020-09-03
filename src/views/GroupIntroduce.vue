@@ -5,7 +5,7 @@
       <ul class="rocker">
         <li :key="index" v-for="(item, index) in block">
           <a href="javascript:void(0);" @click="flag = item.ename">{{
-          item.ename
+            item.ename
           }}</a>
         </li>
       </ul>
@@ -21,18 +21,13 @@
 import GroupDetail from "../components/GroupDetail";
 export default {
   name: "GroupPage",
-  methods: {
-  },
-  
+  methods: {},
+
   data() {
     return {
       flag: "管理组", //确定显示的页面，默认为管理组
       current: 0,
-      block: [
-        { ename: "管理组"},
-        { ename: "运行组"},
-        { ename: "宣传组" },
-      ],
+      block: [{ ename: "管理组" }, { ename: "运行组" }, { ename: "宣传组" }]
     };
   },
   components: {
@@ -54,7 +49,7 @@ export default {
   opacity: 0.8;
   border: solid 10px white;
   border-radius: 10px;
-  background-color:white;
+  background-color: white;
 }
 .bgbody {
   /*body背景*/
