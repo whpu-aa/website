@@ -10,9 +10,6 @@
         </li>
       </ul>
     </div>
-    <div class="right">
-      
-    </div>
     <!--中间显示窗口-->
     <div class="cen">
       <gd v-bind:index="flag"></gd>
@@ -52,8 +49,8 @@ export default {
 .cen {
   /*主页中间最大的div*/
   width: 900px;
-  height: 500px;
-  margin: auto 20px;
+  height: 800px;
+  margin: auto;
   opacity: 0.8;
   border: solid 10px white;
   border-radius: 10px;
@@ -68,6 +65,7 @@ export default {
 }
 .rocker {
   margin-right: 35px;
+  margin-top: 150px;
 }
 a {
   font-size: x-large;
@@ -79,11 +77,10 @@ a {
 .left {
   background-color: white;
   border-radius: 25px;
-  opacity: 0.7;
+  opacity: 0.8;
   width: 400px;
-  height: 500px;
+  height: 800px;
   display: flex;
-  align-items: center;
 }
 .rocker li {
   background-image: url(../assets/group_pic/webmaker/rocker.png);
@@ -93,6 +90,8 @@ a {
   list-style: none;
   border-radius: 25px;
   box-shadow: 10px 10px 5px rgb(106, 106, 245);
+  margin-top: 10px;
+  line-height: 50px;
 }
 .rocker li:hover {
   background-image: url(../assets/group_pic/webmaker/rocker2.png);
