@@ -1,5 +1,5 @@
 <template>
-  <div :class="main">
+  <div>
     <el-header>
       <el-input
         v-model="inputText"
@@ -8,13 +8,25 @@
       ></el-input>
       <el-button icon="el-icon-search" circle></el-button>
     </el-header>
-    <el-main>
-      <more-article-item
-        v-for="info in infos"
-        :key="info.id"
-        :info="info"
-      ></more-article-item>
-    </el-main>
+    <el-container class="main">
+      <el-aside>
+        <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
+        <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
+        <a href="#" @click="handleCheckOut(3)">筛选新闻条件三</a>
+        <a href="#" @click="handleCheckOut(4)">筛选新闻条件四</a>
+        <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
+      </el-aside>
+      <el-main>
+        <transition-group appear="True" name="el-fade-in">
+          <more-article-item
+            class="more-article"
+            v-for="info in infos"
+            :key="info.id"
+            :info="info"
+          ></more-article-item>
+        </transition-group>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -26,7 +38,7 @@ export default {
   },
   data() {
     return {
-      searchtext: "",
+      inputText: "",
       /*传递给子组件的对象数组 */
       infos: [
         {
@@ -40,18 +52,50 @@ export default {
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
           articleContents: "文章内容"
+        },
+        {
+          id: 3,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 4,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 5,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
+        },
+        {
+          id: 6,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容"
         }
       ]
     };
+  },
+  methods: {
+    // 处理筛选新闻函数
+    handleCheckOut: function(id) {
+      return id;
+    }
   }
 };
 </script>
 <style scoped>
-.more-article {
-  height: 200px;
+* {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 .main {
   display: flex;
+  height: 100%;
 }
 .el-input {
   width: 300px;
@@ -69,7 +113,30 @@ export default {
   text-align: center;
   line-height: 60px;
 }
+.el-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+}
+.el-aside {
+  display: flex;
+  flex-direction: column;
+  background-color: #b3c0d1;
+  color: #333;
+}
 .search {
   min-width: 200px;
+}
+.more-article {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+a:hover {
+  color: #409eff;
+}
+a {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
 }
 </style>
