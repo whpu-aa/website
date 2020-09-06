@@ -109,12 +109,9 @@ export default {
   line-height: 60px;
 }
 .el-main {
-  display: block;
   min-width: 500px;
 }
 .el-aside {
-  display: flex;
-  flex-direction: column;
   background-color: #b3c0d1;
   color: #333;
 }
@@ -129,6 +126,7 @@ a:hover {
   color: #409eff;
 }
 a {
+  display: block;
   text-decoration: none;
   color: black;
   margin: 10px;
