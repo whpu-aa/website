@@ -16,6 +16,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import GroupDetail from "../components/GroupDetail";
 export default {
@@ -23,12 +24,7 @@ export default {
   data() {
     return {
       flag: "管理组", //确定显示的页面，默认为管理组
-      block: [
-        { ename: "管理组" },
-        { ename: "运行组" },
-        { ename: "宣传组" },
-        { ename: "人员介绍" }
-      ]
+      block: [{ ename: "管理组" }, { ename: "运行组" }, { ename: "宣传组" }]
     };
   },
   components: {
@@ -36,16 +32,21 @@ export default {
   }
 };
 </script>
+
 <style scoped>
+.right {
+  background-color: white;
+  height: 500px;
+}
 .cen {
   /*主页中间最大的div*/
   width: 900px;
-  height: 500px;
-  margin: auto 20px;
+  height: 800px;
+  margin: auto;
   opacity: 0.8;
   border: solid 10px white;
-  border-radius: 10px;
-  background-color: blanchedalmond;
+  border-radius: 4px;
+  background-color: white;
 }
 .bgbody {
   /*body背景*/
@@ -56,6 +57,7 @@ export default {
 }
 .rocker {
   margin-right: 35px;
+  margin-top: 150px;
 }
 a {
   font-size: x-large;
@@ -66,12 +68,11 @@ a {
 }
 .left {
   background-color: white;
-  border-radius: 25px;
-  opacity: 0.7;
+  border-radius: 4px;
+  opacity: 0.8;
   width: 400px;
-  height: 500px;
+  height: 800px;
   display: flex;
-  align-items: center;
 }
 .rocker li {
   background-image: url(../assets/group_pic/webmaker/rocker.png);
@@ -79,8 +80,10 @@ a {
   width: 300px;
   height: 50px;
   list-style: none;
-  border-radius: 25px;
-  box-shadow: 10px 10px 5px rgb(106, 106, 245);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  margin-top: 10px;
+  line-height: 50px;
 }
 .rocker li:hover {
   background-image: url(../assets/group_pic/webmaker/rocker2.png);
