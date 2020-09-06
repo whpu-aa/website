@@ -8,7 +8,7 @@
       ></el-input>
       <el-button icon="el-icon-search" circle></el-button>
     </el-header>
-    <el-container class="main">
+    <el-container>
       <el-aside>
         <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
         <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
@@ -17,7 +17,7 @@
         <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
       </el-aside>
       <el-main>
-        <transition-group appear="True" name="el-fade-in">
+        <transition-group appear name="el-fade-in">
           <more-article-item
             class="more-article"
             v-for="info in infos"
@@ -81,10 +81,9 @@ export default {
     };
   },
   methods: {
-    // 处理筛选新闻函数
-    handleCheckOut: function(id) {
-      return id;
-    }
+    // 处理筛选新闻函数，该函数处理筛选逻辑
+    // eslint-disable-next-line no-unused-vars
+    handleCheckOut: function(id) {}
   }
 };
 </script>
@@ -92,10 +91,6 @@ export default {
 * {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-}
-.main {
-  display: flex;
-  height: 100%;
 }
 .el-input {
   width: 300px;
@@ -114,8 +109,7 @@ export default {
   line-height: 60px;
 }
 .el-main {
-  display: flex;
-  flex-direction: column;
+  display: block;
   min-width: 500px;
 }
 .el-aside {
