@@ -1,22 +1,22 @@
 <template>
   <div>
-    <el-header>
+    <el-header class="top">
       <el-input
         v-model="inputText"
         placeholder="请输入内容"
         class="search"
       ></el-input>
-      <el-button icon="el-icon-search" circle></el-button>
+      <el-button icon="el-icon-search" class="searchButton" circle></el-button>
     </el-header>
     <el-container>
-      <el-aside>
+      <el-aside class="aside">
         <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
         <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
         <a href="#" @click="handleCheckOut(3)">筛选新闻条件三</a>
         <a href="#" @click="handleCheckOut(4)">筛选新闻条件四</a>
         <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
       </el-aside>
-      <el-main>
+      <el-main class="main">
         <transition-group appear name="el-fade-in">
           <more-article-item
             class="more-article"
@@ -88,31 +88,29 @@ export default {
 };
 </script>
 <style scoped>
-.el-input {
-  width: 300px;
+.search {
+  min-width: 200px;
+  max-width: 300px;
 }
-.el-button {
+.searchButton {
   margin-top: 10px;
   margin-left: 10px;
   width: 40px;
   height: 40px;
 }
-.el-header {
+.top {
   justify-content: center;
   background-color: #b3c0d1;
   color: #333;
   text-align: center;
   line-height: 60px;
 }
-.el-main {
+.main {
   min-width: 500px;
 }
-.el-aside {
+.aside {
   background-color: #b3c0d1;
   color: #333;
-}
-.search {
-  min-width: 200px;
 }
 .more-article {
   border-radius: 4px;
