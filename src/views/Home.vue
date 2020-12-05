@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <aside class="left">
-      <group class="component" />
+      <div id="group-introduction" class="component sample-component">
+        部门介绍
+      </div>
       <div id="about-us" class="component sample-component">关于我们</div>
     </aside>
     <div class="main">
@@ -17,12 +19,8 @@
 </template>
 
 <script>
-import Group from "../components/Group";
 export default {
-  name: "Home",
-  components: {
-    group: Group
-  }
+  name: "Home"
 };
 </script>
 
@@ -74,6 +72,11 @@ export default {
   font-size: 4em;
 }
 
+#group-introduction {
+  height: 500px;
+
+  background-color: royalblue; /* 仅用来展示，在替换为真正的组件后删除 */
+}
 #about-us {
   height: 200px;
 
