@@ -144,7 +144,7 @@ export default {
         while (rows < parseInt(recentRow[recentRow.length - 1]) - 1) {
           recentRow.pop();
         }
-        this.rows = recentRow.join(" ");
+        this.code.rows = recentRow.join(" ");
       }
     },
     submitForm: function() {
