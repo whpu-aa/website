@@ -3,7 +3,7 @@
     <el-header
       ><h1>
         数计学院算法协会
-        <el-select v-model="itemName" placeholder="">
+        <el-select v-model="itemName">
           <el-option
             v-for="(item, index) in site"
             :key="index"
@@ -98,25 +98,18 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  position: relative;
-  left: 8%;
-}
 el-header {
   flex-direction: row;
 }
-.association {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.textCommonent {
+  margin-top: 50px;
 }
 .content {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   text-align: left;
   white-space: pre-wrap;
-}
-.middleBlock {
-  width: 800px;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 </style>
