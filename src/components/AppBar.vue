@@ -6,6 +6,8 @@
     <router-link to="/NewsArticles">新闻文章</router-link>
     <router-link to="/GroupIntroduce">部门介绍</router-link>
     <router-link to="/News">新闻</router-link>
+    <router-link to="/updateCode">上传代码</router-link>
+    <router-link to="/showcode">展示代码</router-link>
   </nav>
 </template>
 
