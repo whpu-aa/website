@@ -57,11 +57,11 @@
             <div class="move">
               <div class="placeholder"></div>
               <pre>
-                    <code :class="code.language" v-html="code.strValue">
+                    <code :class="code.language" v-text="code.strValue">
                     </code>
                 </pre>
             </div>
-            <div class="rows" v-html="code.rows"></div>
+            <div class="rows" v-text="code.rows"></div>
             <textarea
               class="input-font"
               v-model="code.strValue"

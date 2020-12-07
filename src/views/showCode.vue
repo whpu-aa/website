@@ -7,7 +7,7 @@
     <div class="paste">
       <div class="rows" v-html="rows"></div>
       <pre>
-          <code :class="language" v-html="strValue">
+          <code :class="language" v-text="strValue">
           </code>
       </pre>
     </div>
@@ -46,7 +46,8 @@ export default {
           dfs(nums,k,[])\n\
           return min_\n\
     Solution().mostCompetitive([3,5,2,6],2)",
-      rows: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18"
+      rows: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18",
+      language: "python3"
     };
   }
 };
