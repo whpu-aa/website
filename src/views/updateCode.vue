@@ -54,10 +54,13 @@
         </el-row>
         <el-form-item>
           <div class="highlight">
-            <pre>
-                  <code :class="code.language" v-html="code.strValue">
-                  </code>
-              </pre>
+            <div class="move">
+              <div class="placeholder"></div>
+              <pre>
+                    <code :class="code.language" v-html="code.strValue">
+                    </code>
+                </pre>
+            </div>
             <div class="rows" v-html="code.rows"></div>
             <textarea
               class="input-font"
@@ -130,13 +133,13 @@ export default {
       });
     },
     creatRows: function() {
-      let rows = this.strValue.split("\n").length - 1;
-      let recentRow = this.rows.split(" ");
+      let rows = this.code.strValue.split("\n").length - 1;
+      let recentRow = this.code.rows.split(" ");
       if (rows >= recentRow[recentRow.length - 1]) {
         while (rows >= recentRow[recentRow.length - 1]) {
           recentRow.push(parseInt(recentRow[recentRow.length - 1]) + 1);
         }
-        this.rows = recentRow.join(" ");
+        this.code.rows = recentRow.join(" ");
       } else {
         while (rows < parseInt(recentRow[recentRow.length - 1]) - 1) {
           recentRow.pop();
@@ -161,6 +164,9 @@ export default {
 .el-header {
   margin-top: 100px;
 }
+.paste {
+  margin-top: 50px;
+}
 .beforetag {
   padding: 10px;
 }
@@ -173,19 +179,30 @@ export default {
   position: relative;
   justify-content: center;
 }
-pre {
+.move {
   position: absolute;
-  top: -50px;
-  left: 361px;
+  display: flex;
+  justify-content: center;
+  min-width: 500px;
+  pointer-events: none;
+}
+.placeholder {
+  width: 22px;
+}
+pre {
+  position: relative;
+  top: -50.5px;
+  left: -9px;
   pointer-events: none;
   padding-top: 0;
+  width: 800px;
 }
 code {
   background-color: rgba(0, 0, 0, 0);
   font-size: 18px;
   text-align: initial;
   min-height: 500px;
-  width: 800px;
+  min-width: 500px;
   padding-top: 0;
   pointer-events: none;
   border: none;
@@ -202,10 +219,11 @@ code {
   margin-left: 0px;
   border-left: 0px;
   min-height: 500px;
+  min-width: 500px;
+  width: 800px;
   background: #464741;
   resize: none;
   font-size: 18px;
-  width: 800px;
   line-height: 1.25 !important;
   overflow: hidden;
 }
@@ -218,5 +236,20 @@ code {
   color: aliceblue;
   word-break: keep-all;
   line-height: 1.25 !important;
+}
+@media screen and (max-width: 500px) {
+  .move {
+    left: -21.5px;
+  }
+}
+@media screen and (max-width: 540px) and (min-width: 501px) {
+  .move {
+    left: -10px;
+  }
+}
+@media screen and (max-width: 836px) and (min-width: 540px) {
+  .move {
+    left: 0.5px;
+  }
 }
 </style>
