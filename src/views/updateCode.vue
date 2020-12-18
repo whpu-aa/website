@@ -183,73 +183,66 @@ export default {
   position: absolute;
   display: flex;
   justify-content: center;
-  min-width: 500px;
+  width: 820.2px;
   pointer-events: none;
+  min-height: 500px;
 }
 .placeholder {
-  width: 22px;
+  min-width: 22px;
+  max-width: 22px;
 }
 pre {
-  position: relative;
-  top: -50.5px;
-  left: -9px;
+  margin: 0;
   pointer-events: none;
   padding-top: 0;
+  min-height: 500px;
   width: 800px;
+  overflow: hidden;
 }
 code {
+  position: relative;
+  top: -40px;
+  left: -1px;
   background-color: rgba(0, 0, 0, 0);
   font-size: 18px;
   text-align: initial;
   min-height: 500px;
-  min-width: 500px;
-  padding-top: 0;
+  width: 800px;
+  padding: 0;
   pointer-events: none;
   border: none;
   resize: none;
   line-height: 1.25 !important;
-  overflow-y: auto;
-}
-.code {
-  color: #a9b7c6;
-  background: #23241f;
-  text-align: initial;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .input-font {
   margin-left: 0px;
   border-left: 0px;
   min-height: 500px;
-  min-width: 500px;
-  width: 800px;
+  min-width: 800px;
   background: #464741;
   resize: none;
   font-size: 18px;
   line-height: 1.25 !important;
+  padding: 0;
+  border: none;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
   overflow: hidden;
 }
 .rows {
   display: inline-block;
-  padding-top: 5px;
+  padding: 0;
   font-size: 18px;
   width: 22px;
   background: #464741;
   color: aliceblue;
   word-break: keep-all;
   line-height: 1.25 !important;
-}
-@media screen and (max-width: 500px) {
-  .move {
-    left: -21.5px;
-  }
-}
-@media screen and (max-width: 540px) and (min-width: 501px) {
-  .move {
-    left: -10px;
-  }
-}
-@media screen and (max-width: 836px) and (min-width: 540px) {
-  .move {
-    left: 0.5px;
-  }
 }
 </style>
