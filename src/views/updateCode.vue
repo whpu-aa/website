@@ -66,6 +66,7 @@
               class="input-font"
               v-model="code.strValue"
               @input="creatRows()"
+              style="word-wrap : break-word;"
             ></textarea>
           </div>
         </el-form-item>
@@ -133,6 +134,21 @@ export default {
       });
     },
     creatRows: function() {
+      let value = this.code.strValue.split("\n");
+      let lens = value.length;
+      let index = 0;
+      while (index < lens){
+        if (value[index].length > 88){
+          let data = value[index].split("");
+          data.splice(88, 0, "\n");
+          data = data.join("").split("\n");
+          value[index] = data[0];
+          value.splice(index + 1, 0, data[1]);
+          lens++;
+        }
+        index++;
+      }
+      this.code.strValue = value.join("\n");
       let rows = this.code.strValue.split("\n").length - 1;
       let recentRow = this.code.rows.split(" ");
       if (rows >= recentRow[recentRow.length - 1]) {
