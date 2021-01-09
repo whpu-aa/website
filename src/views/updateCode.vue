@@ -137,8 +137,8 @@ export default {
       let value = this.code.strValue.split("\n");
       let lens = value.length;
       let index = 0;
-      while (index < lens){
-        if (value[index].length > 88){
+      while (index < lens) {
+        if (value[index].length > 88) {
           let data = value[index].split("");
           data.splice(88, 0, "\n");
           data = data.join("").split("\n");
