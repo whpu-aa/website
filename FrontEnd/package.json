@@ -10,7 +10,7 @@
     "lint:ci": "vue-cli-service lint --no-fix --max-warnings 0"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "^3.9.1",
     "element-ui": "^2.4.5",
     "highlight.js": "^10.4.1",
     "vue": "^2.6.11",
