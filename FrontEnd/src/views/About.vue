@@ -1,152 +1,115 @@
 <template>
   <div class="about">
-    <div class="title">
-      <span>数计学院算法协会</span>
-    </div>
-    <div class="association">
-      <!--顶端索引-->
-      <div class="headIndex">
-        <router-link to="/">主页</router-link>
-        <span>&gt;</span>
-        <router-link to="/about">关于我们</router-link>
-        <span>&gt;</span>
-        <span>{{ currentItem }}</span>
+    <el-header
+      ><h1>
+        数计学院算法协会
+        <el-select v-model="itemName">
+          <el-option
+            v-for="(item, index) in site"
+            :key="index"
+            :value="item"
+            :label="item"
+          ></el-option>
+        </el-select></h1
+    ></el-header>
+    <div class="textCommonent">
+      <div v-if="itemName == '协会简介'">
+        <h3>{{ itemName }}</h3>
+        <h4>
+          <pre class="content">
+            算法协会是一个以计算机软件算法为核心的组织，
+            它力求以严格、规范、先进的模式，为广大学生提供一个学习、监督、交流的平台，
+            为培养专业、全面、领先的计算机高技术型人才服务。
+          </pre>
+        </h4>
       </div>
-      <div class="majorStructure">
-        <!--左边导航栏-->
-        <div class="leftColumn">
-          <h2>协会概况</h2>
-          <ul>
-            <li
-              @click="currentItem = site.item"
-              :key="index"
-              v-for="(site, index) in sites1"
-            >
-              <a>{{ site.item }}</a>
-            </li>
-          </ul>
-        </div>
-        <!--中间显示对应内容-->
-        <div class="middleBlock">
-          <DetailComponent :itemName="currentItem"></DetailComponent>
-        </div>
-        <!--右边导航栏-->
-        <div class="rightColumn">
-          <h2>协会概况</h2>
-          <ul>
-            <li
-              @click="currentItem = site.item"
-              :key="index"
-              v-for="(site, index) in sites2"
-            >
-              <a>{{ site.item }}</a>
-            </li>
-          </ul>
-        </div>
+      <div v-else-if="itemName == '协会负责人'">
+        <h3>{{ itemName }}</h3>
+        <h4>
+          <pre class="content">
+          刘德，男，软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。
+
+          杨宇千，男，大类1901班，算法协会副会长。热爱编程，喜欢钻研各种问题，学习最前沿的技术。在GitHub上有着十几万的代码量，拥有一定的开发经验。曾参与过数计学院的网站建设。平时爱好是听音乐，看书。希望能够通过算法协会，为学院的学风和技术氛围的建设做出自己的贡献。
+          
+          周云，男，软工1801班，算法协会副会长，入党积极分子。兴趣爱好是跑步，打羽毛球，看动漫。专业基础知识掌握牢固，面对困难乐观积极进取，能主动探索自己的知识盲区，拓宽自己的眼界。希望在数计学院算法协会不仅能学习各种优化算法，提升自己的编程能力，更能在与协会成员磨合过程中，提升自己的团队协作能力。
+        </pre
+          >
+        </h4>
+      </div>
+      <div v-else-if="itemName == '协会机构'">
+        <h3>{{ itemName }}</h3>
+      </div>
+      <div v-else-if="itemName == '协会章程'">
+        <h3>{{ itemName }}</h3>
+        <h4>
+          <pre class="content">
+            制定管理制度：协会的正常运行和发展离不开完善的规章制度。目前协会刚刚起步，针对协会当前运营及工作情况，主要对协会成员日常题目训练，题目讲解以及参加会议情况等进行考察并制定相关的管理制度。
+            算法协会管理组将主要负责对协会成员日常活动的考察，并建立完善相关制度。
+            目前协会主要分为管理组，运行组和宣传组，实行分组管理，各尽其责。同时针对每一位低年级同学，都有一位高年级同学与之对接，即采用一对一方式进行指导和管理。
+            根据目前协会运营管理状况，制定如下管理制度：
+            （1）每位成员对于平时的做题训练，题目讲解以及开会等活动，不得无故缺勤。若无故缺勤，事后需向管理组负责人阐明具体情况。
+            （2）协会成员因紧急的事情而耽误协会工作时，需向相对应负责人请假，阐述具体原因，再由相关负责人向管理组报备，做好记载。
+            （3）协会成员不得多次请假，滞后协会工作和日常学习进度，对于多次请假者，需向管理组相关负责人提交一份说明书，要阐明每次缺勤缘由并将耽误的工作弥补起来。
+            （4）每位成员在加入协会之前应写一份保证书，表明自己加入协会的意愿并且将为协会的运营建设出力，不能中途退出，否则需向协会负责人分别提交一份退会申请书。
+            （5）针对每位成员的平时表现，对于平时表现优异的同学给予适当的奖励（物质奖励和精神奖励）。
+            由于协会仍在不断建设之中，各项制度措施会不断完善，我们会在不断摸索中建立健全各项制度。
+          </pre>
+        </h4>
+      </div>
+      <div v-else-if="itemName == '联系我们'">
+        <h3>{{ itemName }}</h3>
+      </div>
+      <div v-else-if="itemName == '成员风采'">
+        <h3>{{ itemName }}</h3>
+      </div>
+      <div v-else-if="itemName == '招新专区'">
+        <h3>{{ itemName }}</h3>
+      </div>
+      <div v-else-if="itemName == '技术专栏'">
+        <h3>{{ itemName }}</h3>
+      </div>
+      <div v-else>
+        <h3>{{ itemName }}</h3>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import DetailComponent from "../components/DetailComponent.vue";
 export default {
   name: "About",
-  components: {
-    DetailComponent: DetailComponent
-  },
   data() {
     return {
-      sites1: [
-        { item: "协会简介" },
-        { item: "协会负责人" },
-        { item: "协会机构" },
-        { item: "协会章程" },
-        { item: "联系我们" }
+      site: [
+        "协会简介",
+        "协会负责人",
+        "协会机构",
+        "协会章程",
+        "联系我们",
+        "成员风采",
+        "招新专区",
+        "技术专栏",
+        "活动纪实"
       ],
-      sites2: [
-        { item: "成员风采" },
-        { item: "招新专区" },
-        { item: "技术专栏" },
-        { item: "活动纪实" }
-      ],
-      currentItem: "协会简介"
+      itemName: "协会简介"
     };
   }
 };
 </script>
 
 <style scoped>
-.about {
-  width: 100%;
-  min-height: 600px;
-  border: solid 1px thistle;
+el-header {
+  flex-direction: row;
 }
-.title {
-  width: 100%;
-  height: 60px;
-  font-family: Verdana, Tahoma, sans-serif;
-  font-size: xx-large;
-  background-color: #88b0c5;
-  text-align: center inherit;
+.textCommonent {
+  margin-top: 50px;
 }
-.association {
-  width: 85%;
-  height: fit-content;
-  margin-left: 100px;
-}
-.headIndex {
-  height: 40px;
-  width: 100%;
+.content {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
   text-align: left;
-  background-color: peachpuff;
-}
-.majorStructure {
-  width: 100%;
-  height: fit-content;
-}
-.leftColumn {
-  width: 15%;
-  min-height: 470px;
-  border-radius: 5px;
-  margin-right: 12px;
-  border: solid 1px thistle;
-  float: left;
-}
-h2 {
-  width: 100%;
-  margin-top: 0px;
-  text-align: center;
-  font-size: 20px;
-  background-color: #1295d8;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-li {
-  margin-top: 25px;
-  height: 60px;
-  width: 100%;
-  border-radius: 5px;
-  font-size: 20px;
-}
-li:hover {
-  background-color: #869bae;
-}
-.middleBlock {
-  width: 67%;
-  min-height: 470px;
-  margin-right: 12px;
-  border: solid 1px thistle;
-  float: left;
-}
-.rightColumn {
-  width: 15%;
-  min-height: 470px;
-  border-radius: 5px;
-  border: solid 1px thistle;
-  float: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 </style>
