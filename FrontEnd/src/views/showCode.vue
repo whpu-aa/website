@@ -19,7 +19,7 @@ import "highlight.js/styles/monokai-sublime.css";
 export default {
   mounted() {
     let block = document.querySelectorAll("pre code");
-    block.forEach(el => {
+    block.forEach((el) => {
       hljs.highlightBlock(el);
     });
   },
@@ -47,9 +47,9 @@ export default {
           return min_\n\
     Solution().mostCompetitive([3,5,2,6],2)",
       rows: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18",
-      language: "python3"
+      language: "python3",
     };
-  }
+  },
 };
 </script>
 <style scoped>

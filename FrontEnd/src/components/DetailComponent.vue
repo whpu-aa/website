@@ -60,8 +60,8 @@
 export default {
   name: "DetailComponent",
   props: {
-    itemName: String
-  }
+    itemName: String,
+  },
 };
 </script>
 <style scoped>

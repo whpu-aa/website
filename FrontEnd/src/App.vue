@@ -10,8 +10,8 @@ import AppBar from "./components/AppBar";
 
 export default {
   components: {
-    "app-bar": AppBar
-  }
+    "app-bar": AppBar,
+  },
 };
 </script>
 
