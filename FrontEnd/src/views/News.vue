@@ -34,7 +34,7 @@
 import MoreArticleItem from "../components/MoreArticleItem";
 export default {
   components: {
-    MoreArticleItem
+    MoreArticleItem,
   },
   data() {
     return {
@@ -45,46 +45,46 @@ export default {
           id: 1,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
+          articleContents: "文章内容",
         },
         {
           id: 2,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
+          articleContents: "文章内容",
         },
         {
           id: 3,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
+          articleContents: "文章内容",
         },
         {
           id: 4,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
+          articleContents: "文章内容",
         },
         {
           id: 5,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
+          articleContents: "文章内容",
         },
         {
           id: 6,
           targetHref: "http://www.baidu.com",
           iconSrc: "logo.png",
-          articleContents: "文章内容"
-        }
-      ]
+          articleContents: "文章内容",
+        },
+      ],
     };
   },
   methods: {
     // 处理筛选新闻函数，该函数处理筛选逻辑
     // eslint-disable-next-line no-unused-vars
-    handleCheckOut: function(id) {}
-  }
+    handleCheckOut: function (id) {},
+  },
 };
 </script>
 <style scoped>

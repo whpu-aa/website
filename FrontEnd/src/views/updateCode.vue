@@ -111,28 +111,28 @@ export default {
           return min_\n\
     Solution().mostCompetitive([3,5,2,6],2)",
         rows: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18",
-        time: new Date()
+        time: new Date(),
       },
       rules: {
         name: [
           { required: true, message: "请输入姓名", trigger: "blur" },
-          { min: 2, max: 5, message: "长度在2到5个字符", tigger: "blur" }
+          { min: 2, max: 5, message: "长度在2到5个字符", tigger: "blur" },
         ],
         number: [
           { required: true, message: "请输入学号", trigger: "blur" },
-          { min: 1, max: 10, message: "长度在1到10个字符", tigger: "blur" }
-        ]
-      }
+          { min: 1, max: 10, message: "长度在1到10个字符", tigger: "blur" },
+        ],
+      },
     };
   },
   methods: {
     highlightCode: () => {
       let block = document.querySelectorAll("pre code");
-      block.forEach(el => {
+      block.forEach((el) => {
         hljs.highlightBlock(el);
       });
     },
-    creatRows: function() {
+    creatRows: function () {
       let rows = this.code.strValue.split("\n").length - 1;
       let recentRow = this.code.rows.split(" ");
       if (rows >= recentRow[recentRow.length - 1]) {
@@ -147,8 +147,8 @@ export default {
         this.code.rows = recentRow.join(" ");
       }
     },
-    submitForm: function() {
-      this.$refs["codeForm"].validate(valid => {
+    submitForm: function () {
+      this.$refs["codeForm"].validate((valid) => {
         if (valid) {
           alert("submit!");
         } else {
@@ -156,8 +156,8 @@ export default {
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

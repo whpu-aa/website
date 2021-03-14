@@ -15,9 +15,9 @@ export default {
       articleContents: String, (文章内容简介)
      */
     info: {
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 };
 </script>
 

@@ -45,43 +45,43 @@ export default {
   data() {
     return {
       current_img_num: 0, //控制显示某一张图片的id,当current_img_num与id相等时候则显示
-      timer_id: "" //接受Interval计时器的返回值,在mouted里面初始化
+      timer_id: "", //接受Interval计时器的返回值,在mouted里面初始化
     };
   },
   methods: {
-    change: function(id) {
+    change: function (id) {
       //点击按钮则重置计时器
       this.current_img_num = id;
       this.timestop();
       this.timestart();
     },
-    timestop: function() {
+    timestop: function () {
       clearInterval(this.timer_id);
     },
-    timestart: function() {
+    timestart: function () {
       this.timer_id = setInterval(() => {
         this.current_img_num++;
         if (this.current_img_num == this.imgSrcArr.length) {
           this.current_img_num = 0;
         }
       }, this.intervalTime);
-    }
+    },
   },
   computed: {
-    imgactive: function() {
+    imgactive: function () {
       //考虑到v-if和v-for的冲突问题,在此使用计算属性来筛选
       var num = this.current_img_num;
-      return this.imgSrcArr.filter(function(img) {
+      return this.imgSrcArr.filter(function (img) {
         return img.id == num;
       });
-    }
+    },
   },
   mounted() {
     this.timestart();
   },
   beforeDestroy() {
     this.timestop();
-  }
+  },
 };
 </script>
 <style scoped>
