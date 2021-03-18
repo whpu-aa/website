@@ -1,0 +1,50 @@
+name: Front End CI
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "FrontEnd/**"
+  pull_request:
+    branches: [master]
+    paths:
+      - "FrontEnd/**"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: FrontEnd
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+
+      - name: Restore Packages
+        run: npm ci
+
+      - name: Build App
+        run: npm run build
+
+      - name: Lint Code
+        run: npm run lint:ci
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: FrontEnd/dist/
