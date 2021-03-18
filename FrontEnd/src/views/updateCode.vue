@@ -120,7 +120,7 @@ export default {
           { min: 2, max: 5, message: "长度在2到5个字符", tigger: "blur" },
         ],
         number: [
-          { required: true, message: "请输入学号", trigger: "blur" },
+          { required: true, message: "请输入题号", trigger: "blur" },
           { min: 1, max: 10, message: "长度在1到10个字符", tigger: "blur" },
         ],
       },
