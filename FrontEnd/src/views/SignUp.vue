@@ -1,11 +1,10 @@
 <template>
   <div class="main">
     <div class="table">
-      <img :src="avatar" alt="头像" class="avatar" />
-      <h2 class="title">登录</h2>
+      <h2 class="title">注册</h2>
       <el-form
         :model="studentData"
-        ref="loginForm"
+        ref="SignUpForm"
         label-position="left"
         label-width="40px"
       >
@@ -20,9 +19,8 @@
             show-password
           ></el-input>
         </el-form-item>
-
         <el-button type="primary" plain @click="login" :loading="loading"
-          >登录</el-button
+          >注册</el-button
         >
       </el-form>
     </div>
