@@ -12,7 +12,7 @@
       >
         <el-form-item
           ref="idLabel"
-          class="row"
+          :class="[idLabel ? 'up' : 'row']"
           prop="id"
           label="账号"
           label-width="50px"
@@ -27,7 +27,7 @@
 
         <el-form-item
           ref="pwLabel"
-          class="row"
+          :class="[pwLabel ? 'up' : 'row']"
           prop="password"
           label="密码"
           label-width="50px"
@@ -45,7 +45,7 @@
           class="btn-login"
           type="primary"
           plain
-          @click="login('studentData')"
+          @click="login"
           :loading="loading"
           >登录</el-button
         >
@@ -67,18 +67,25 @@ export default {
         id: [{ required: true, message: " 请输入姓名", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
+      idUp: "",
+      pwUp: "",
     };
+  },
+  computed: {
+    idLabel: function () {
+      return this.studentData.id + this.idUp;
+    },
+    pwLabel: function () {
+      return this.studentData.password + this.pwUp;
+    },
   },
   methods: {
     login: function () {
       this.loading = true;
       // console.log(this.$refs.loginForm);
       this.$refs.loginForm.validate((res, faild) => {
-        console.log(res);
         if (res) {
-          console.log("success begin"); //此步不会被调用
           setTimeout(() => {
-            console.log("success begin");
             this.$message({
               message: this.studentData,
               type: "success",
@@ -86,11 +93,6 @@ export default {
             this.loading = false;
           }, 3000);
         }
-        console.log("clean begin");
-        setTimeout(() => {
-          console.log("clean run");
-          this.$refs.loginForm.clearValidate();
-        }, 3000);
         console.log(faild); //错误的内容
       });
       setTimeout(() => {
@@ -105,29 +107,46 @@ export default {
       this.$router.replace("/SignUp");
     },
     focus: function (data) {
-      let dom = "";
       if (data == "id") {
-        dom = this.$refs.idLabel.$el;
+        this.idUp = true;
       } else if (data == "pw") {
-        dom = this.$refs.pwLabel.$el;
+        this.pwUp = true;
       }
-      dom.classList.value = dom.classList.value.replace("row", "up");
+      //!此处存在大bug,在输入框空值后第一次输入,触发focus事件将row->up,输入后blur事件无论是否有内容都会执行up->row,但该步不应该执行
+      // console.log("focus run");
+      // let dom = "";
+      // if (data == "id") {
+      //   dom = this.$refs.idLabel.$el;
+      // } else if (data == "pw") {
+      //   dom = this.$refs.pwLabel.$el;
+      // }
+      // console.log("row->up");
+      // dom.classList.value = dom.classList.value.replace("row", "up");
       // this.$refs.idLabel.$children[0].add("row-up");
     },
     blur: function (data) {
-      let dom = "";
       if (data == "id") {
-        dom = this.$refs.idLabel.$el;
-        if (this.studentData.id) {
-          return;
-        }
+        this.idUp = "";
       } else if (data == "pw") {
-        dom = this.$refs.pwLabel.$el;
-        if (this.studentData.password) {
-          return;
-        }
+        this.pwUp = "";
       }
-      dom.classList.value = dom.classList.value.replace("up", "row");
+      // console.log(data);
+      // console.log("blur run");
+      // let dom = "";
+      // if (data == "id") {
+      //   dom = this.$refs.idLabel.$el;
+      //   if (this.studentData.id) {
+      //     console.log(this.studentData.id);
+      //     return;
+      //   }
+      // } else if (data == "pw") {
+      //   dom = this.$refs.pwLabel.$el;
+      //   if (this.studentData.password) {
+      //     return;
+      //   }
+      // }
+      // console.log("up->row");
+      // dom.classList.value = dom.classList.value.replace("up", "row");
     },
   },
 };
