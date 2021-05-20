@@ -52,6 +52,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "showCode" */ "../views/showCode.vue"),
   },
+  {
+    path: "/schedule",
+    name: "schedule",
+    component: () =>
+      import(/* webpackChunkName: "schedule" */ "../views/schedule.vue"),
+  },
 ];
 
 const router = new VueRouter({
