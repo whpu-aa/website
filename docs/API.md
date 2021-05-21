@@ -106,6 +106,7 @@ interface User {
   name: string; // 名字
   description: string; // 描述
   otherInfo: Record<string, string>; // 其他的信息，一个string map。
+  avatarUrl: string; // 头像链接，即 /api/users/:id/avatar
 }
 ```
 
@@ -196,7 +197,7 @@ Response `400`
 
 ErrorCode `100201` 用户名已存在
 
-ErrorCode `100203` 不能修改根用户的permission
+ErrorCode `100203` 不能修改根用户的 permission
 
 Response `401`
 
@@ -213,6 +214,50 @@ Response `200`
 Response `400`
 
 ErrorCode `100204` 不能删除根用户。
+
+## get `/api/users/:id/avatar`
+
+获取用户的 avatar.
+
+Response `200`
+
+一个图片，有 ContentType，ETag，Last-Modified，Cache-Control.
+
+## put `/api/users/:id/avatar`
+
+上传一个用户 avatar。
+
+需要验证，自己能上传自己的，管理员能上传所有人的。
+
+Request
+
+一个图片，得有 ContentType，图片得是方的（长宽一样高，前端裁剪！）
+
+Response `200`
+
+```ts
+interface PutAvatarResponse {
+  etag: string;
+}
+```
+
+Response `400`
+
+Response `401`
+
+Response `403`
+
+## delete `/api/users/:id/avatar`
+
+删除一个用户的头像，即恢复默认。
+
+需要验证，自己能删除自己的，管理员能删除所有人的。
+
+Response `200`
+
+Response `401`
+
+Response `403`
 
 ## post `/api/userop/changepassword`
 
