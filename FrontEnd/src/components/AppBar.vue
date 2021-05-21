@@ -2,6 +2,8 @@
   <nav class="nav">
     <img class="logo" src="@/assets/logo.png" />
     <router-link to="/">主页</router-link>
+    <router-link to="/Login">登录</router-link>
+    <router-link to="/SignUp">注册</router-link>
     <router-link to="/about">关于我们</router-link>
     <router-link to="/NewsArticles">新闻文章</router-link>
     <router-link to="/GroupIntroduce">部门介绍</router-link>

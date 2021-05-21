@@ -44,7 +44,7 @@ const routes = [
     path: "/updateCode",
     name: "updateCode",
     component: () =>
-      import(/* webpackChunkName: "updataCode" */ "../views/updateCode.vue"),
+      import(/* webpackChunkName: "updateCode" */ "../views/updateCode.vue"),
   },
   {
     path: "/showCode",
@@ -57,6 +57,18 @@ const routes = [
     name: "schedule",
     component: () =>
       import(/* webpackChunkName: "schedule" */ "../views/schedule.vue"),
+  },
+  {
+    path: "/Login",
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
+  },
+  {
+    path: "/SignUp",
+    name: "SignUp",
+    component: () =>
+      import(/* webpackChunkName: "SignUp" */ "../views/SignUp.vue"),
   },
 ];
 
