@@ -8,9 +8,10 @@ public class UserPermission {
     @GeneratedValue
     private long id;
 
+    @Column(nullable = false)
     private String permission;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name="user_id", foreignKey = @ForeignKey(name = "FK_USER_PERMISSION_USER_ID"))
     private User user;
 

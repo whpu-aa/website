@@ -8,12 +8,14 @@ public class UserDetail {
     @GeneratedValue
     private long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name="user_id", foreignKey = @ForeignKey(name = "FK_USER_DETAIL_USER_ID"))
     private User user;
 
+    @Column(nullable = false)
     private String key;
 
+    @Column(nullable = false)
     private String value;
 
     public long getId() {

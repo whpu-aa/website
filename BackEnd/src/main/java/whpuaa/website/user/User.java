@@ -9,8 +9,10 @@ public class User {
     @GeneratedValue
     private long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
     private String name;
