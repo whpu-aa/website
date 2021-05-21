@@ -1,3 +1,114 @@
+# 用户
+
+## interface `User`
+
+```ts
+interface User {
+  id: number; // 唯一id
+  username: string; // 用户名
+  name: string; // 名字
+  description: string; // 描述
+  otherInfo: Record<string, string>; // 其他的信息，一个string map。
+}
+```
+
+## get `/api/users`
+
+获取用户列表。
+
+Query Params
+
+```ts
+interface GetUserListQueryParams {
+  page?: number; // 从0开始的页面号，默认0
+  numberPerPage?: number; // 每页多少个用户，默认20
+}
+```
+
+Response `200`
+
+```ts
+type GetUserListResponse = User[];
+```
+
+## get `/api/users/:id`
+
+获取一个用户。
+
+Response `200`
+
+```ts
+type GetUserResponse = User;
+```
+
+## post `/api/users`
+
+创建一个用户。
+
+需要验证。仅管理员可操作。
+
+```ts
+interface PostUserRequest {
+  username: string; // 用户名
+  name: string; // 名字
+  password: string; // 密码
+  description?: string; // 描述，不填就是空字符串。
+  otherInfo?: Record<string, string>; // 其他的信息，一个string map。不填就是空map。
+}
+```
+
+Response `200`
+
+```ts
+type PostUserResponse = User;
+```
+
+## patch `/api/users/:id`
+
+修改一个用户。
+
+需要验证。
+
+```ts
+interface PatchUserRequest {
+  username?: string; // 用户名，仅管理员可设置
+  name?: string; // 名字，仅管理员可设置
+  password?: string; // 密码，仅管理员可设置
+  description?: string; // 描述。
+  otherInfo?: Record<string, string>; // 其他的信息，一个string map。设为null来删除某个字段。
+}
+```
+
+Response `200`
+
+```ts
+type PatchUserResponse = User;
+```
+
+## delete `/api/users/:id`
+
+删除一个新闻。
+
+需要验证。仅管理员可操作。
+
+Response `200`
+
+## post `/api/userop/changepassword`
+
+修改密码。
+
+需要验证。
+
+Request
+```ts
+interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+}
+```
+
+Response `200`
+
 # 新闻
 
 ## interface `News`
@@ -111,7 +222,7 @@ interface PatchNewsRequest {
 Response `200`
 
 ```ts
-type PostNewsResponse = News;
+type PatchNewsResponse = News;
 ```
 
 ## delete `/api/news/:id`
