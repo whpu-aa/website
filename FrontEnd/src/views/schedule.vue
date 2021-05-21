@@ -40,7 +40,11 @@
       </div>
     </div>
     <div class="main">
-      <div class="hour-column"></div>
+      <div class="hour-column">
+        <div class="hour-column-box" :key="each" v-for="each in hourArr">
+          {{ each }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +57,11 @@ export default {
       searchData: "",
       avaterUrl: require("../assets/avater1.png"),
       bellBadge: false,
-      dateArray: Array.from({ length: 30 }, (_, index) => index + 1),
+      dateArray: Array.from({ length: 31 }, (_, index) => index + 1),
+      hourArr: Array.from({ length: 11 }, (_, index) => {
+        let hour = index + 8;
+        return hour < 10 ? "0" + hour + ":00" : hour + ":00";
+      }),
     };
   },
   methods: {
@@ -90,6 +98,10 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
+}
+.main {
+  position: relative;
+  background-color: linear-gradient(25deg, #d33535, #ce796a, #baaea3, #86dfdf);
 }
 .bell >>> .el-button {
   background: none;
