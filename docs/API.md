@@ -67,7 +67,7 @@ interface PostNewsRequest {
   time?: string; // 时间字符串，ISO 8601标准。默认为服务器时间。
   author?: string; // 作者，默认为验证的用户的name。
   description?: string; // 简短的描述。默认为文章的开头一部分。
-  labels: string[]; // 标签列表。
+  labels?: string[]; // 标签列表。为空表示空数组。
   content: string; // Markdown 格式的内容。
   thumbImageIndex?: number; // 选第几张图作为缩略图。为空表示没有缩略图。
   imageList: {
@@ -84,3 +84,40 @@ Response `200`
 ```ts
 type PostNewsResponse = News;
 ```
+
+## patch `/api/news/:id`
+
+修改一个新闻。
+
+需要验证。
+
+```ts
+// 空field表示不修改，图片一次只能替换整个列表，暂时没有设计修改单张图片的API，后期再加吧。
+interface PatchNewsRequest {
+  title?: string; // 标题
+  time?: string; // 时间字符串，ISO 8601标准。默认为服务器时间。
+  author?: string; // 作者，默认为验证的用户的name。
+  description?: string; // 简短的描述。默认为文章的开头一部分。
+  labels?: string[]; // 标签列表。
+  content?: string; // Markdown 格式的内容。
+  thumbImageIndex?: number; // 选第几张图作为缩略图。为空表示没有缩略图。
+  imageList?: {
+    data: string; // base64格式的数据。
+    contentType: string; // 图片的Mime格式。
+  }[];
+}
+```
+
+Response `200`
+
+```ts
+type PostNewsResponse = News;
+```
+
+## delete `/api/news/:id`
+
+删除一个新闻。
+
+需要验证。
+
+Response `200`
