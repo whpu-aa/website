@@ -1,3 +1,16 @@
+# 错误
+
+所有除身份验证相关的客户端错误返回`400`，以及如下 body
+
+```ts
+interface ErrorInfo {
+  code: number;
+  message: string;
+}
+```
+
+ErrorCode `100000`，通用错误代码，用于请求格式不对。
+
 # 验证
 
 用户验证根据以下流程：
@@ -29,6 +42,10 @@ interface CreateTokenResponse {
 }
 ```
 
+Response `400`
+
+ErrorCode `100101`，用户名或密码不正确。
+
 ## post `/api/token/verify`
 
 检查一个 token 是否有效。
@@ -49,6 +66,10 @@ interface VerifyTokenResponse {
 }
 ```
 
+Response `400`
+
+ErrorCode `100102`，token 无效。
+
 ## post `/api/token/revoke`
 
 撤销一个 token.
@@ -65,14 +86,23 @@ interface RevokeTokenRequest {
 
 Response `200`
 
+Response `401`
+
+Response `403`
+
 # 用户
+
+管理员权限对应 permission 为`UserManagement`.
 
 ## interface `User`
 
 ```ts
+const kPermissionList = ["UserManagement", "NewsManagement"];
+
 interface User {
   id: number; // 唯一id
   username: string; // 用户名
+  permission: string[]; // 拥有的权限。
   name: string; // 名字
   description: string; // 描述
   otherInfo: Record<string, string>; // 其他的信息，一个string map。
@@ -131,6 +161,14 @@ Response `200`
 type PostUserResponse = User;
 ```
 
+Response `400`
+
+ErrorCode `100201` 用户名已存在
+
+Response `401`
+
+Response `403`
+
 ## patch `/api/users/:id`
 
 修改一个用户。
@@ -154,6 +192,16 @@ Response `200`
 type PatchUserResponse = User;
 ```
 
+Response `400`
+
+ErrorCode `100201` 用户名已存在
+
+ErrorCode `100203` 不能path根用户的permission
+
+Response `401`
+
+Response `403`
+
 ## delete `/api/users/:id`
 
 删除一个新闻。
@@ -161,6 +209,10 @@ type PatchUserResponse = User;
 需要验证。仅管理员可操作。
 
 Response `200`
+
+Response `400`
+
+ErrorCode `100204` 不能删除根用户。
 
 ## post `/api/userop/changepassword`
 
@@ -179,7 +231,13 @@ interface ChangePasswordRequest {
 
 Response `200`
 
+Response `401`
+
+ErrorCode `100202` 旧密码不对。
+
 # 新闻
+
+管理员权限对应 permission 为`NewsManagement`.
 
 ## interface `News`
 
@@ -266,6 +324,16 @@ Response `200`
 type PostNewsResponse = News;
 ```
 
+Response `400`
+
+ErrorCode `100301` content 引用了不存在的 image
+
+ErrorCode `100302` thumb 引用了不存在的 image
+
+Response `401`
+
+Response `403`
+
 ## patch `/api/news/:id`
 
 修改一个新闻。
@@ -295,6 +363,16 @@ Response `200`
 type PatchNewsResponse = News;
 ```
 
+Response `400`
+
+ErrorCode `100301` content 引用了不存在的 image
+
+ErrorCode `100302` thumb 引用了不存在的 image
+
+Response `401`
+
+Response `403`
+
 ## delete `/api/news/:id`
 
 删除一个新闻。
@@ -302,3 +380,7 @@ type PatchNewsResponse = News;
 需要验证。
 
 Response `200`
+
+Response `401`
+
+Response `403`
