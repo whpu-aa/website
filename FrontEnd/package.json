@@ -10,7 +10,6 @@
     "lint:ci": "vue-cli-service lint --no-fix --max-warnings 0"
   },
   "dependencies": {
-    "chokidar": "^2.1.8",
     "core-js": "^3.12.1",
     "element-ui": "^2.15.1",
     "highlight.js": "^10.7.2",
