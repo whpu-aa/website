@@ -1,3 +1,70 @@
+# 验证
+
+用户验证根据以下流程：
+
+1. 检查 `access_token` query parameter，如果有，使用值作为 token.
+2. 否则，检查 `Authorize` Header，如果有，且以`Bearer `开头，则将后面的内容作为 token.
+3. 否则，视为未登陆状态。
+4. 如果有 token，检查 token 是否合法，以及对应的用户信息是否存在。如果 ok，则进入已验证状态，否则返回`401 Unauthorized`.
+
+## post `/api/token/create`
+
+创建一个 token.
+
+Request
+
+```ts
+interface CreateTokenRequest {
+  username: string;
+  password: string;
+}
+```
+
+Response `200`
+
+```ts
+interface CreateTokenResponse {
+  token: string;
+  user: User;
+}
+```
+
+## post `/api/token/verify`
+
+检查一个 token 是否有效。
+
+Request
+
+```ts
+interface VerifyTokenRequest {
+  token: string;
+}
+```
+
+Response `200`
+
+```ts
+interface VerifyTokenResponse {
+  user: User;
+}
+```
+
+## post `/api/token/revoke`
+
+撤销一个 token.
+
+需要验证。
+
+Request
+
+```ts
+interface RevokeTokenRequest {
+  token: string;
+}
+```
+
+Response `200`
+
 # 用户
 
 ## interface `User`
@@ -100,6 +167,7 @@ Response `200`
 需要验证。
 
 Request
+
 ```ts
 interface ChangePasswordRequest {
   oldPassword: string;
