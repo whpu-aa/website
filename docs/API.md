@@ -196,7 +196,7 @@ Response `400`
 
 ErrorCode `100201` 用户名已存在
 
-ErrorCode `100203` 不能path根用户的permission
+ErrorCode `100203` 不能修改根用户的permission
 
 Response `401`
 
