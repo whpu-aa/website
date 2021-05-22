@@ -87,4 +87,10 @@ public class UserServiceImpl implements UserService {
         // TODO(Liu De): Implement this!
         return false;
     }
+
+    @Override
+    public UserInfo verifyUserCredential(String username, String password) throws BadCredentialException {
+        // TODO(Liu De): Implement this!
+        return null;
+    }
 }
