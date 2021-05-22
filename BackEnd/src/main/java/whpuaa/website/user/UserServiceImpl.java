@@ -1,9 +1,22 @@
 package whpuaa.website.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UsernameValidator usernameValidator;
+
+    @Autowired
+    private PasswordValidator passwordValidator;
 
     @Autowired
     private UserRepository userRepository;
@@ -19,10 +32,56 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    private UserInfo mapEntityToInfo(User user) {
+        return new UserInfo(
+                user.getId(),
+                user.getUsername(),
+                user.getName() != null ? user.getName() : "",
+                user.getDescription() != null ? user.getDescription() : "",
+                user.getPermissions().stream().map(UserPermission::getPermission).collect(Collectors.toList()),
+                user.getDetails().stream().collect(Collectors.toMap(UserDetail::getKey, UserDetail::getValue)));
+    }
+
     @Override
-    public User createUser(String username, String password) {
+    public long getUserId(String username) throws UserNotExistException {
+        return 0;
+    }
+
+    @Override
+    public UserInfo getUser(long id) throws UserNotExistException {
+        return null;
+    }
+
+    @Override
+    public UserInfo getUserByUsername(String username) throws UserNotExistException {
+        return null;
+    }
+
+    @Override
+    public List<UserInfo> getUsers(long page, long numberPerPage) {
+        return null;
+    }
+
+    @Override
+    public UserInfo createUser(@NonNull String username, @NonNull String password) throws UsernameConflictException {
+        usernameValidator.ValidateAndThrow(username, false);
+        passwordValidator.Validate(password, false);
+
+        if (userRepository.existsByUsername(username))
+            throw new UsernameConflictException("Failed to create user because this username already exists.");
+
         User user = createUserEntity(username, password);
         userRepository.save(user);
-        return user;
+        return mapEntityToInfo(user);
+    }
+
+    @Override
+    public UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException {
+        return null;
+    }
+
+    @Override
+    public boolean removeUser(long id) throws InvalidOperationOnRootUserException {
+        return false;
     }
 }

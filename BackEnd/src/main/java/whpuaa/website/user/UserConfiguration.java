@@ -16,4 +16,14 @@ public class UserConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public UsernameValidator usernameValidator() {
+        return new UsernameValidator();
+    }
+
+    @Bean
+    public PasswordValidator passwordValidator() {
+        return new PasswordValidator();
+    }
 }
