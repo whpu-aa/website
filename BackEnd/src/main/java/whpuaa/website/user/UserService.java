@@ -40,7 +40,7 @@ public interface UserService {
     /**
      * Create a user.
      * @param username The username of new user.
-     * @param password The passowrd of new user.
+     * @param password The password of new user.
      * @return The new user's info.
      * @throws UsernameConflictException Thrown when username already exists in another user.
      */
