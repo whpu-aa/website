@@ -63,4 +63,13 @@ public interface UserService {
      * @throws InvalidOperationOnRootUserException Thrown when removing root user.
      */
     boolean removeUser(long id) throws InvalidOperationOnRootUserException;
+
+    /**
+     * Given username and password, check its legality and return its user info if correct.
+     * @param username The username.
+     * @param password The password.
+     * @return The user info.
+     * @throws BadCredentialException Thrown if username or password is wrong.
+     */
+    UserInfo verifyUserCredential(String username, String password) throws BadCredentialException;
 }
