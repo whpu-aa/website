@@ -41,21 +41,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public long getUserId(String username) throws UserNotExistException {
+        // TODO(Liu De): Implement this!
         return 0;
     }
 
     @Override
     public UserInfo getUser(long id) throws UserNotExistException {
+        // TODO(Liu De): Implement this!
         return null;
     }
 
     @Override
     public UserInfo getUserByUsername(String username) throws UserNotExistException {
+        // TODO(Liu De): Implement this!
         return null;
     }
 
     @Override
     public List<UserInfo> getUsers(long page, long numberPerPage) {
+        // TODO(Liu De): Implement this!
         return null;
     }
 
@@ -74,11 +78,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException {
+        // TODO(Liu De): Implement this!
         return null;
     }
 
     @Override
     public boolean removeUser(long id) throws InvalidOperationOnRootUserException {
+        // TODO(Liu De): Implement this!
         return false;
     }
 }
