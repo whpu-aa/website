@@ -35,7 +35,7 @@ public interface UserService {
      * @param numberPerPage Number of users per page.
      * @return The list of user info.
      */
-    List<UserInfo> getUsers(long page, long numberPerPage);
+    List<UserInfo> getUsers(long page, long numberPerPage) throws UserNotExistException;
 
     /**
      * Create a user.
@@ -54,7 +54,7 @@ public interface UserService {
      * @throws UsernameConflictException Thrown when new username already exists in another user.
      * @throws InvalidOperationOnRootUserException Thrown when change root user's permission.
      */
-    UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException;
+    UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException, UserNotExistException;
 
     /**
      * Remove a user.
@@ -71,5 +71,5 @@ public interface UserService {
      * @return The user info.
      * @throws BadCredentialException Thrown if username or password is wrong.
      */
-    UserInfo verifyUserCredential(String username, String password) throws BadCredentialException;
+    UserInfo verifyUserCredential(String username, String password) throws BadCredentialException, UserNotExistException;
 }

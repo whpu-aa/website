@@ -10,7 +10,7 @@ public class UserInfo {
     private String description;
     private List<String> permission;
     private Map<String, String> details;
-
+    public UserInfo(){}
     public UserInfo(long id, String username, String name, String description, List<String> permission, Map<String, String> details) {
         this.id = id;
         this.username = username;
@@ -66,5 +66,17 @@ public class UserInfo {
 
     public void setDetails(Map<String, String> details) {
         this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", permission=" + permission +
+                ", details=" + details +
+                '}';
     }
 }

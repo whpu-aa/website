@@ -89,6 +89,7 @@ public class ServiceImpTest {
            int c=(int)(Math.random()*100);
            String sql="insert into user values("+i+",'"+(char)c+"','dd','ld1','study')";
             jdbcTemplate.execute(sql);
+
         }
     }
     @Test void test10() throws UserNotExistException {
