@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="whpuaa.website.user.UserMapper">
+    <select id="getUserId" resultType="long">
+            select id
+            from user
+            where username=#{username}
+    </select>
+    <select id="getPermissions" resultType="java.lang.String">
+          select permission
+          from user_permission
+          where user_id=#{id}
+    </select>
+    <select id="getDetails" resultType="java.util.Map">
+          select key,value
+          from user_detail
+          where user_id=#{id}
+    </select>
+    <select id="getUserById"  resultType="User" >
+       select *
+       from user
+       where id=#{id}
+     </select>
+     <select id="getIdByUsername" resultType="long">
+         select id
+         from user
+         where username=#{username}
+     </select>
+    <select id="getUsersId" resultType="long">
+        select *
+        from user
+        limit (#{page}-1)*#{numberPerPage},#{numberPerPage}
+    </select>
+    <select id="removeUser"  >
+        delete
+        from user
+        where id=#{id}
+    </select>
+</mapper>
+
