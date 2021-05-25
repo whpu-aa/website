@@ -11,37 +11,10 @@
     <router-link to="/updateCode">上传代码</router-link>
     <router-link to="/showcode">展示代码</router-link>
   </nav>
-  <!--  <div class="nav">-->
-  <!--    <img class="logo" src="@/assets/logo.png" />-->
-  <!--    <el-tabs v-model="activeName" @tab-click="handleClick">-->
-  <!--      <el-tab-pane label="主页" name="Home"></el-tab-pane>-->
-  <!--      <el-tab-pane label="登录" name="Login"></el-tab-pane>-->
-  <!--      <el-tab-pane label="注册" name="SignUp"></el-tab-pane>-->
-  <!--      <el-tab-pane label="关于我们" name="About"></el-tab-pane>-->
-  <!--      <el-tab-pane label="新闻文章" name="NewsArticles"></el-tab-pane>-->
-  <!--      <el-tab-pane label="部门介绍" name="GroupIntroduce"></el-tab-pane>-->
-  <!--      <el-tab-pane label="新闻" name="News"></el-tab-pane>-->
-  <!--      <el-tab-pane label="上传代码" name="updateCode"></el-tab-pane>-->
-  <!--      <el-tab-pane label="展示代码" name="showCode"></el-tab-pane>-->
-  <!--    </el-tabs>-->
-  <!--  </div>-->
 </template>
 
 <script>
 export default {
-  // data() {
-  //   return {
-  //     activeName: "Home",
-  //   };
-  // },
-  // methods: {
-  //   handleClick() {
-  //     console.log(this.activeName);
-  //     console.log(this.$route.name);
-  //     // console.log(this.$route);
-  //     // this.$route =;
-  //   },
-  // },
 };
 </script>
 
