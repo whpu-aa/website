@@ -3,13 +3,14 @@ package whpuaa.website.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
      private UserMapper userMapper;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private User createUserEntity(String username, String password) {
@@ -47,7 +49,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public long getUserId(String username) throws UserNotExistException {
         // TODO(Liu De): Implement this!
-       return userMapper.getUserId(username);
+        Integer id=userMapper.getUserIdByUsername(username);
+        if(null==id)
+            throw new UserNotExistException("Failed to find username because it is not exist.");
+       return id;
     }
 
     @Override
@@ -55,7 +60,7 @@ public class UserServiceImpl implements UserService {
         // TODO(Liu De): Implement this!
         User user = userMapper.getUserById(id);
         if(user==null)
-            throw new UserNotExistException("Failed to find user because this it is not exist.");
+            throw new UserNotExistException("Failed to find user because it is not exist.");
         List<String> permissions = userMapper.getPermissions(id);
         Map<String,String> details=new HashMap<String,String>();
         List<Map<String, String>> map = userMapper.getDetails(id);
@@ -71,7 +76,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo getUserByUsername(String username) throws UserNotExistException {
         // TODO(Liu De): Implement this!
-        long root = userMapper.getIdByUsername("root");
+        long root = userMapper.getUserIdByUsername("root");
         UserInfo user =getUser(root);
         return user;
     }
@@ -112,8 +117,6 @@ public class UserServiceImpl implements UserService {
     public boolean removeUser(long id) throws InvalidOperationOnRootUserException {
         // TODO(Liu De): Implement this!
         Integer ans=userMapper.removeUser(id);
-        if(ans>1)
-            throw new InvalidOperationOnRootUserException("The same id appears，data error!");
         if(null==ans)
             throw new InvalidOperationOnRootUserException("The id is not exist!");
         return true;
@@ -122,14 +125,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo verifyUserCredential(String username, String password) throws BadCredentialException, UserNotExistException {
         // TODO(Liu De): Implement this!
-        long id = userMapper.getIdByUsername(username);
+        long id = userMapper.getUserIdByUsername(username);
         User user=userMapper.getUserById(id);
         if(null==user)
             throw new UserNotExistException("This user is not exist!");
-        if(user.getPassword().equals(password))
+        if(passwordEncoder.matches(password,user.getPassword()))
             return getUser(id);
         else
             throw new BadCredentialException("username and password do not matched！");
-
     }
 }
