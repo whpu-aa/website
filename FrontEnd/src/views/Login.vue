@@ -54,6 +54,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -78,6 +79,12 @@ export default {
     pwLabel: function () {
       return this.studentData.password + this.pwUp;
     },
+    ...mapMutations([
+      "userSet", // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+
+      // `mapMutations` 也支持载荷：
+      "loginSet", // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+    ]),
   },
   methods: {
     login: function () {
@@ -102,6 +109,18 @@ export default {
         });
         this.loading = false;
       }, 2000);
+      this.$axios
+        .post("/api/token/create", {
+          username: this.studentData.id,
+          password: this.studentData.password,
+        })
+        .then((response) => {
+          this.userSet(response.data.user);
+          this.loginSet(response.data.token);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     SignUp: function () {
       this.$router.replace("/SignUp");
