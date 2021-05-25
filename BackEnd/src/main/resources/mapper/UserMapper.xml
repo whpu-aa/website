@@ -26,7 +26,7 @@
     <select id="getUsersId" resultType="Integer">
         select id
         from user
-        limit (#{page}-1)*#{numberPerPage},#{numberPerPage}
+        limit #{page}*#{numberPerPage},#{numberPerPage}
     </select>
     <select id="removeUser"  >
         delete
