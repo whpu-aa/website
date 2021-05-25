@@ -1,12 +1,12 @@
 <template>
   <div class="nav">
-    <img class="logo" src="@/assets/logo.png"/>
+    <img class="logo" src="@/assets/logo.png" />
     <el-tabs v-model="activeName" @tab-click="tabClick">
       <el-tab-pane
-          v-for="(item ,index) in site"
-          :name="item"
-          :label="item"
-          :key="index"
+        v-for="(item, index) in site"
+        :name="item"
+        :label="item"
+        :key="index"
       ></el-tab-pane>
     </el-tabs>
   </div>
@@ -17,15 +17,34 @@ export default {
   data() {
     return {
       activeName: "主页",
-      site: ['主页', '登录', '注册', '关于我们', '新闻介绍', '部门介绍', '新闻', '上传代码', '展示代码'],
-      page:['/','Login','SignUp','About','NewsArticles','GroupIntroduce','News','updateCode','showCode']
+      site: [
+        "主页",
+        "登录",
+        "注册",
+        "关于我们",
+        "新闻介绍",
+        "部门介绍",
+        "新闻",
+        "上传代码",
+        "展示代码",
+      ],
+      page: [
+        "/",
+        "Login",
+        "SignUp",
+        "About",
+        "NewsArticles",
+        "GroupIntroduce",
+        "News",
+        "updateCode",
+        "showCode",
+      ],
     };
   },
   methods: {
     tabClick() {
       for (let i = 0; i < this.site.length; i++) {
-        if (this.activeName === this.site[i])
-          this.$router.push(this.page[i]);
+        if (this.activeName === this.site[i]) this.$router.push(this.page[i]);
       }
     },
   },
