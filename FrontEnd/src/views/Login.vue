@@ -83,7 +83,7 @@ export default {
       "userSet", // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
 
       // `mapMutations` 也支持载荷：
-      "loginSet", // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+      "tokenSet", // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
     ]),
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
         })
         .then((response) => {
           this.userSet(response.data.user);
-          this.loginSet(response.data.token);
+          this.tokenSet(response.data.token);
         })
         .catch((error) => {
           console.log(error);

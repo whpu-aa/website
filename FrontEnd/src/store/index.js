@@ -23,7 +23,7 @@ export default new Vuex.Store({
     token: (state) => state.token,
   },
   mutations: {
-    loginSet: (state, token) => {
+    tokenSet: (state, token) => {
       state.token = token;
       localStorage.setItem("token", token);
     },

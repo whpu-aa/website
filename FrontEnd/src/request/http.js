@@ -22,6 +22,7 @@ instance.interceptors.request.use(
     return Promise.error(error);
   }
 );
+
 instance.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
@@ -60,8 +61,7 @@ instance.interceptors.response.use(
                 duration: 1000,
               });
               // 清除token
-              localStorage.removeItem("token");
-              store.commit("loginSet", null);
+              store.commit("tokenSet", null);
               // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
               setTimeout(() => {
                 router.replace({
