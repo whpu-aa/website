@@ -9,11 +9,13 @@ import whpuaa.website.user.UserInfo;
 import whpuaa.website.user.UserNotExistException;
 import whpuaa.website.user.UserService;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 
+@Transactional
 public class TokenServiceImpl implements TokenService {
 
     @Autowired

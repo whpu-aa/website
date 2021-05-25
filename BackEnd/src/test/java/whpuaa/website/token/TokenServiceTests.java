@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.mockito.BDDMockito.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest
@@ -26,7 +26,7 @@ public class TokenServiceTests {
     private TokenService tokenService;
 
     @Test
-    public void createAndVerifyTokenShouldWork() throws UserNotExistException, BadCredentialException,BadTokenException, TokenExpiredException {
+    public void createAndVerifyTokenShouldWork() throws UserNotExistException, BadCredentialException, BadTokenException, TokenExpiredException {
         UserInfo mockUser = new UserInfo(1, "username", "", "", new ArrayList<>(), new HashMap<>());
 
         given(userService.verifyUserCredential("username", "password")).willReturn(mockUser);
@@ -45,5 +45,23 @@ public class TokenServiceTests {
         assertThat(u).isEqualTo(mockUser);
 
         verify(userService, times(1)).getUser(1);
+    }
+
+    @Test
+    public void revokeTokenShouldWork() throws UserNotExistException, BadCredentialException, BadTokenException, TokenExpiredException {
+        UserInfo mockUser = new UserInfo(1, "username", "", "", new ArrayList<>(), new HashMap<>());
+
+        given(userService.verifyUserCredential("username", "password")).willReturn(mockUser);
+
+        TokenService.CreateTokenResult result = tokenService.createToken("username", "password", Duration.ofDays(30));
+
+        assertThat(result.user).isEqualTo(mockUser);
+        assertThat(result.token).isNotBlank();
+
+        verify(userService, times(1)).verifyUserCredential("username", "password");
+
+        tokenService.revokeToken(result.token);
+
+        assertThatThrownBy(() -> tokenService.verifyToken(result.token)).isInstanceOf(BadTokenException.class);
     }
 }
