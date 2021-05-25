@@ -21,7 +21,7 @@ public class ServiceImpTest {
     @Test
     public void insertDetail() throws UserNotExistException {
         System.out.println("------");
-        jdbcTemplate.execute("insert into user_detail values (2,'ll','1234',1)");
+        jdbcTemplate.execute("insert into user_detail values (3,'ll','1234',1)");
         List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from user_detail");
         for (Map<String, Object> map : maps) {
             Set<String> strings = map.keySet();
