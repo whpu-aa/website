@@ -11,19 +11,30 @@
   <!--    <router-link to="/updateCode">上传代码</router-link>-->
   <!--    <router-link to="/showcode">展示代码</router-link>-->
   <!--  </nav>-->
-  <div class="nav">
-    <img class="logo" src="@/assets/logo.png" />
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="主页" name="Home"></el-tab-pane>
-      <el-tab-pane label="登录" name="Login"></el-tab-pane>
-      <el-tab-pane label="注册" name="SignUp"></el-tab-pane>
-      <el-tab-pane label="关于我们" name="About"></el-tab-pane>
-      <el-tab-pane label="新闻文章" name="NewsArticles"></el-tab-pane>
-      <el-tab-pane label="部门介绍" name="GroupIntroduce"></el-tab-pane>
-      <el-tab-pane label="新闻" name="News"></el-tab-pane>
-      <el-tab-pane label="上传代码" name="updateCode"></el-tab-pane>
-      <el-tab-pane label="展示代码" name="showCode"></el-tab-pane>
-    </el-tabs>
+  <div>
+    <div class="nav">
+      <img class="logo" src="@/assets/logo.png" />
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane
+            v-for="(item ,index) in site"
+            :name="item"
+            :label="item"
+            :key="index"
+        ></el-tab-pane>
+      </el-tabs>
+    </div>
+      <div v-if="activeName ==='主页'">切换到Home</div>
+      <div v-else-if="activeName ==='登录'">切换到Login</div>
+      <div v-else-if="activeName === '注册'">切换到SingUp</div>
+      <div v-else-if="activeName === '关于我们'">切换到About</div>
+      <div v-else-if="activeName === '新闻介绍'">切换到News</div>
+      <div v-else-if="activeName === '部门介绍'">切换到Group</div>
+      <div v-else-if="activeName === '新闻'">切换到News</div>
+      <div v-else-if="activeName === '上传代码'">切换到updateCode</div>
+      <div v-else-if="activeName === '展示代码'">切换到showCode</div>
+    <div>
+
+    </div>
   </div>
 </template>
 
@@ -32,14 +43,13 @@ export default {
   data() {
     return {
       activeName: "Home",
+      site:['主页','登录','注册','关于我们','新闻介绍','部门介绍','新闻','上传代码','展示代码'],
     };
   },
   methods: {
     handleClick() {
       console.log(this.activeName);
       console.log(this.$route.name);
-      // console.log(this.$route);
-      // this.$route =;
     },
   },
 };
