@@ -1,21 +1,22 @@
 package whpuaa.website.token.entity;
 
-import whpuaa.website.user.User;
-
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity(name = "user_token")
 public class UserToken {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
     private String token;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name="user_id", foreignKey = @ForeignKey(name = "FK_USER_TOKEN_USER_ID"))
-    private User user;
+    @Column(name = "expire_at", nullable = false)
+    private Timestamp expireAt;
+
+    @Column(name = "user_id", nullable = false)
+    private long userId;
 
     public long getId() {
         return id;
@@ -33,11 +34,19 @@ public class UserToken {
         this.token = token;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getExpireAt() {
+        return expireAt;
+    }
+
+    public void setExpireAt(Timestamp expireAt) {
+        this.expireAt = expireAt;
     }
 }

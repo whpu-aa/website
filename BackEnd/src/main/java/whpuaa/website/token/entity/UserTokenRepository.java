@@ -2,6 +2,9 @@ package whpuaa.website.token.entity;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserTokenRepository extends CrudRepository<UserToken, Long> {
+import java.util.Optional;
 
+public interface UserTokenRepository extends CrudRepository<UserToken, Long> {
+    Optional<UserToken> findByToken(String token);
+    void deleteByToken(String token);
 }
