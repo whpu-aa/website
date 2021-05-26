@@ -23,10 +23,10 @@
     <el-row>
       <el-col :span="4" :offset="2">
         <el-date-picker
-          v-model="dateValue"
-          type="date"
-          placeholder="选择日期"
-          value-format="yyyy-MM-dd"
+          v-model="MouthValue"
+          type="month"
+          placeholder="选择月"
+          value-format="yyyy-MM"
         ></el-date-picker>
       </el-col>
     </el-row>
@@ -39,13 +39,32 @@
         {{ each }}
       </div>
     </div>
-    <div class="main">
-      <div class="hour-column">
+    <el-row class="main">
+      <el-col :span="2" class="hour-column">
         <div class="hour-column-box" :key="each" v-for="each in hourArr">
           {{ each }}
         </div>
-      </div>
-    </div>
+      </el-col>
+      <el-col :span="14" class="label-column">
+        <div
+          class="label-box"
+          :key="id"
+          v-for="(item, id) in labelObjArray"
+          :style="{ top: item.top, height: item.height }"
+        >
+          <div
+            class="label-before"
+            :style="{ background: item.beforeColor }"
+          ></div>
+          <div class="label-content" :style="{ background: item.color }">
+            <div class="content-time">
+              {{ item.startTime }}~~{{ item.endTime }}
+            </div>
+            {{ item.main }}
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -53,15 +72,61 @@
 export default {
   data() {
     return {
-      dateValue: new Date().toISOString().substring(0, 10),
+      day: new Date().toISOString().substring(8, 10), //亮的那个
+      MouthValue: new Date().toISOString().substring(0, 7),
       searchData: "",
       avaterUrl: require("../assets/avater1.png"),
       bellBadge: false,
-      dateArray: Array.from({ length: 31 }, (_, index) => index + 1),
-      hourArr: Array.from({ length: 11 }, (_, index) => {
+      hourArr: Array.from({ length: 15 }, (_, index) => {
         let hour = index + 8;
         return hour < 10 ? "0" + hour + ":00" : hour + ":00";
       }),
+      labelObjArray: [
+        {
+          id: "111", //唯一识别号
+          top: "3.15rem",
+          height: "9.45rem", //每一个小时就是3.15Rem
+          beforeColor: "#4Ec9Fc",
+          color: "#EAF9FF",
+          startTime: "9:00",
+          endTime: "12:00",
+          tag: "meeting", //留个tag的筛选
+          main: "一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长的文字",
+        },
+        {
+          id: "222",
+          top: "15.75rem",
+          height: "3.15rem", //每一个小时就是3.15Rem
+          beforeColor: "#5EA0F6",
+          color: "#E2ECFF",
+          startTime: "13:00",
+          endTime: "14:00",
+          tag: "讲题", //留个tag的筛选
+          main: "一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长的文字",
+        },
+        {
+          id: "333",
+          top: "18.90rem",
+          height: "4.725rem", //每一个小时就是3.15Rem
+          beforeColor: "#f9e26e",
+          color: "#FEFAED",
+          startTime: "14:00",
+          endTime: "15:30",
+          tag: "母鸡吖", //留个tag的筛选
+          main: "一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长的文字",
+        },
+        {
+          id: "444",
+          top: "25.2rem",
+          height: "18.9rem", //每一个小时就是3.15Rem
+          beforeColor: "#F985AB",
+          color: "#FFF1F6",
+          startTime: "16:00",
+          endTime: "22:00",
+          tag: "母鸡吖", //留个tag的筛选
+          main: "一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长的文字",
+        },
+      ],
     };
   },
   methods: {
@@ -75,16 +140,18 @@ export default {
       if (day.length > 2) {
         return;
       }
-      this.dateValue = this.dateValue.substring(0, 8) + day;
+      this.day = day;
+      // todo:转换日子,清除tagObjArray,重新获取新的tagObjArray
     },
   },
   computed: {
-    day: function () {
-      if (this.dateValue) {
-        return this.dateValue.split("-")[2];
-      } else {
-        return 0;
-      }
+    dateArray() {
+      let yyyy = parseInt(this.MouthValue.split("-")[0], 10);
+      let mm = parseInt(this.MouthValue.split("-")[1], 10);
+      return Array.from(
+        { length: new Date(yyyy, mm, 0).getDate() },
+        (_, index) => index + 1
+      );
     },
   },
 };
@@ -98,10 +165,6 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-}
-.main {
-  position: relative;
-  background-color: linear-gradient(25deg, #d33535, #ce796a, #baaea3, #86dfdf);
 }
 .bell >>> .el-button {
   background: none;
@@ -141,6 +204,7 @@ export default {
   padding-left: 2.5rem;
 }
 .day-box {
+  user-select: none;
   flex-shrink: 0;
   display: inline-flex;
   justify-content: center;
@@ -154,5 +218,43 @@ export default {
   margin-top: 2rem;
   white-space: nowrap;
   overflow-x: auto;
+}
+.main {
+  display: flex;
+  position: relative;
+}
+.hour-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 3rem;
+}
+.hour-column-box {
+  margin: 1rem 0;
+  color: #65646ea6;
+}
+.label-column {
+  position: relative;
+}
+.label-before {
+  height: 100%;
+  width: 10px;
+  display: inline-block;
+  border-radius: 4px 0 0 4px;
+}
+.label-box {
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+}
+.label-content {
+  padding: 1rem;
+  text-align: initial;
+  width: 100%;
+  border-radius: 0 4px 4px 0;
+  font-weight: bold;
+}
+
+.content-time {
+  font-size: 80%;
 }
 </style>
