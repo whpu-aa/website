@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-     private UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Autowired
     private UsernameValidator usernameValidator;
@@ -48,25 +49,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public long getUserId(String username) throws UserNotExistException {
-        // TODO(Liu De): Implement this!
-        Integer id=userMapper.getUserIdByUsername(username);
-        if(null==id)
+        Integer id = userMapper.getUserIdByUsername(username);
+        if (null == id)
             throw new UserNotExistException("Failed to find username because it is not exist.");
-       return id;
+        return id;
     }
 
     @Override
     public UserInfo getUser(long id) throws UserNotExistException {
-        // TODO(Liu De): Implement this!
         User user = userMapper.getUserById(id);
-        if(user==null)
+        if (user == null)
             throw new UserNotExistException("Failed to find user because it is not exist.");
         List<String> permissions = userMapper.getPermissions(id);
-        Map<String,String> details=new HashMap<String,String>();
+        Map<String, String> details = new HashMap<String, String>();
         List<Map<String, String>> map = userMapper.getDetails(id);
         for (Map<String, String> detail : map) {
             for (Map.Entry<String, String> entry : detail.entrySet()) {
-                details.put(entry.getKey(),entry.getValue());
+                details.put(entry.getKey(), entry.getValue());
             }
         }
         UserInfo userInfo = new UserInfo(user.getId(), user.getUsername(), user.getName(), user.getDescription(), permissions, details);
@@ -75,17 +74,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo getUserByUsername(String username) throws UserNotExistException {
-        // TODO(Liu De): Implement this!
         long root = userMapper.getUserIdByUsername("root");
-        UserInfo user =getUser(root);
+        UserInfo user = getUser(root);
         return user;
     }
 
     @Override
     public List<UserInfo> getUsers(long page, long numberPerPage) throws UserNotExistException {
-        // TODO(Liu De): Implement this!
         List<Integer> usersid = userMapper.getUsersId(page, numberPerPage);
-        List<UserInfo> userInfos=new ArrayList<UserInfo>();
+        List<UserInfo> userInfos = new ArrayList<UserInfo>();
         for (Integer integer : usersid) {
             UserInfo userInfo = getUser(integer);
             userInfos.add(userInfo);
@@ -108,28 +105,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException, UserNotExistException {
-        // TODO(Liu De): Implement this!
         UserInfo user = getUser(id);
-        return new UserInfo(id,params.getUsername(),params.getPassword(),params.getName(),params.getPermission(),params.getDetails());
+        return new UserInfo(id, params.getUsername(), params.getPassword(), params.getName(), params.getPermission(), params.getDetails());
     }
 
     @Override
     public boolean removeUser(long id) throws InvalidOperationOnRootUserException {
-        // TODO(Liu De): Implement this!
-        Integer ans=userMapper.removeUser(id);
-        if(null==ans)
+        Integer ans = userMapper.removeUser(id);
+        if (null == ans)
             throw new InvalidOperationOnRootUserException("The id is not exist!");
         return true;
     }
 
     @Override
     public UserInfo verifyUserCredential(String username, String password) throws BadCredentialException, UserNotExistException {
-        // TODO(Liu De): Implement this!
         long id = userMapper.getUserIdByUsername(username);
-        User user=userMapper.getUserById(id);
-        if(null==user)
+        User user = userMapper.getUserById(id);
+        if (null == user)
             throw new UserNotExistException("This user is not exist!");
-        if(passwordEncoder.matches(password,user.getPassword()))
+        if (passwordEncoder.matches(password, user.getPassword()))
             return getUser(id);
         else
             throw new BadCredentialException("username and password do not matched！");

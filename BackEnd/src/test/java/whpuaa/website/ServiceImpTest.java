@@ -36,9 +36,9 @@ public class ServiceImpTest {
     public void insertUsers() throws UserNotExistException, UsernameConflictException {
 
 
-        for(int i=0;i<20;i++){
-            Object[]objects={"l"+i,"l"+i};
-            jdbcTemplate.update("insert into user(username,password) values(?,?)",objects);
+        for (int i = 0; i < 20; i++) {
+            Object[] objects = {"l" + i, "l" + i};
+            jdbcTemplate.update("insert into user(username,password) values(?,?)", objects);
         }
 
     }
@@ -46,21 +46,14 @@ public class ServiceImpTest {
     @Test
     public void queryUsers() throws UserNotExistException, UsernameConflictException {
         List<UserInfo> users = userService.getUsers(1, 50);
-        for(UserInfo user:users)
+        for (UserInfo user : users)
             System.out.println(user);
     }
 
     @Test
-    public void CheckRepository(){
+    public void CheckRepository() {
         System.out.println(userService);
     }
-
-
-
-
-
-
-
 
 
 }

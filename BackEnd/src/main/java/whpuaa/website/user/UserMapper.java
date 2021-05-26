@@ -12,15 +12,19 @@ import java.util.Map;
 @Repository
 public interface UserMapper {
     Integer getUserIdByUsername(String username);
+
     /*
-    *将UserInfo拆成User,再通过User来找其他的属性，原因：jdbc没有返回Map<k,v>集合的方法，只能返回容量为1的
+     *将UserInfo拆成User,再通过User来找其他的属性，原因：jdbc没有返回Map<k,v>集合的方法，只能返回容量为1的
      */
     List<String> getPermissions(long id);
-    List<Map<String,String>> getDetails(long id);
-    User getUserById(long id);
-    List<Integer> getUsersId(long page, long numberPerPage);
-    Integer removeUser(long id);
 
+    List<Map<String, String>> getDetails(long id);
+
+    User getUserById(long id);
+
+    List<Integer> getUsersId(long page, long numberPerPage);
+
+    Integer removeUser(long id);
 
 
 }

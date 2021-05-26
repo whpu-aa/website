@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="whpuaa.website.user.UserMapper">
-    <select id="getUserIdByUsername" >
+    <select id="getUserIdByUsername">
             select id
             from user
             where username=#{username}
@@ -18,7 +18,7 @@
           from user_detail
           where user_id=#{id}
     </select>
-    <select id="getUserById"  resultType="User" >
+    <select id="getUserById" resultType="User">
        select *
        from user
        where id=#{id}
@@ -28,7 +28,7 @@
         from user
         limit #{page}*#{numberPerPage},#{numberPerPage}
     </select>
-    <select id="removeUser"  >
+    <select id="removeUser">
         delete
         from user
         where id=#{id}
