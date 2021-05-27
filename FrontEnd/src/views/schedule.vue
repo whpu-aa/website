@@ -2,9 +2,13 @@
   <div class="out">
     <el-row class="top">
       <el-col :span="4" class="topinf"><h3>协会日历</h3></el-col>
-      <el-button class="btn-sreach" icon="el-icon-search"></el-button>
       <el-col :span="8">
-        <el-input v-model="searchData" placeholder="search"> </el-input>
+        <el-date-picker
+          v-model="MouthValue"
+          type="month"
+          placeholder="选择月"
+          value-format="yyyy-MM"
+        ></el-date-picker>
       </el-col>
       <el-col :span="1" :offset="7">
         <el-badge is-dot class="bell" :hidden="bellBadge">
@@ -18,16 +22,6 @@
       </el-col>
       <el-col :span="3">
         <div class="name">我是大饼,你的超级大饼</div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="4" :offset="2">
-        <el-date-picker
-          v-model="MouthValue"
-          type="month"
-          placeholder="选择月"
-          value-format="yyyy-MM"
-        ></el-date-picker>
       </el-col>
     </el-row>
     <div @click="changeDate($event)" class="date-array">
@@ -47,6 +41,9 @@
       </el-col>
       <el-col :span="14" class="label-column">
         <div
+          v-show="
+            timeFliter[0] <= item.startTime && timeFliter[1] >= item.endTime
+          "
           class="label-box"
           :key="id"
           v-for="(item, id) in labelObjArray"
@@ -64,6 +61,44 @@
           </div>
         </div>
       </el-col>
+      <el-col class="fliter-time" :span="4">
+        <div class="fliter-time-title">时间</div>
+        <el-time-select
+          placeholder="起始时间"
+          v-model="fliterStartTime"
+          :picker-options="{
+            start: '08:00',
+            step: '00:30',
+            end: '22:00',
+          }"
+        >
+        </el-time-select>
+        <el-time-select
+          placeholder="结束时间"
+          v-model="fliterEndTime"
+          :picker-options="{
+            start: '08:00',
+            step: '00:30',
+            end: '22:00',
+            minTime: fliterStartTime,
+          }"
+        >
+        </el-time-select>
+        <el-button
+          @click="setTimeFliter"
+          icon="el-icon-search"
+          circle
+        ></el-button>
+      </el-col>
+      <el-col :span="4"
+        ><div class="fliter-event">任务</div>
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox class="fliter-event-box-1" label="开会"></el-checkbox>
+          <el-checkbox class="fliter-event-box-2" label="讲题"></el-checkbox>
+          <el-checkbox class="fliter-event-box-3" label="母鸡吖"></el-checkbox>
+          <el-checkbox class="fliter-event-box-4" label="别的"></el-checkbox>
+        </el-checkbox-group>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -74,9 +109,12 @@ export default {
     return {
       day: new Date().toISOString().substring(8, 10), //亮的那个
       MouthValue: new Date().toISOString().substring(0, 7),
-      searchData: "",
+      fliterStartTime: "",
+      fliterEndTime: "",
+      timeFliter: ["08:00", "22:00"],
       avaterUrl: require("../assets/avater1.png"),
       bellBadge: false,
+      checkList: [],
       hourArr: Array.from({ length: 15 }, (_, index) => {
         let hour = index + 8;
         return hour < 10 ? "0" + hour + ":00" : hour + ":00";
@@ -123,7 +161,7 @@ export default {
           color: "#FFF1F6",
           startTime: "16:00",
           endTime: "22:00",
-          tag: "母鸡吖", //留个tag的筛选
+          tag: "别的", //留个tag的筛选
           main: "一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长一段很长很长的文字",
         },
       ],
@@ -142,6 +180,9 @@ export default {
       }
       this.day = day;
       // todo:转换日子,清除tagObjArray,重新获取新的tagObjArray
+    },
+    setTimeFliter: function () {
+      this.timeFliter = [this.fliterStartTime, this.fliterEndTime];
     },
   },
   computed: {
@@ -256,5 +297,67 @@ export default {
 
 .content-time {
   font-size: 80%;
+}
+
+.fliter-time {
+  padding: 1rem 1rem;
+}
+.fliter-time >>> .el-date-editor {
+  margin: 2rem 0;
+}
+.el-checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+.el-checkbox {
+  margin: 0;
+}
+
+.fliter-event-box-1 >>> .el-checkbox__inner {
+  transition: all 0.25s;
+  border-color: #4ec9fc;
+  background-color: #eaf9ff;
+}
+.fliter-event-box-1 >>> .is-checked .el-checkbox__inner {
+  padding: 10%;
+  transition: all 0.25s;
+  background-clip: content-box;
+  background-color: #4ec9fc;
+}
+
+.fliter-event-box-2 >>> .el-checkbox__inner {
+  transition: all 0.25s;
+  border-color: #5ea0f6;
+  background-color: #e2ecff;
+}
+.fliter-event-box-2 >>> .is-checked .el-checkbox__inner {
+  padding: 10%;
+  transition: all 0.25s;
+  background-clip: content-box;
+  background-color: #5ea0f6;
+}
+
+.fliter-event-box-3 >>> .el-checkbox__inner {
+  transition: all 0.25s;
+  border-color: #f9e26e;
+  background-color: #fefaed;
+}
+.fliter-event-box-3 >>> .is-checked .el-checkbox__inner {
+  padding: 10%;
+  transition: all 0.25s;
+  background-clip: content-box;
+  background-color: #f9e26e;
+}
+
+.fliter-event-box-3 >>> .el-checkbox__inner {
+  transition: all 0.25s;
+  border-color: #f985ab;
+  background-color: #fff1f6;
+}
+.fliter-event-box-3 >>> .is-checked .el-checkbox__inner {
+  padding: 10%;
+  transition: all 0.25s;
+  background-clip: content-box;
+  background-color: #f985ab;
 }
 </style>
