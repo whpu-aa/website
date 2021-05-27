@@ -13,7 +13,7 @@
   </nav>
 </template>
 
-<style>
+<style scoped>
 .nav {
   position: fixed;
   z-index: 1000;
