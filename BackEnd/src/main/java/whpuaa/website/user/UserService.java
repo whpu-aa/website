@@ -71,5 +71,5 @@ public interface UserService {
      * @return The user info.
      * @throws BadCredentialException Thrown if username or password is wrong.
      */
-    UserInfo verifyUserCredential(String username, String password) throws BadCredentialException;
+    UserInfo verifyUserCredential(String username, String password) throws UserNotExistException, BadCredentialException;
 }
