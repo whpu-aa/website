@@ -1,8 +1,8 @@
 <template>
   <div class="out">
     <el-row class="top">
-      <el-col :span="4" class="topinf"><h3>协会日历</h3></el-col>
-      <el-col :span="8">
+      <el-col :span="5" class="topinf"><h3>协会日历</h3></el-col>
+      <el-col :span="7">
         <el-date-picker
           v-model="MouthValue"
           type="month"
@@ -88,8 +88,8 @@
         </el-time-select>
         <el-button @click="setFliter" icon="el-icon-search" circle></el-button>
       </el-col>
-      <el-col :span="4"
-        ><div class="fliter-event">任务</div>
+      <el-col :span="4" class="fliter-event"
+        ><div>任务</div>
         <el-checkbox-group class="fliter-event-group" v-model="checkList">
           <el-checkbox class="fliter-event-box-0" label="开会讲题母鸡吖别的"
             >全部</el-checkbox
@@ -205,6 +205,9 @@ export default {
 };
 </script>
 <style scoped>
+.el-date-editor {
+  width: auto;
+}
 .active {
   color: white;
   background-color: orange;
@@ -321,6 +324,9 @@ export default {
 }
 .el-checkbox {
   margin: 0.5rem 0;
+}
+.fliter-event {
+  padding: 1rem 0;
 }
 .fliter-event-group {
   display: flex;
