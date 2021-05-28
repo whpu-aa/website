@@ -12,6 +12,7 @@ import whpuaa.website.user.entity.UserPermission;
 import whpuaa.website.user.entity.UserRepository;
 import whpuaa.website.util.ListWithTotalCount;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -39,6 +41,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(password));
         user.setName("");
         user.setDescription("");
+        user.setPermissions(new ArrayList<>());
+        user.setDetails(new ArrayList<>());
         return user;
     }
 
@@ -96,8 +100,8 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(username))
             throw new UsernameConflictException("Failed to create user because this username already exists.");
 
-        User user = createUserEntity(username, password);
-        userRepository.save(user);
+        User entity = createUserEntity(username, password);
+        User user = userRepository.save(entity);
         return mapEntityToInfo(user);
     }
 
