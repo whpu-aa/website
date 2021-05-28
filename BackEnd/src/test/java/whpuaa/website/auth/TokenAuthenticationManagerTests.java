@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import whpuaa.website.token.BadTokenException;
 import whpuaa.website.token.TokenExpiredException;
@@ -22,7 +23,7 @@ public class TokenAuthenticationManagerTests {
     private TokenService tokenService;
 
     @Autowired
-    private TokenAuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Test
     public void authenticateShouldWork() throws TokenExpiredException, BadTokenException {
@@ -47,5 +48,25 @@ public class TokenAuthenticationManagerTests {
         assertThat(auth.isAuthenticated()).isTrue();
         assertThat(auth.getAuthorities()).hasSize(1);
         assertThat(auth.getAuthorities().iterator().next().getAuthority()).isEqualTo("a-permission");
+    }
+
+    @Test
+    public void authenticateThrowBadTokenAuthenticationException() throws TokenExpiredException, BadTokenException {
+        given(tokenService.verifyToken("a-token")).willThrow(BadTokenException.class);
+
+        TokenAuthentication authentication = new TokenAuthentication();
+        authentication.setToken("a-token");
+
+        assertThatThrownBy(() -> authenticationManager.authenticate(authentication)).isInstanceOf(BadTokenAuthenticationException.class);
+    }
+
+    @Test
+    public void authenticateThrowTokenExpiredAuthenticationException() throws TokenExpiredException, BadTokenException {
+        given(tokenService.verifyToken("a-token")).willThrow(TokenExpiredException.class);
+
+        TokenAuthentication authentication = new TokenAuthentication();
+        authentication.setToken("a-token");
+
+        assertThatThrownBy(() -> authenticationManager.authenticate(authentication)).isInstanceOf(TokenExpiredAuthenticationException.class);
     }
 }

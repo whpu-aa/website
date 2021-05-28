@@ -5,6 +5,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
+import whpuaa.website.token.BadTokenException;
+import whpuaa.website.token.TokenExpiredException;
 import whpuaa.website.token.TokenService;
 import whpuaa.website.user.UserInfo;
 
@@ -25,10 +27,10 @@ public class TokenAuthenticationManager implements AuthenticationManager {
             tokenAuthentication.setUser(user);
             tokenAuthentication.setAuthenticated(true);
             return tokenAuthentication;
-        } catch (whpuaa.website.token.BadTokenException e) {
-            throw new BadTokenException("Token is invalid.", e);
-        } catch (whpuaa.website.token.TokenExpiredException e) {
-            throw new TokenExpiredException("Token is expired.", e);
+        } catch (BadTokenException e) {
+            throw new BadTokenAuthenticationException("Token is invalid.", e);
+        } catch (TokenExpiredException e) {
+            throw new TokenExpiredAuthenticationException("Token is expired.", e);
         }
     }
 }
