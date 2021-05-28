@@ -30,7 +30,7 @@ public class PasswordValidator {
                 return "Password can't be longer than 20.";
             }
 
-            if (CharMatcher.ascii().and(CharMatcher.whitespace().negate()).matchesAllOf(password)) {
+            if (!CharMatcher.ascii().and(CharMatcher.whitespace().negate()).matchesAllOf(password)) {
                 return "Password can only consists of ascii character and not space.";
             }
         }

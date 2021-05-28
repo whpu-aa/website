@@ -2,9 +2,11 @@ package whpuaa.website.token;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.keygen.KeyGenerators;
+import org.springframework.test.annotation.DirtiesContext;
 import whpuaa.website.user.BadCredentialException;
 import whpuaa.website.user.UserInfo;
 import whpuaa.website.user.UserNotExistException;
@@ -19,6 +21,8 @@ import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@AutoConfigureTestDatabase
 public class TokenServiceTests {
     @MockBean
     private UserService userService;

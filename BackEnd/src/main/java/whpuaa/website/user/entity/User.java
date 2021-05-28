@@ -1,4 +1,4 @@
-package whpuaa.website.user;
+package whpuaa.website.user.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,10 +19,10 @@ public class User {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private List<UserPermission> permissions;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private List<UserDetail> details;
 
     public long getId() {
