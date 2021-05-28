@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity(name = "user_permission")
 public class UserPermission {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
