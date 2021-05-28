@@ -39,9 +39,9 @@
         </h4>
       </div>
       <div v-else-if="itemName == '成员风采'">
-        <h3>{{ itemName }}</h3>
+        <h2>{{itemName}}</h2>
         <h4>
-          <pre class="memberContent">
+          <pre class="content">
           刘德，男，软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。
 
           杨宇千，男，大类1901班，算法协会副会长。热爱编程，喜欢钻研各种问题，学习最前沿的技术。在GitHub上有着十几万的代码量，拥有一定的开发经验。曾参与过数计学院的网站建设。平时爱好是听音乐，看书。希望能够通过算法协会，为学院的学风和技术氛围的建设做出自己的贡献。
@@ -74,15 +74,18 @@ export default {
 </script>
 
 <style scoped>
+
 el-header {
   flex-direction: row;
 }
 
-.el-header .el-tabs {
+.el-tabs {
   width: 100%;
+  padding: 5px 0;
 }
+
 .textCommonent {
-  margin-top: 50px;
+  margin-top: 55px;
 }
 .content {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -91,29 +94,34 @@ el-header {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: hidden;
-}
-.memberContent {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: hidden;
+  margin: auto;
+  width: 90%;
 }
 
 /*成员风采的响应式布局*/
 /* 手机*/
 @media screen and (max-width: 767px){
-  .memberContent {
-    /*background-color: #000;*/
-    margin: auto;
-    width: 90%;
+  .el-header {
+    margin-top: 55px;
   }
+  .el-tabs {
+    padding: 10px 0;
+  }
+
 }
 
 /*平板*/
 @media screen and (min-width: 768px){
-
+  .el-header {
+    margin-top: 70px;
+  }
+  .el-tabs {
+    padding: 10px 0;
+  }
+  h2 {
+    position: relative;
+    
+  }
 }
 
 /*电脑*/
@@ -123,3 +131,5 @@ el-header {
 
 
 </style>
+
+:
