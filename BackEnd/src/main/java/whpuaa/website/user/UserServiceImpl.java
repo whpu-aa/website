@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo createUser(@NonNull String username, @NonNull String password) throws UsernameConflictException {
         usernameValidator.ValidateAndThrow(username, false);
-        passwordValidator.Validate(password, false);
+        passwordValidator.ValidateAndThrow(password, false);
 
         if (userRepository.existsByUsername(username))
             throw new UsernameConflictException("Failed to create user because this username already exists.");
@@ -145,7 +145,8 @@ public class UserServiceImpl implements UserService {
         }
 
         if (newPermission != null) {
-            user.setPermissions(newPermission.stream().map(p -> {
+            user.getPermissions().clear();
+            user.getPermissions().addAll(newPermission.stream().map(p -> {
                 UserPermission entity = new UserPermission();
                 entity.setUser(user);
                 entity.setPermission(p);
@@ -173,9 +174,9 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        userRepository.save(user);
+        User newUser = userRepository.saveAndFlush(user);
 
-        return mapEntityToInfo(user);
+        return mapEntityToInfo(newUser);
     }
 
     @Override
