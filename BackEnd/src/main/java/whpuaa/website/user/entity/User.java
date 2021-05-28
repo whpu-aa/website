@@ -1,4 +1,4 @@
-package whpuaa.website.user;
+package whpuaa.website.user.entity;
 
 import javax.persistence.*;
 import java.util.List;

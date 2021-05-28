@@ -3,6 +3,10 @@ package whpuaa.website.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import whpuaa.website.user.entity.User;
+import whpuaa.website.user.entity.UserDetail;
+import whpuaa.website.user.entity.UserPermission;
+import whpuaa.website.user.entity.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
