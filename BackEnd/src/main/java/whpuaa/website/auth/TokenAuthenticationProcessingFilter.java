@@ -23,7 +23,7 @@ public class TokenAuthenticationProcessingFilter extends AbstractAuthenticationP
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String tokenQueryParam = request.getParameter(TOKEN_QUERY_PARAM_NAME);
         if (tokenQueryParam != null) {
             TokenAuthentication authentication = new TokenAuthentication();

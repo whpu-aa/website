@@ -3,9 +3,6 @@ package whpuaa.website.user;
 import org.springframework.lang.NonNull;
 import whpuaa.website.util.ListWithTotalCount;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public interface UserService {
     /**
      * Get user id by username.
