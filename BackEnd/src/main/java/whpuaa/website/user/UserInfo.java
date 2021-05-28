@@ -20,6 +20,20 @@ public class UserInfo {
         this.details = details;
     }
 
+    public UserInfo(UserInfo other) {
+        set(other);
+    }
+
+    public void set(UserInfo other) {
+        this.id = other.id;
+        this.username = other.username;
+        this.name = other.name;
+        this.description = other.description;
+        this.permission = other.permission;
+        this.details = other.details;
+
+    }
+
     public long getId() {
         return id;
     }
