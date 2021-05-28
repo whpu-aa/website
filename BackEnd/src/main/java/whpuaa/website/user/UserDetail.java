@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity(name = "user_detail")
 public class UserDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne(optional = false)
