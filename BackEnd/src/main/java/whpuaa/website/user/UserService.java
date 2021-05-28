@@ -1,8 +1,10 @@
 package whpuaa.website.user;
 
 import org.springframework.lang.NonNull;
+import whpuaa.website.util.ListWithTotalCount;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public interface UserService {
     /**
@@ -35,7 +37,7 @@ public interface UserService {
      * @param numberPerPage Number of users per page.
      * @return The list of user info.
      */
-    List<UserInfo> getUsers(long page, long numberPerPage);
+    ListWithTotalCount<UserInfo> getUsers(long page, long numberPerPage);
 
     /**
      * Create a user.
@@ -54,7 +56,7 @@ public interface UserService {
      * @throws UsernameConflictException Thrown when new username already exists in another user.
      * @throws InvalidOperationOnRootUserException Thrown when change root user's permission.
      */
-    UserInfo modifyUser(long id, UserModifyParams params) throws UsernameConflictException, InvalidOperationOnRootUserException;
+    UserInfo modifyUser(long id, UserModifyParams params) throws UserNotExistException, UsernameConflictException, InvalidOperationOnRootUserException;
 
     /**
      * Remove a user.

@@ -1,7 +1,5 @@
 package whpuaa.website.user.entity;
 
-import whpuaa.website.user.entity.User;
-
 import javax.persistence.*;
 
 @Entity(name = "user_detail")
