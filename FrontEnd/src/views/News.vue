@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-header class="top">
+      <div class="title">新闻</div>
       <el-input
         v-model="inputText"
         placeholder="请输入内容"
@@ -10,11 +11,13 @@
     </el-header>
     <el-container>
       <el-aside class="aside">
-        <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
-        <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
-        <a href="#" @click="handleCheckOut(3)">筛选新闻条件三</a>
-        <a href="#" @click="handleCheckOut(4)">筛选新闻条件四</a>
-        <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
+        <el-card>
+          <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
+          <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
+          <a href="#" @click="handleCheckOut(3)">筛选新闻条件三</a>
+          <a href="#" @click="handleCheckOut(4)">筛选新闻条件四</a>
+          <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
+        </el-card>
       </el-aside>
       <el-main class="main">
         <transition-group appear name="el-fade-in">
@@ -88,6 +91,20 @@ export default {
 };
 </script>
 <style scoped>
+.el-container {
+  background: linear-gradient(to left, #d3959b, #bfe6ba);
+}
+.el-card {
+  margin-left: 60px;
+  margin-top: 30px;
+  background-color: #ffe699;
+}
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  margin-right: 26%;
+}
 .search {
   min-width: 200px;
   max-width: 300px;
@@ -99,25 +116,28 @@ export default {
   height: 40px;
 }
 .top {
-  justify-content: center;
-  background-color: #b3c0d1;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #d9faf3;
   color: #333;
   text-align: center;
   line-height: 60px;
 }
 .main {
   min-width: 500px;
+  display: flex;
 }
 .aside {
-  background-color: #b3c0d1;
   color: #333;
 }
 .more-article {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  margin-left: 20%;
 }
 a:hover {
-  color: #409eff;
+  color: #c55a11;
 }
 a {
   display: block;
