@@ -30,7 +30,7 @@ Request
 interface CreateTokenRequest {
   username: string;
   password: string;
-  expireAfter: number; // 以天为单位
+  expireAfter?: number; // 以天为单位，默认1天
 }
 ```
 
@@ -100,7 +100,6 @@ Response `403`
 Response `200`
 
 Response `401`
-
 
 # 用户
 
