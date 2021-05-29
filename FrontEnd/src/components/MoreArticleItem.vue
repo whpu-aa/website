@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .MoreArticleItem {
   display: flex;
-  min-width: 700px;
+  width: 90%;
   transition: all 0.3s ease-in-out;
 }
 .MoreArticleItem:hover {
@@ -48,7 +48,7 @@ a:hover {
   color: #00a8e4;
 }
 a {
-  width: 50%;
+  width: 75%;
   background-color: #e7e7e7;
   text-decoration: none;
   color: black;

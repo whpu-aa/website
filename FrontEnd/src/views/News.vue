@@ -9,27 +9,32 @@
       ></el-input>
       <el-button icon="el-icon-search" class="searchButton" circle></el-button>
     </el-header>
-    <el-container>
-      <el-aside class="aside">
-        <el-card>
+    <div class="container">
+      <div class="aside">
+        <el-card class="box-card">
+          <div slot="header">筛选条件</div>
           <a href="#" @click="handleCheckOut(1)">筛选新闻条件一</a>
           <a href="#" @click="handleCheckOut(2)">筛选新闻条件二</a>
           <a href="#" @click="handleCheckOut(3)">筛选新闻条件三</a>
           <a href="#" @click="handleCheckOut(4)">筛选新闻条件四</a>
           <a href="#" @click="handleCheckOut(5)">筛选新闻条件五</a>
         </el-card>
-      </el-aside>
-      <el-main class="main">
-        <transition-group appear name="el-fade-in">
-          <more-article-item
-            class="more-article"
-            v-for="info in infos"
-            :key="info.id"
-            :info="info"
-          ></more-article-item>
-        </transition-group>
-      </el-main>
-    </el-container>
+        <el-card class="box-card">
+          <div v-for="item in 5" :key="item">{{ item }}</div>
+        </el-card>
+        <el-card class="box-card">
+          <div v-for="item in 5" :key="item">{{ item + 5 }}</div>
+        </el-card>
+      </div>
+      <div class="main">
+        <more-article-item
+          class="more-article"
+          v-for="info in infos"
+          :key="info.id"
+          :info="info"
+        ></more-article-item>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -91,13 +96,17 @@ export default {
 };
 </script>
 <style scoped>
-.el-container {
-  background-color: #816c6f;
+.container {
+  background-color: #f4f5f5;
+  display: flex;
 }
-.el-card {
-  margin-left: 60px;
-  margin-top: 30px;
-  background-color: #bfbfbf;
+.box-card {
+  margin-bottom: 10px;
+}
+.aside {
+  margin-left: 10%;
+  margin-top: 2%;
+  width: 250px;
 }
 .title {
   text-align: center;
@@ -118,23 +127,20 @@ export default {
 .top {
   display: flex;
   justify-content: flex-end;
-  background-color: #e8e8e8;
+  background-color: #ffffff;
   color: #333;
   text-align: center;
   line-height: 60px;
 }
 .main {
-  min-width: 500px;
-  display: flex;
-}
-.aside {
-  color: #333;
+  width: 60%;
+  margin: 10px 20px;
 }
 .more-article {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   background-color: white;
-  margin-left: 20%;
+  margin-left: 40px;
 }
 a:hover {
   color: #c55a11;
