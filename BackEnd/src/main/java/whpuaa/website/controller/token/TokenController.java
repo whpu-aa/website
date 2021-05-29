@@ -1,12 +1,13 @@
-package whpuaa.website.controller;
+package whpuaa.website.controller.token;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import whpuaa.website.controller.InvalidModelException;
 import whpuaa.website.controller.model.*;
 import whpuaa.website.token.BadTokenException;
-import whpuaa.website.token.ForbiddenException;
 import whpuaa.website.token.TokenExpiredException;
 import whpuaa.website.token.TokenService;
 import whpuaa.website.user.*;
@@ -28,7 +29,7 @@ public class TokenController {
     private TokenService tokenService;
 
     @PostMapping("/create")
-    public HttpCreateTokenResult create(@RequestBody HttpCreateTokenRequest body) throws BadCredentialException {
+    public ResponseEntity<HttpCreateTokenResult> create(@RequestBody HttpCreateTokenRequest body) throws BadCredentialException {
         usernameValidator.validateAndDoIfFailed(body.getUsername(), false, (message) -> {
             throw new InvalidModelException(message);
         });
@@ -54,7 +55,7 @@ public class TokenController {
             TokenService.CreateTokenResult result = tokenService.createToken(body.getUsername(), body.getPassword(), expireAfterDuration);
 
             // TODO: Fill in avatar url when implemented.
-            return new HttpCreateTokenResult(result.token, new HttpUserInfo(result.user, null));
+            return ResponseEntity.ok(new HttpCreateTokenResult(result.token, new HttpUserInfo(result.user, null)));
         } catch (BadCredentialException e) {
             throw new BadCredentialException("Username or password is wrong.");
         } catch (UserNotExistException e) {
@@ -63,34 +64,36 @@ public class TokenController {
     }
 
     @PostMapping("/verify")
-    public HttpVerifyTokenResult verify(@RequestBody HttpVerifyTokenRequest body) throws BadTokenException, TokenExpiredException {
-        UserInfo user =  tokenService.verifyToken(body.getToken());
+    public ResponseEntity<HttpVerifyTokenResult> verify(@RequestBody HttpVerifyTokenRequest body) throws BadTokenException, TokenExpiredException {
+        UserInfo user = tokenService.verifyToken(body.getToken());
         // TODO: Fill in avatar url when implemented.
-        return new HttpVerifyTokenResult(new HttpUserInfo(user, null));
+        return ResponseEntity.ok(new HttpVerifyTokenResult(new HttpUserInfo(user, null)));
     }
 
     @PostMapping("/revoke")
-    @PreAuthorize("isAuthenticated()")
     public void revoke(@RequestBody HttpRevokeTokenRequest body, Authentication authentication) {
         Optional<Long> optionalUserId = tokenService.getTokenUserId(body.getToken());
         if (optionalUserId.isEmpty()) return;
         // shu... Don't tell him/her it's other's token!!! Just return peacefully!
-        if (optionalUserId.get() != ((UserInfo)authentication.getPrincipal()).getId()) return;
+        if (optionalUserId.get() != ((UserInfo) authentication.getPrincipal()).getId()) return;
         tokenService.revokeToken(body.getToken());
     }
 
     @ExceptionHandler
-    public HttpCommonErrorResponse handleBadCredentialException(BadCredentialException e) {
-        return new HttpCommonErrorResponse(100101, e.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<HttpCommonErrorResponse> handleBadCredentialException(BadCredentialException e) {
+        return ResponseEntity.ok(new HttpCommonErrorResponse(100101, e.getMessage()));
     }
 
     @ExceptionHandler
-    public HttpCommonErrorResponse handleBadTokenException(BadTokenException e) {
-        return new HttpCommonErrorResponse(100102, e.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<HttpCommonErrorResponse> handleBadTokenException(BadTokenException e) {
+        return ResponseEntity.ok(new HttpCommonErrorResponse(100102, e.getMessage()));
     }
 
     @ExceptionHandler
-    public HttpCommonErrorResponse handleTokenExpiredException(TokenExpiredException e) {
-        return new HttpCommonErrorResponse(100103, e.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<HttpCommonErrorResponse> handleTokenExpiredException(TokenExpiredException e) {
+        return ResponseEntity.ok(new HttpCommonErrorResponse(100103, e.getMessage()));
     }
 }

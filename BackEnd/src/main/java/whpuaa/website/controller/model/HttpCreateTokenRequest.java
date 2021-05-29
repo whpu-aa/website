@@ -16,6 +16,12 @@ public class HttpCreateTokenRequest {
     public HttpCreateTokenRequest() {
     }
 
+    public HttpCreateTokenRequest(@NonNull String username, @NonNull String password, @Nullable Double expireAfter) {
+        this.username = username;
+        this.password = password;
+        this.expireAfter = expireAfter;
+    }
+
     @NonNull
     public String getUsername() {
         return username;
