@@ -30,6 +30,7 @@ Request
 interface CreateTokenRequest {
   username: string;
   password: string;
+  expireAfter?: number; // 以天为单位，默认1天
 }
 ```
 
@@ -69,6 +70,7 @@ interface VerifyTokenResponse {
 Response `400`
 
 ErrorCode `100102`，token 无效。
+ErrorCode `100103`，token 过期了。
 
 ## post `/api/token/revoke`
 
@@ -89,6 +91,16 @@ Response `200`
 Response `401`
 
 Response `403`
+
+## post `/api/token/revokeAll`
+
+撤销所有 token.
+
+需要验证。
+
+Response `200`
+
+Response `401`
 
 # 用户
 
@@ -126,7 +138,10 @@ interface GetUserListQueryParams {
 Response `200`
 
 ```ts
-type GetUserListResponse = User[];
+interface GetUserListResponse {
+  totalCount: number;
+  items: User[];
+}
 ```
 
 ## get `/api/users/:id`
@@ -326,7 +341,10 @@ interface GetNewsListQueryParams {
 Response `200`
 
 ```ts
-type GetNewsListResponse = NewsDigest[];
+interface GetNewsListResponse {
+  totalCount: number;
+  items: NewsDigest[];
+}
 ```
 
 ## get `/api/news/:id`
