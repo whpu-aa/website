@@ -92,12 +92,12 @@ export default {
 </script>
 <style scoped>
 .el-container {
-  background: linear-gradient(to left, #d3959b, #bfe6ba);
+  background-color: #816c6f;
 }
 .el-card {
   margin-left: 60px;
   margin-top: 30px;
-  background-color: #ffe699;
+  background-color: #bfbfbf;
 }
 .title {
   text-align: center;
@@ -118,7 +118,7 @@ export default {
 .top {
   display: flex;
   justify-content: flex-end;
-  background-color: #d9faf3;
+  background-color: #e8e8e8;
   color: #333;
   text-align: center;
   line-height: 60px;
