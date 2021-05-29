@@ -87,6 +87,19 @@ public class TokenServiceTests {
     }
 
     @Test
+    public void getTokenUserIdShouldWork() throws BadCredentialException, UserNotExistException {
+        UserInfo mockUser = new UserInfo(1, "username", "", "", new ArrayList<>(), new HashMap<>());
+
+        given(userService.verifyUserCredential("username", "password")).willReturn(mockUser);
+
+        TokenService.CreateTokenResult result = tokenService.createToken("username", "password", Duration.ofDays(30));
+
+        assertThat(tokenService.getTokenUserId(result.token)).isPresent().hasValue(1L);
+
+        assertThat(tokenService.getTokenUserId(KeyGenerators.string().generateKey())).isEmpty();
+    }
+
+    @Test
     public void verifyTokenThrowBadTokenException() {
         assertThatThrownBy(() -> tokenService.verifyToken(KeyGenerators.string().generateKey())).isInstanceOf(BadTokenException.class);
     }
