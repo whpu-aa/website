@@ -70,6 +70,7 @@ interface VerifyTokenResponse {
 Response `400`
 
 ErrorCode `100102`，token 无效。
+ErrorCode `100103`，token 过期了。
 
 ## post `/api/token/revoke`
 
