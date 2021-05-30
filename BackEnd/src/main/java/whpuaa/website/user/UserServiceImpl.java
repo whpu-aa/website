@@ -94,8 +94,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo createUser(@NonNull String username, @NonNull String password) throws UsernameConflictException {
-        usernameValidator.ValidateAndThrow(username, false);
-        passwordValidator.ValidateAndThrow(password, false);
+        usernameValidator.validateAndThrow(username, false);
+        passwordValidator.validateAndThrow(password, false);
 
         if (userRepository.existsByUsername(username))
             throw new UsernameConflictException("Failed to create user because this username already exists.");
@@ -107,8 +107,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo modifyUser(long id, UserModifyParams params) throws UserNotExistException, UsernameConflictException, InvalidOperationOnRootUserException {
-        usernameValidator.ValidateAndThrow(params.getUsername(), true);
-        passwordValidator.ValidateAndThrow(params.getPassword(), true);
+        usernameValidator.validateAndThrow(params.getUsername(), true);
+        passwordValidator.validateAndThrow(params.getPassword(), true);
 
         List<String> newPermission = params.getPermission();
         if (newPermission != null) {

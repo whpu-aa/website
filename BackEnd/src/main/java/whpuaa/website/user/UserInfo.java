@@ -11,6 +11,10 @@ public class UserInfo {
     private List<String> permission;
     private Map<String, String> details;
 
+    public UserInfo() {
+
+    }
+
     public UserInfo(long id, String username, String name, String description, List<String> permission, Map<String, String> details) {
         this.id = id;
         this.username = username;
@@ -18,6 +22,20 @@ public class UserInfo {
         this.description = description;
         this.permission = permission;
         this.details = details;
+    }
+
+    public UserInfo(UserInfo other) {
+        set(other);
+    }
+
+    public void set(UserInfo other) {
+        this.id = other.id;
+        this.username = other.username;
+        this.name = other.name;
+        this.description = other.description;
+        this.permission = other.permission;
+        this.details = other.details;
+
     }
 
     public long getId() {
