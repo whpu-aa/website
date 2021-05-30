@@ -1,9 +1,10 @@
-package whpuaa.website.controller.token;
+package whpuaa.website.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import whpuaa.website.controller.InvalidModelException;
 import whpuaa.website.controller.model.*;
@@ -65,6 +66,10 @@ public class TokenController {
 
     @PostMapping("/verify")
     public ResponseEntity<HttpVerifyTokenResult> verify(@RequestBody HttpVerifyTokenRequest body) throws BadTokenException, TokenExpiredException {
+        if (body.getToken() == null || body.getToken().isEmpty()) {
+            throw new InvalidModelException("Token can't be null or empty.");
+        }
+
         UserInfo user = tokenService.verifyToken(body.getToken());
         // TODO: Fill in avatar url when implemented.
         return ResponseEntity.ok(new HttpVerifyTokenResult(new HttpUserInfo(user, null)));

@@ -84,4 +84,37 @@ public class TokenTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("user.id", equalTo(1)));
     }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    void verifyTokenError() throws Exception {
+        mvc.perform(post("/api/token/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpVerifyTokenRequest(null))))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("code", equalTo(100000)));
+
+        mvc.perform(post("/api/token/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpVerifyTokenRequest("a-token"))))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("code", equalTo(100102)));
+
+        MvcResult mvcResult = mvc.perform(post("/api/token/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpCreateTokenRequest("root", "rootroot",
+                        1.0 / 24 / 3600)))) // one second
+                .andExpect(status().isOk())
+                .andReturn();
+
+        HttpCreateTokenResult result = objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), HttpCreateTokenResult.class);
+
+        Thread.sleep(1000);
+
+        mvc.perform(post("/api/token/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpVerifyTokenRequest(result.getToken()))))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("code", equalTo(100103)));
+    }
 }

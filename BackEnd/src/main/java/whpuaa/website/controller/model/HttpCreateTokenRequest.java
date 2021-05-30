@@ -1,51 +1,42 @@
 package whpuaa.website.controller.model;
 
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
-
 public class HttpCreateTokenRequest {
-    @NonNull
-    private String username = "";
+    private String username;
 
-    @NonNull
-    private String password = "";
+    private String password;
 
-    @Nullable
     private Double expireAfter;
 
     public HttpCreateTokenRequest() {
     }
 
-    public HttpCreateTokenRequest(@NonNull String username, @NonNull String password, @Nullable Double expireAfter) {
+    public HttpCreateTokenRequest(String username, String password, Double expireAfter) {
         this.username = username;
         this.password = password;
         this.expireAfter = expireAfter;
     }
 
-    @NonNull
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NonNull String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    @NonNull
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NonNull String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    @Nullable
     public Double getExpireAfter() {
         return expireAfter;
     }
 
-    public void setExpireAfter(@Nullable Double expireAfter) {
+    public void setExpireAfter(Double expireAfter) {
         this.expireAfter = expireAfter;
     }
 }
