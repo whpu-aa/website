@@ -3,6 +3,8 @@ package whpuaa.website.user;
 import com.google.common.base.CharMatcher;
 import org.springframework.lang.Nullable;
 
+import java.util.function.Consumer;
+
 public class PasswordValidator {
     /**
      * Validate a password.
@@ -12,7 +14,7 @@ public class PasswordValidator {
      * @return An error message. Or null if no error.
      */
     @Nullable
-    public String Validate(@Nullable String password, boolean allowNull) {
+    public String validate(@Nullable String password, boolean allowNull) {
         if (password == null) {
             if (!allowNull) {
                 return "Password can't be null.";
@@ -43,9 +45,15 @@ public class PasswordValidator {
      * @param password The username to validate.
      * @param allowNull Whether null is permitted.
      */
-    public void ValidateAndThrow(@Nullable String password, boolean allowNull) {
-        String message = Validate(password, allowNull);
+    public void validateAndThrow(@Nullable String password, boolean allowNull) {
+        String message = validate(password, allowNull);
         if (message == null) return;
         throw new IllegalArgumentException(message);
+    }
+
+    public void validateAndDoIfFailed(@Nullable String password, boolean allowNull, Consumer<String> action) {
+        String message = validate(password, allowNull);
+        if (message == null) return;
+        action.accept(message);
     }
 }
