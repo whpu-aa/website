@@ -11,6 +11,10 @@ public class UserInfo {
     private List<String> permission;
     private Map<String, String> details;
 
+    public UserInfo() {
+
+    }
+
     public UserInfo(long id, String username, String name, String description, List<String> permission, Map<String, String> details) {
         this.id = id;
         this.username = username;

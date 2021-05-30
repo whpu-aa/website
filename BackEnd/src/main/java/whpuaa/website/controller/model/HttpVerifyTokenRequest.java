@@ -9,6 +9,10 @@ public class HttpVerifyTokenRequest {
     public HttpVerifyTokenRequest() {
     }
 
+    public HttpVerifyTokenRequest(@NonNull String token) {
+        this.token = token;
+    }
+
     @NonNull
     public String getToken() {
         return token;

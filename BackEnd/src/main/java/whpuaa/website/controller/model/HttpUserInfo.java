@@ -9,6 +9,10 @@ public class HttpUserInfo extends UserInfo {
 
     private String avatarUrl;
 
+    public HttpUserInfo() {
+
+    }
+
     public HttpUserInfo(UserInfo base, String avatarUrl) {
         super(base);
         this.avatarUrl = avatarUrl;

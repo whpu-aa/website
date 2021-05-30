@@ -9,7 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import whpuaa.website.controller.model.HttpCreateTokenRequest;
+import whpuaa.website.controller.model.HttpCreateTokenResult;
+import whpuaa.website.controller.model.HttpVerifyTokenRequest;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,7 +38,7 @@ public class TokenTests {
                 .content(objectMapper.writeValueAsString(new HttpCreateTokenRequest("root", "rootroot", 30.))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("token", not(emptyString())))
-                .andExpect(jsonPath("user.id", is(1)));
+                .andExpect(jsonPath("user.id", equalTo(1)));
     }
 
     void createTokenAssertError(HttpCreateTokenRequest request, int statusCode, int errorCode) throws Exception {
@@ -43,7 +46,7 @@ public class TokenTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().is(statusCode))
-                .andExpect(jsonPath("code", is(errorCode)));
+                .andExpect(jsonPath("code", equalTo(errorCode)));
     }
 
     void createTokenAssertInvalidModel(HttpCreateTokenRequest request) throws Exception {
@@ -62,5 +65,23 @@ public class TokenTests {
         createTokenAssertInvalidModel(new HttpCreateTokenRequest("root", "rootroot", 366.0));
 
         createTokenAssertError(new HttpCreateTokenRequest("root", "a-password", null), 400, 100101);
+    }
+
+    @Test
+    void verifyTokenShouldWork() throws Exception {
+        MvcResult mvcResult = mvc.perform(post("/api/token/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpCreateTokenRequest("root", "rootroot", 30.))))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        HttpCreateTokenResult result = objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), HttpCreateTokenResult.class);
+
+
+        mvc.perform(post("/api/token/verify")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new HttpVerifyTokenRequest(result.getToken()))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("user.id", equalTo(1)));
     }
 }
