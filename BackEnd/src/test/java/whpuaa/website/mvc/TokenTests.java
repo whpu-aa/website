@@ -37,4 +37,30 @@ public class TokenTests {
                 .andExpect(jsonPath("token", not(emptyString())))
                 .andExpect(jsonPath("user.id", is(1)));
     }
+
+    void createTokenAssertError(HttpCreateTokenRequest request, int statusCode, int errorCode) throws Exception {
+        mvc.perform(post("/api/token/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().is(statusCode))
+                .andExpect(jsonPath("code", is(errorCode)));
+    }
+
+    void createTokenAssertInvalidModel(HttpCreateTokenRequest request) throws Exception {
+        createTokenAssertError(request, 400, 100000);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Test
+    void createTokenError() throws Exception {
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest(null, "rootroot", null));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("root", null, null));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("", "rootroot", null));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("!!!", "rootroot", null));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("root", "", null));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("root", "rootroot", -1.0));
+        createTokenAssertInvalidModel(new HttpCreateTokenRequest("root", "rootroot", 366.0));
+
+        createTokenAssertError(new HttpCreateTokenRequest("root", "a-password", null), 400, 100101);
+    }
 }

@@ -80,20 +80,19 @@ public class TokenController {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<HttpCommonErrorResponse> handleBadCredentialException(BadCredentialException e) {
-        return ResponseEntity.ok(new HttpCommonErrorResponse(100101, e.getMessage()));
+        return ResponseEntity.badRequest().body(new HttpCommonErrorResponse(100101, e.getMessage()));
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<HttpCommonErrorResponse> handleBadTokenException(BadTokenException e) {
-        return ResponseEntity.ok(new HttpCommonErrorResponse(100102, e.getMessage()));
+        return ResponseEntity.badRequest().body(new HttpCommonErrorResponse(100102, e.getMessage()));
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<HttpCommonErrorResponse> handleTokenExpiredException(TokenExpiredException e) {
-        return ResponseEntity.ok(new HttpCommonErrorResponse(100103, e.getMessage()));
+        return ResponseEntity.badRequest().body(new HttpCommonErrorResponse(100103, e.getMessage()));
     }
 }
