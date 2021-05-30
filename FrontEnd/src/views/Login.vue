@@ -191,7 +191,7 @@ export default {
   width: 100%;
   transition: all 1s;
   border-radius: 0;
-  background-color: rgb(255, 255, 255, -0);
+  background-color: rgba(255, 255, 255, 0);
   border: 0;
   border-bottom: 1px solid #3d3b4f;
   position: relative;
