@@ -11,6 +11,10 @@ public class UserModifyParams {
     private List<String> permission;
     private Map<String, String> details;
 
+    public UserModifyParams() {
+
+    }
+
     public UserModifyParams(String username, String name, String password, String description, List<String> permission, Map<String, String> details) {
         this.username = username;
         this.name = name;

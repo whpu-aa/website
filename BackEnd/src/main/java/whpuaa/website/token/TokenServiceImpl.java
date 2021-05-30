@@ -56,6 +56,14 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
+    public Optional<Long> getTokenUserId(String token) {
+        Optional<UserToken> optionalEntity = tokenRepository.findByToken(token);
+        if (optionalEntity.isEmpty()) return Optional.empty();
+        return Optional.of(optionalEntity.get().getUserId());
+    }
+
+
+    @Override
     public void revokeToken(String token) {
         tokenRepository.deleteByToken(token);
     }

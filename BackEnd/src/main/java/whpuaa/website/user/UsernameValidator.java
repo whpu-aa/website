@@ -3,6 +3,9 @@ package whpuaa.website.user;
 import com.google.common.base.CharMatcher;
 import org.springframework.lang.Nullable;
 
+import javax.annotation.CheckReturnValue;
+import java.util.function.Consumer;
+
 public class UsernameValidator {
     /**
      * Validate a username.
@@ -12,7 +15,8 @@ public class UsernameValidator {
      * @return An error message. Or null if no error.
      */
     @Nullable
-    public String Validate(@Nullable String username, boolean allowNull) {
+    @CheckReturnValue
+    public String validate(@Nullable String username, boolean allowNull) {
         if (username == null) {
             if (!allowNull) {
                 return "Username can't be null.";
@@ -43,9 +47,15 @@ public class UsernameValidator {
      * @param username The username to validate.
      * @param allowNull Whether null is permitted.
      */
-    public void ValidateAndThrow(@Nullable String username, boolean allowNull) {
-        String message = Validate(username, allowNull);
+    public void validateAndThrow(@Nullable String username, boolean allowNull) {
+        String message = validate(username, allowNull);
         if (message == null) return;
         throw new IllegalArgumentException(message);
+    }
+
+    public void validateAndDoIfFailed(@Nullable String username, boolean allowNull, Consumer<String> action) {
+        String message = validate(username, allowNull);
+        if (message == null) return;
+        action.accept(message);
     }
 }
