@@ -59,7 +59,7 @@ public class UserServiceTests {
     @Test
     public void getUsersShouldWorkWithMoreUser() throws UsernameConflictException {
         for (int i = 1; i <= 24; i++) {
-            userService.createUser(String.valueOf(i), "aaaaaaaa");
+            userService.createUser(String.valueOf(i), "a-password");
         }
 
         ListWithTotalCount<UserInfo> result1 = userService.getUsers(0, 10);

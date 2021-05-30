@@ -5,6 +5,7 @@ import whpuaa.website.user.UserInfo;
 import whpuaa.website.user.UserNotExistException;
 
 import java.time.Duration;
+import java.util.Optional;
 
 public interface TokenService {
     class CreateTokenResult {
@@ -46,6 +47,13 @@ public interface TokenService {
      * @throws TokenExpiredException Thrown when token is expired.
      */
     UserInfo verifyToken(String token) throws BadTokenException, TokenExpiredException;
+
+    /**
+     * Get the owner user's id of the token. If token does not exist, return empty optional.
+     * @param token The token.
+     * @return The user id. Or an empty Optional if token does not exist.
+     */
+    Optional<Long> getTokenUserId(String token);
 
     /**
      * Revoke a token, which means it is not valid any more.
