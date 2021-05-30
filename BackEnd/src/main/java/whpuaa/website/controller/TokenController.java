@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import whpuaa.website.controller.InvalidModelException;
 import whpuaa.website.controller.model.*;
 import whpuaa.website.token.BadTokenException;
 import whpuaa.website.token.TokenExpiredException;
@@ -77,6 +75,10 @@ public class TokenController {
 
     @PostMapping("/revoke")
     public void revoke(@RequestBody HttpRevokeTokenRequest body, Authentication authentication) {
+        if (body.getToken() == null || body.getToken().isEmpty()) {
+            throw new InvalidModelException("Token can't be null or empty.");
+        }
+
         Optional<Long> optionalUserId = tokenService.getTokenUserId(body.getToken());
         if (optionalUserId.isEmpty()) return;
         // shu... Don't tell him/her it's other's token!!! Just return peacefully!

@@ -1,20 +1,20 @@
 package whpuaa.website.controller.model;
 
-import org.springframework.lang.NonNull;
-
 public class HttpRevokeTokenRequest {
-    @NonNull
-    private String token = "";
+    private String token;
 
     public HttpRevokeTokenRequest() {
     }
 
-    @NonNull
+    public HttpRevokeTokenRequest(String token) {
+        this.token = token;
+    }
+
     public String getToken() {
         return token;
     }
 
-    public void setToken(@NonNull String token) {
+    public void setToken(String token) {
         this.token = token;
     }
 }
