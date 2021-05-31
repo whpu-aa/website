@@ -4,7 +4,7 @@
     >
       <h1>
         数计学院算法协会
-        <el-tabs v-model="itemName" stretch tab-position="top" type="card">
+        <el-tabs v-model="itemName" stretch tab-position="top" >
           <el-tab-pane
               v-for="(item, index) in site"
               :label="item"
@@ -42,43 +42,28 @@
         </h4>
       </div>
       <div v-else-if="itemName == '成员风采'">
-        <h2>{{ itemName }}</h2>
-        <div class="photo">
-          <img :src="photo" alt="成员1"/>
-          <h3>刘德</h3>
-          软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。
-        </div>
-        <div class="photo">
-          <img :src="photo" alt="成员2"/>
-          <h3>杨宇千</h3>
-          大类1901班，算法协会副会长。热爱编程，喜欢钻研各种问题，学习最前沿的技术。在GitHub上有着十几万的代码量，拥有一定的开发经验。曾参与过数计学院的网站建设。平时爱好是听音乐，看书。希望能够通过算法协会，为学院的学风和技术氛围的建设做出自己的贡献。
-        </div>
-        <div class="photo">
-          <img :src="photo" alt="成员3"/>
-          <h3>周云</h3>
-          软工1801班，算法协会副会长，入党积极分子。兴趣爱好是跑步，打羽毛球，看动漫。专业基础知识掌握牢固，面对困难乐观积极进取，能主动探索自己的知识盲区，拓宽自己的眼界。希望在数计学院算法协会不仅能学习各种优化算法，提升自己的编程能力，更能在与协会成员磨合过程中，提升自己的团队协作能力。
-        </div>
-      </div>
-      <div v-else-if="itemName == '招新专区'">
-        <h3>{{ itemName }}</h3>
-      </div>
-      <div v-else>
-        <h3>{{ itemName }}</h3>
+        <MemberStyle></MemberStyle>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+//把成员风采的东西单独抽取了一个组件
+import MemberStyle from "@/components/MemberStyle"
+
 export default {
   name: "About",
   data() {
     return {
       site: ["协会介绍", "成员风采", "招新专区"],
       itemName: "协会介绍",
-      photo: require("../assets/member1.jpg"),
+      // photo: require("../assets/member1.jpg"),
     };
   },
+  components:{
+    MemberStyle
+  }
 };
 </script>
 
@@ -126,7 +111,7 @@ el-header {
   .photo {
     margin: auto auto 20px;
     width: 95%;
-    height: 700px;
+    height: 10%;
 
     text-align: left;
   }
@@ -135,9 +120,9 @@ el-header {
     object-fit: cover;
     width: 100%;
     height: 70%;
-    display: inline-block;
     border: none;
     border-radius: 10px;
+    /*position-;*/
   }
 
 }
@@ -152,18 +137,41 @@ el-header {
     padding: 10px 0;
   }
 
+  .el-tabs >>> .el-tabs__item {
+    font-size: 23px;
+  }
+
   .photo {
-    margin: auto auto 20px;
-    width: 100%;
-    height: 700px;
+    margin-right: 1em;
+    display: inline-block;
+    vertical-align: top;
+
+    width: 27%;
+    height: 20em;
 
     text-align: left;
+  }
+
+  .photo img {
+    object-fit: cover;
+
+    width: 100%;
+    height: 80%;
   }
 }
 
 /*电脑*/
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
+  .photo {
+    margin-right: 1em;
+    display: inline-block;
+    vertical-align: top;
+
+    width: 30%;
+    height: 35em;
+
+    text-align: left;
+  }
 }
 </style>
 
-:
