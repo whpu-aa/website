@@ -1,13 +1,5 @@
 <template>
-  <div class="main" :style="{ fontSize: fontSize + 'vw' }">
-    <el-button-group class="FontSizeButton">
-      <el-button type="primary" @click="FrontSizeMinus()"
-        >Aa<i class="el-icon-minus"></i
-      ></el-button>
-      <el-button type="primary" @click="FrontSizePlus()"
-        >Aa<i class="el-icon-plus"></i
-      ></el-button>
-    </el-button-group>
+  <div class="main">
     <div class="NewsArticles">
       <div class="article">
         <h3>{{ title }}</h3>
@@ -47,7 +39,6 @@ export default {
   },
   data() {
     return {
-      fontSize: 1.5,
       title: "文章标题",
       msg_center: [
         "原标题：拜登正式接受美国民主党总统候选人提名",
@@ -82,41 +73,18 @@ export default {
       ],
     };
   },
-  methods: {
-    FrontSizeMinus: function () {
-      var num = this.fontSize * 10;
-      num -= 1;
-      num /= 10;
-      if (num < 1) {
-        num = 1;
-        this.$alert("已经达到字体最小", "提示", {
-          confirmButtonText: "确定",
-        });
-      }
-      this.fontSize = num;
-    },
-    FrontSizePlus: function () {
-      var num = this.fontSize * 10;
-      num += 1;
-      num /= 10;
-      if (num > 2) {
-        num = 2;
-        this.$alert("已经达到字体最大", "提示", {
-          confirmButtonText: "确定",
-        });
-      }
-      this.fontSize = num;
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
 .main {
+  font-size: 20px;
   padding-top: 2.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f4f5f5;
 }
 .NewsArticles {
   padding-top: 1.5%;
@@ -127,19 +95,20 @@ export default {
   align-items: baseline;
 }
 .article {
+  margin-left: 6%;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   height: auto;
   min-height: 700px;
   flex-basis: 50%;
-  background-color: rgb(211, 211, 211); /* 颜色未定 ,后期统一背板颜色 */
+  background-color: #ffffff;
 }
 .morearticle {
   border-radius: 4px;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   flex-basis: 30%;
   height: auto;
-  background-color: rgb(211, 211, 211);
 }
 pre {
   white-space: pre-wrap; /*css-3*/
@@ -153,12 +122,13 @@ a {
   text-align: center;
 }
 .msgleft {
+  padding: 10px;
   text-align: left;
 }
 .rightPart {
   display: flex;
   height: auto;
-  flex-basis: 30%;
+  flex-basis: 32%;
   flex-direction: column;
 }
 .articleList {
@@ -166,6 +136,7 @@ a {
   flex-direction: column;
   height: auto;
   margin-bottom: 10px;
+  background-color: #ffffff;
 }
 .readMore {
   border-radius: 4px;
@@ -173,13 +144,13 @@ a {
   display: block;
   min-height: 30px;
   height: auto;
-  background-color: rgb(180, 180, 180);
   margin: 10px;
+  background-color: #ffffff;
 }
 .otherRecommended {
+  background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   margin-top: 50px;
-  background-color: rgb(211, 211, 211);
 }
 </style>
