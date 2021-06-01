@@ -2,11 +2,13 @@ package whpuaa.website.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import whpuaa.website.user.UserPermissions;
 
 @Configuration
 public class WebsiteWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -20,7 +22,9 @@ public class WebsiteWebSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .and().csrf().disable()
                 .authorizeRequests(authorize ->
                         authorize
-                                .mvcMatchers("/api/token/create", "/api/token/verify").permitAll()
-                                .mvcMatchers("/api/token/revoke").authenticated());
+                                .mvcMatchers("/api/token/revoke").authenticated()
+                                .mvcMatchers(HttpMethod.POST, "/api/users").hasAuthority(UserPermissions.USER_MANAGEMENT)
+                                .mvcMatchers(HttpMethod.DELETE, "/api/users/{user_id}").hasAuthority(UserPermissions.USER_MANAGEMENT)
+                                .anyRequest().permitAll());
     }
 }
