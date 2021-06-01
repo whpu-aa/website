@@ -163,10 +163,10 @@ type GetUserResponse = User;
 ```ts
 interface PostUserRequest {
   username: string; // 用户名
-  name: string; // 名字
   password: string; // 密码
-  permission: string[]; // 拥有的权限。
+  name?: string; // 名字，不填就是空字符串
   description?: string; // 描述，不填就是空字符串。
+  permission?: string[]; // 拥有的权限，不填就是没权限。
   details?: Record<string, string>; // 其他的信息，一个string map。不填就是空map。
 }
 ```
@@ -194,8 +194,8 @@ Response `403`
 ```ts
 interface PatchUserRequest {
   username?: string; // 用户名，仅管理员可设置
-  name?: string; // 名字，仅管理员可设置
   password?: string; // 密码，仅管理员可设置
+  name?: string; // 名字，仅管理员可设置
   permission?: string[]; // 权限，仅管理员可设置
   description?: string; // 描述。
   details?: Record<string, string>; // 其他的信息，一个string map。设为null来删除某个字段。
