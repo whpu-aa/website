@@ -24,6 +24,7 @@ public class WebsiteWebSecurityConfiguration extends WebSecurityConfigurerAdapte
                         authorize
                                 .mvcMatchers("/api/token/revoke").authenticated()
                                 .mvcMatchers(HttpMethod.POST, "/api/users").hasAuthority(UserPermissions.USER_MANAGEMENT)
+                                .mvcMatchers(HttpMethod.PATCH, "/api/users/{user_id}").authenticated()
                                 .mvcMatchers(HttpMethod.DELETE, "/api/users/{user_id}").hasAuthority(UserPermissions.USER_MANAGEMENT)
                                 .anyRequest().permitAll());
     }
