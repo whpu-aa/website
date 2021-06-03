@@ -1,19 +1,17 @@
 <template>
   <div class="about">
-    <el-header
-    >
+    <el-header>
       <h1>
         数计学院算法协会
-        <el-tabs v-model="itemName" stretch tab-position="top" >
+        <el-tabs v-model="itemName" stretch tab-position="top">
           <el-tab-pane
-              v-for="(item, index) in site"
-              :label="item"
-              :key="index"
-              :name="item"
+            v-for="(item, index) in site"
+            :label="item"
+            :key="index"
+            :name="item"
           ></el-tab-pane>
         </el-tabs>
-      </h1
-      >
+      </h1>
     </el-header>
 
     <div class="textCommonent">
@@ -50,7 +48,7 @@
 
 <script>
 //把成员风采的东西单独抽取了一个组件
-import MemberStyle from "@/components/AboutItem"
+import MemberStyle from "@/components/AboutItem";
 
 export default {
   name: "About",
@@ -60,9 +58,9 @@ export default {
       itemName: "协会介绍",
     };
   },
-  components:{
-    MemberStyle
-  }
+  components: {
+    MemberStyle,
+  },
 };
 </script>
 
@@ -80,7 +78,6 @@ el-header {
   margin-top: 55px;
 }
 
-
 /*成员风采的响应式布局*/
 /* 手机*/
 @media screen and (max-width: 767px) {
@@ -91,7 +88,6 @@ el-header {
   .el-tabs {
     padding: 10px 0;
   }
-
 }
 
 /*平板*/
@@ -103,8 +99,5 @@ el-header {
   .el-tabs {
     padding: 10px 0;
   }
-
 }
-
 </style>
-
