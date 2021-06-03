@@ -22,7 +22,6 @@ export default {
   data() {
     return {
       photo: require("@/assets/member1.jpg"),
-      // currentDate: new Date(),
       memberName: ["刘德", "杨宇千", "周云"],
       introduction: [
         "软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。\n",
@@ -36,28 +35,53 @@ export default {
 </script>
 
 <style scoped>
+
 .el-card {
-  margin:10px;
-  height: 40em;
+  margin: 10px;
 }
+
 .el-card >>> .el-card__header {
   font-size: 30px;
-  font-weight:bold;
+  font-weight: bold;
 }
+
 .content {
   border-left: 2px;
   padding: 14px;
 }
 
 .image {
-  width: 90%;
-  height: 10%;
-  margin-bottom: 1em;
+  width: 95%;
+  margin: auto auto 1em;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .clearfix:after {
   clear: both;
+}
+
+.content {
+  font-family: fantasy;
+  text-indent: 2em;
+  text-align: left;
+}
+/*手机*/
+@media screen and (max-width: 767px) {
+  .el-row >>> .el-col-8 {
+    width: 100%;
+  }
+
+  .el-card {
+    border: 5px solid #EBEEF5;
+    margin-bottom: 10%;
+  }
+}
+
+/*平板*/
+@media screen and (min-width: 768px){
+  .el-card {
+    width: 95%;
+  }
 }
 </style>

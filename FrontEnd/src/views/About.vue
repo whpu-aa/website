@@ -42,7 +42,7 @@
         </h4>
       </div>
       <div v-else-if="itemName == '成员风采'">
-        <MemberStyle></MemberStyle>
+        <MemberStyle class="main"></MemberStyle>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 
 <script>
 //把成员风采的东西单独抽取了一个组件
-import MemberStyle from "@/components/MemberStyle"
+import MemberStyle from "@/components/AboutItem"
 
 export default {
   name: "About",
@@ -58,7 +58,6 @@ export default {
     return {
       site: ["协会介绍", "成员风采", "招新专区"],
       itemName: "协会介绍",
-      // photo: require("../assets/member1.jpg"),
     };
   },
   components:{
@@ -81,21 +80,6 @@ el-header {
   margin-top: 55px;
 }
 
-.textCommonent h2 {
-  font-family: 新宋体;
-}
-
-.content {
-  font-family: "微软雅黑 Light";
-  font-size: 14px;
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: hidden;
-  margin: auto;
-  width: 90%;
-}
-
 
 /*成员风采的响应式布局*/
 /* 手机*/
@@ -106,23 +90,6 @@ el-header {
 
   .el-tabs {
     padding: 10px 0;
-  }
-
-  .photo {
-    margin: auto auto 20px;
-    width: 95%;
-    height: 10%;
-
-    text-align: left;
-  }
-
-  .photo img {
-    object-fit: cover;
-    width: 100%;
-    height: 70%;
-    border: none;
-    border-radius: 10px;
-    /*position-;*/
   }
 
 }
@@ -137,41 +104,7 @@ el-header {
     padding: 10px 0;
   }
 
-  .el-tabs >>> .el-tabs__item {
-    font-size: 23px;
-  }
-
-  .photo {
-    margin-right: 1em;
-    display: inline-block;
-    vertical-align: top;
-
-    width: 27%;
-    height: 20em;
-
-    text-align: left;
-  }
-
-  .photo img {
-    object-fit: cover;
-
-    width: 100%;
-    height: 80%;
-  }
 }
 
-/*电脑*/
-@media screen and (min-width: 1200px) {
-  .photo {
-    margin-right: 1em;
-    display: inline-block;
-    vertical-align: top;
-
-    width: 30%;
-    height: 35em;
-
-    text-align: left;
-  }
-}
 </style>
 
