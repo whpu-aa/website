@@ -235,4 +235,32 @@ public class UserTests extends MvcTestBase {
         mvcPatch(url, new HttpPatchUserRequest(null, null, null, mockPermission, null, null))
                 .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100203)));
     }
+
+    @Test
+    public void deleteShouldWork() throws Exception {
+        long userId = users.get(0).getId();
+        String url = "/api/users/" + userId + "?access_token=" + adminToken;
+
+        mvcDelete(url).andExpect(status().isOk());
+
+        mvcDelete(url).andExpect(status().isOk());
+    }
+
+    @Test
+    public void deletePermissionCheck() throws Exception {
+        long userId = users.get(0).getId();
+        String baseUrl = "/api/users/" + userId;
+        String url = baseUrl + "?access_token=" + userToken;
+
+        mvcDelete(baseUrl).andExpect(status().isUnauthorized());
+        mvcDelete(url).andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void deleteRootUserError() throws Exception {
+        String url = "/api/users/1?access_token=" + adminToken;
+
+        mvcDelete(url).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("code", equalTo(100203)));
+    }
 }

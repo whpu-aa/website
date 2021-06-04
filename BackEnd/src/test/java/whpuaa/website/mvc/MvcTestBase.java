@@ -38,4 +38,8 @@ public class MvcTestBase {
     protected ResultActions mvcPatch(String url, Object json) throws Exception {
         return mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(json)));
     }
+
+    protected ResultActions mvcDelete(String url) throws Exception {
+        return mvc.perform(delete(url));
+    }
 }
