@@ -20,7 +20,7 @@ ErrorCode `100000`，通用错误代码，用于请求格式不对。
 3. 否则，视为未登陆状态。
 4. 如果有 token，检查 token 是否合法，以及对应的用户信息是否存在。如果 ok，则进入已验证状态，否则返回`401 Unauthorized`.
 
-## post `/api/token/create`
+## post `/api/token/create` (✅v0.1.0)
 
 创建一个 token.
 
@@ -47,7 +47,7 @@ Response `400`
 
 ErrorCode `100101`，用户名或密码不正确。
 
-## post `/api/token/verify`
+## post `/api/token/verify` (✅v0.1.0)
 
 检查一个 token 是否有效。
 
@@ -72,7 +72,7 @@ Response `400`
 ErrorCode `100102`，token 无效。
 ErrorCode `100103`，token 过期了。
 
-## post `/api/token/revoke`
+## post `/api/token/revoke` (✅v0.1.0)
 
 撤销一个 token.
 
@@ -122,7 +122,7 @@ interface User {
 }
 ```
 
-## get `/api/users`
+## get `/api/users` (✅v0.1.0)
 
 获取用户列表。
 
@@ -144,7 +144,7 @@ interface GetUserListResponse {
 }
 ```
 
-## get `/api/users/:id`
+## get `/api/users/:id` (✅v0.1.0)
 
 获取一个用户。
 
@@ -154,7 +154,7 @@ Response `200`
 type GetUserResponse = User;
 ```
 
-## post `/api/users`
+## post `/api/users` (✅v0.1.0)
 
 创建一个用户。
 
@@ -185,7 +185,7 @@ Response `401`
 
 Response `403`
 
-## patch `/api/users/:id`
+## patch `/api/users/:id` (✅v0.1.0)
 
 修改一个用户。
 
@@ -218,7 +218,7 @@ Response `401`
 
 Response `403`
 
-## delete `/api/users/:id`
+## delete `/api/users/:id` (✅v0.1.0)
 
 删除一个新闻。
 
