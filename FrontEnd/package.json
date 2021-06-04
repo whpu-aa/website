@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "core-js": "^3.13.0",
+    "core-js": "^3.13.1",
     "element-ui": "^2.15.1",
     "highlight.js": "^10.7.2",
-    "vue": "^2.6.12",
+    "vue": "^2.6.13",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
@@ -29,9 +29,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.27.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.9.0",
+    "eslint-plugin-vue": "^7.10.0",
     "prettier": "^2.3.0",
     "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.13"
   }
 }
