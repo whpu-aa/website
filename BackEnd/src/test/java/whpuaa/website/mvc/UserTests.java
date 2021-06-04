@@ -1,15 +1,9 @@
 package whpuaa.website.mvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
 import whpuaa.website.controller.model.HttpPostUserRequest;
 import whpuaa.website.user.UserInfo;
 import whpuaa.website.user.UserPermissions;
@@ -26,19 +20,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@AutoConfigureTestDatabase
-public class UserTests {
+public class UserTests extends MvcTestBase {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private List<UserInfo> users;
 
@@ -127,5 +111,31 @@ public class UserTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void postInvalidModelError() throws Exception {
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest(null, "a-password", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("", "a-password", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("!", "a-password", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("a-username", null, null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("a-username", "", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("a-username", "short", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        List<String> badPermission = new ArrayList<>();
+        badPermission.add("invalid");
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("a-username", "a-password", null, badPermission, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+    }
+
+    @Test
+    public void postUsernameConflict() throws Exception {
+        mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("root", "a-password", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100201)));
     }
 }
