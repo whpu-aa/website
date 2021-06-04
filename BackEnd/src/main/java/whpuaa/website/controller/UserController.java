@@ -72,7 +72,7 @@ public class UserController {
 
     @PatchMapping("/users/{user_id}")
     public ResponseEntity<HttpUserInfo> patch(@PathVariable("user_id") long userId, @RequestBody HttpPatchUserRequest body, TokenAuthentication authentication) throws InvalidOperationOnRootUserException, UserNotExistException, UsernameConflictException {
-        if (!authentication.getUser().getPermission().contains(UserPermissions.USER_MANAGEMENT) && (body.getUsername() != null || body.getPassword() != null || body.getName() != null || body.getPermission() != null)) {
+        if (!authentication.getUser().getPermission().contains(UserPermissions.USER_MANAGEMENT) && (authentication.getUser().getId() != userId || body.getUsername() != null || body.getPassword() != null || body.getName() != null || body.getPermission() != null)) {
             return ResponseEntity.status(403).build();
         }
         usernameValidator.validateAndDoIfFailed(body.getUsername(), true, (m) -> {

@@ -175,4 +175,64 @@ public class UserTests extends MvcTestBase {
                 .andExpect(jsonPath("permission", both(iterableWithSize(1)).and(hasItem(UserPermissions.NEWS_MANAGEMENT))))
                 .andExpect(jsonPath("details", both(aMapWithSize(1)).and(hasEntry("a-key", "a-value"))));
     }
+
+    @Test
+    public void patchPermissionCheck() throws Exception {
+        long userId = users.get(0).getId();
+        String urlBase = "/api/users/" + userId;
+        String urlAsUser = urlBase + "?access_token=" + userToken;
+
+        mvcPatch(urlBase, new HttpPatchUserRequest()).andExpect(status().isUnauthorized());
+
+        mvcPatch(urlAsUser, new HttpPatchUserRequest("a-username", null, null, null, null, null))
+                .andExpect(status().isForbidden());
+        mvcPatch(urlAsUser, new HttpPatchUserRequest(null, "a-password", null, null, null, null))
+                .andExpect(status().isForbidden());
+        mvcPatch(urlAsUser, new HttpPatchUserRequest(null, null, "a-name", null, null, null))
+                .andExpect(status().isForbidden());
+        List<String> mockPermission = new ArrayList<>();
+        mockPermission.add(UserPermissions.NEWS_MANAGEMENT);
+        mvcPatch(urlAsUser, new HttpPatchUserRequest(null, null, null, mockPermission, null, null))
+                .andExpect(status().isForbidden());
+
+        mvcPatch("/api/users/" + users.get(1).getId() + "?access_token=" + userToken, new HttpPatchUserRequest())
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void patchInvalidModelError() throws Exception {
+        long userId = users.get(0).getId();
+        String url = "/api/users/" + userId + "?access_token=" + adminToken;
+
+        mvcPatch(url, new HttpPatchUserRequest("", null, null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPatch(url, new HttpPatchUserRequest("!", null, null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPatch(url, new HttpPatchUserRequest(null, "", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        mvcPatch(url, new HttpPatchUserRequest(null, "short", null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+        List<String> badPermission = new ArrayList<>();
+        badPermission.add("invalid");
+        mvcPatch(url, new HttpPatchUserRequest(null, null, null, badPermission, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100000)));
+    }
+
+    @Test
+    public void patchUsernameConflictError() throws Exception {
+        long userId = users.get(0).getId();
+        String url = "/api/users/" + userId + "?access_token=" + adminToken;
+
+        mvcPatch(url, new HttpPatchUserRequest("root", null, null, null, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100201)));
+    }
+
+    @Test
+    public void patchRootUserPermissionError() throws Exception {
+        String url = "/api/users/1?access_token=" + adminToken;
+        List<String> mockPermission = new ArrayList<>();
+        mockPermission.add(UserPermissions.NEWS_MANAGEMENT);
+        mvcPatch(url, new HttpPatchUserRequest(null, null, null, mockPermission, null, null))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100203)));
+    }
 }

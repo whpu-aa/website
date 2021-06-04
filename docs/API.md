@@ -228,7 +228,7 @@ Response `200`
 
 Response `400`
 
-ErrorCode `100204` 不能删除根用户。
+ErrorCode `100203` 不能删除根用户。
 
 ## get `/api/users/:id/avatar`
 
