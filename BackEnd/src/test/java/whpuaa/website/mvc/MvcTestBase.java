@@ -10,8 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,5 +33,9 @@ public class MvcTestBase {
 
     protected ResultActions mvcPost(String url, Object json) throws Exception {
         return mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(json)));
+    }
+
+    protected ResultActions mvcPatch(String url, Object json) throws Exception {
+        return mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(json)));
     }
 }

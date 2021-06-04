@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import whpuaa.website.controller.model.HttpPatchUserRequest;
 import whpuaa.website.controller.model.HttpPostUserRequest;
 import whpuaa.website.user.UserInfo;
 import whpuaa.website.user.UserPermissions;
@@ -15,10 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class UserTests extends MvcTestBase {
     @Autowired
@@ -37,8 +36,8 @@ public class UserTests extends MvcTestBase {
             users.add(user);
         }
 
-        adminToken = Helper.createToken(mvc, objectMapper, "root", "rootroot");
-        userToken = Helper.createToken(mvc, objectMapper, "1", "a-password");
+        adminToken = createToken("root", "rootroot");
+        userToken = createToken("1", "a-password");
     }
 
     @Test
@@ -137,5 +136,43 @@ public class UserTests extends MvcTestBase {
     public void postUsernameConflict() throws Exception {
         mvcPost("/api/users?access_token=" + adminToken, new HttpPostUserRequest("root", "a-password", null, null, null, null))
                 .andExpect(status().isBadRequest()).andExpect(jsonPath("code", equalTo(100201)));
+    }
+
+    @Test
+    public void patchShouldWorkAsUser() throws Exception {
+        long userId = users.get(0).getId();
+        String url = "/api/users/" + userId + "?access_token=" + userToken;
+
+        Map<String, String> mockDetails = new HashMap<>();
+        mockDetails.put("a-key", "a-value");
+        mvcPatch(url, new HttpPatchUserRequest(null, null, null, null, "a-description", mockDetails))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("description", equalTo("a-description")))
+                .andExpect(jsonPath("details", both(aMapWithSize(1)).and(hasEntry("a-key", "a-value"))));
+
+        mockDetails.put("a-key", null);
+        mockDetails.put("b-key", "b-value");
+        mvcPatch(url, new HttpPatchUserRequest(null, null, null, null, null, mockDetails))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("description", equalTo("a-description")))
+                .andExpect(jsonPath("details", both(aMapWithSize(1)).and(hasEntry("b-key", "b-value"))));
+    }
+
+    @Test
+    public void patchShouldWorkAsAdmin() throws Exception {
+        long userId = users.get(0).getId();
+        String url = "/api/users/" + userId + "?access_token=" + adminToken;
+
+        List<String> mockPermission = new ArrayList<>();
+        mockPermission.add(UserPermissions.NEWS_MANAGEMENT);
+        Map<String, String> mockDetails = new HashMap<>();
+        mockDetails.put("a-key", "a-value");
+        mvcPatch(url, new HttpPatchUserRequest("a-username", "a-password", "a-name", mockPermission, "a-description", mockDetails))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("username", equalTo("a-username")))
+                .andExpect(jsonPath("name", equalTo("a-name")))
+                .andExpect(jsonPath("description", equalTo("a-description")))
+                .andExpect(jsonPath("permission", both(iterableWithSize(1)).and(hasItem(UserPermissions.NEWS_MANAGEMENT))))
+                .andExpect(jsonPath("details", both(aMapWithSize(1)).and(hasEntry("a-key", "a-value"))));
     }
 }

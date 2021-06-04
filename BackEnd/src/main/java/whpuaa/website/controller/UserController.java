@@ -83,9 +83,9 @@ public class UserController {
         });
         validateUserPermission(body.getPermission(), true);
 
-        userService.modifyUser(userId, new UserModifyParams(body.getUsername(), body.getName(), body.getPassword(), body.getDescription(), body.getPermission(), body.getDetails()));
+        UserInfo user = userService.modifyUser(userId, new UserModifyParams(body.getUsername(), body.getName(), body.getPassword(), body.getDescription(), body.getPermission(), body.getDetails()));
 
-        return null;
+        return ResponseEntity.ok(mapUserInfoToHttp(user));
     }
 
     @DeleteMapping("/users/{user_id}")
