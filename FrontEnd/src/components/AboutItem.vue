@@ -63,6 +63,7 @@ export default {
   text-indent: 2em;
   text-align: left;
 }
+
 /*手机*/
 @media screen and (max-width: 767px) {
   .el-row >>> .el-col-8 {
