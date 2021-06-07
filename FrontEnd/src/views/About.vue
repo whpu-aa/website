@@ -71,33 +71,33 @@ el-header {
 
 .el-tabs >>> .el-tabs__item {
   width: 100%;
-  font-size: 17px;
+  font-size: 1.2rem;
 }
 
 .textCommonent {
-  margin-top: 55px;
+  margin-top: 5rem;
 }
 
 /*成员风采的响应式布局*/
 /* 手机*/
 @media screen and (max-width: 767px) {
   .el-header {
-    margin-top: 55px;
+    margin-top: 5rem;
   }
 
   .el-tabs {
-    padding: 10px 0;
+    padding: 1rem 0;
   }
 }
 
 /*平板*/
 @media screen and (min-width: 768px) {
   .el-header {
-    margin-top: 70px;
+    margin-top: 6rem;
   }
 
   .el-tabs {
-    padding: 10px 0;
+    padding: 1rem 0;
   }
 }
 </style>

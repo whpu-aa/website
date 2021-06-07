@@ -35,17 +35,16 @@ export default {
 
 <style scoped>
 .el-card {
-  margin: 10px;
+  margin: 1rem;
 }
 
 .el-card >>> .el-card__header {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .content {
-  border-left: 2px;
-  padding: 14px;
+  padding: 0.5rem;
 }
 
 .image {
