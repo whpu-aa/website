@@ -10,13 +10,20 @@
         <div class="morearticle">
           <p>其他新闻</p>
           <!--跳转至其他文章-->
-          <div class="articleList">
-            <more-article-item
-              v-for="info in infos"
-              :key="info.id"
-              :info="info"
-            ></more-article-item>
+          <div class="wrapper">
+            <div class="articleList">
+              <more-article-item
+                v-for="info in infos"
+                :key="info.id"
+                :info="info"
+              ></more-article-item>
+            </div>
           </div>
+          <div
+            v-loading="loading"
+            class="loading"
+            element-loading-spinner="el-icon-loading"
+          ></div>
           <!--跳转到新闻目录-->
           <div class="readMore">
             <router-link to="/News">阅读更多新闻</router-link>
@@ -70,10 +77,75 @@ export default {
           iconSrc: "logo.png",
           articleContents: "文章内容",
         },
+        {
+          id: 4,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 5,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 6,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 7,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
       ],
+      loading: false,
     };
   },
-  methods: {},
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      //监听滚动事件
+      let refresh = this.debounce(this.changeLoading);
+      let wrapperScroll = document.getElementsByClassName("wrapper");
+      wrapperScroll[0].addEventListener("scroll", () => {
+        //变量scrollTop是滚动条滚动时，距离顶部的距离
+        let scrollTop = wrapperScroll[0].scrollTop;
+        //变量clientHeight是可视区的高度
+        let clientHeight = wrapperScroll[0].clientHeight;
+        //变量scrollHeight是滚动条的总高度
+        let scrollHeight = wrapperScroll[0].scrollHeight;
+        console.log("scrollTop" + scrollTop);
+        console.log("clientHeight" + clientHeight);
+        console.log("scrollHeight" + scrollHeight);
+        if (scrollTop + clientHeight >= scrollHeight) {
+          refresh();
+        }
+      });
+    },
+    changeLoading() {
+      //定义滑到底部后的操作函数  后期为获取新一页新闻消息
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
+    },
+    //防抖函数
+    debounce(func, delay = 200) {
+      let timer = null;
+      return function (...args) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    },
+  },
 };
 </script>
 
@@ -131,10 +203,13 @@ a {
   flex-basis: 32%;
   flex-direction: column;
 }
+.wrapper {
+  height: 480px;
+  overflow: auto;
+}
 .articleList {
   display: flex;
   flex-direction: column;
-  height: auto;
   margin-bottom: 10px;
   background-color: #ffffff;
 }
