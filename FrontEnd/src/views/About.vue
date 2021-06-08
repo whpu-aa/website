@@ -1,17 +1,18 @@
 <template>
   <div class="about">
-    <el-header
-      ><h1>
+    <el-header>
+      <h1>
         数计学院算法协会
-        <el-tabs v-model="itemName" stretch tab-position="top" type="card">
+        <el-tabs v-model="itemName" stretch tab-position="top">
           <el-tab-pane
             v-for="(item, index) in site"
             :label="item"
             :key="index"
             :name="item"
           ></el-tab-pane>
-        </el-tabs></h1
-    ></el-header>
+        </el-tabs>
+      </h1>
+    </el-header>
 
     <div class="textCommonent">
       <div v-if="itemName == '协会介绍'">
@@ -39,29 +40,16 @@
         </h4>
       </div>
       <div v-else-if="itemName == '成员风采'">
-        <h3>{{ itemName }}</h3>
-        <h4>
-          <pre class="content">
-          刘德，男，软工1804班，算法协会会长，入党积极分子。热爱运动，喜欢打羽毛球和乒乓球。为人比较活跃，喜欢参加各种活动，以此来充实自己的大学生活。希望在数计学院算法协会学习到更多专业技能，希望能为数计学院学风建设做出一点贡献。
-
-          杨宇千，男，大类1901班，算法协会副会长。热爱编程，喜欢钻研各种问题，学习最前沿的技术。在GitHub上有着十几万的代码量，拥有一定的开发经验。曾参与过数计学院的网站建设。平时爱好是听音乐，看书。希望能够通过算法协会，为学院的学风和技术氛围的建设做出自己的贡献。
-
-          周云，男，软工1801班，算法协会副会长，入党积极分子。兴趣爱好是跑步，打羽毛球，看动漫。专业基础知识掌握牢固，面对困难乐观积极进取，能主动探索自己的知识盲区，拓宽自己的眼界。希望在数计学院算法协会不仅能学习各种优化算法，提升自己的编程能力，更能在与协会成员磨合过程中，提升自己的团队协作能力。
-        </pre
-          >
-        </h4>
-      </div>
-      <div v-else-if="itemName == '招新专区'">
-        <h3>{{ itemName }}</h3>
-      </div>
-      <div v-else>
-        <h3>{{ itemName }}</h3>
+        <MemberStyle class="main"></MemberStyle>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+//把成员风采的东西单独抽取了一个组件
+import MemberStyle from "@/components/AboutItem";
+
 export default {
   name: "About",
   data() {
@@ -69,6 +57,9 @@ export default {
       site: ["协会介绍", "成员风采", "招新专区"],
       itemName: "协会介绍",
     };
+  },
+  components: {
+    MemberStyle,
   },
 };
 </script>
@@ -78,18 +69,35 @@ el-header {
   flex-direction: row;
 }
 
-.el-header .el-tabs {
+.el-tabs >>> .el-tabs__item {
   width: 100%;
+  font-size: 1.2rem;
 }
+
 .textCommonent {
-  margin-top: 50px;
+  margin-top: 5rem;
 }
-.content {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: hidden;
+
+/*成员风采的响应式布局*/
+/* 手机*/
+@media screen and (max-width: 767px) {
+  .el-header {
+    margin-top: 5rem;
+  }
+
+  .el-tabs {
+    padding: 1rem 0;
+  }
+}
+
+/*平板*/
+@media screen and (min-width: 768px) {
+  .el-header {
+    margin-top: 6rem;
+  }
+
+  .el-tabs {
+    padding: 1rem 0;
+  }
 }
 </style>
