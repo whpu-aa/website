@@ -19,6 +19,11 @@
               ></more-article-item>
             </div>
           </div>
+          <transition name="fade">
+            <div class="backtop" v-show="isBack" @click="backTop">
+              <i class="el-icon-caret-top"></i>
+            </div>
+          </transition>
           <div
             v-loading="loading"
             class="loading"
@@ -103,6 +108,7 @@ export default {
         },
       ],
       loading: false,
+      isBack: false,
     };
   },
   mounted() {
@@ -112,17 +118,16 @@ export default {
     scroll() {
       //监听滚动事件
       let refresh = this.debounce(this.changeLoading);
-      let wrapperScroll = document.getElementsByClassName("wrapper");
-      wrapperScroll[0].addEventListener("scroll", () => {
+      let wrapperScroll = document.getElementsByClassName("wrapper")[0];
+      wrapperScroll.addEventListener("scroll", () => {
         //变量scrollTop是滚动条滚动时，距离顶部的距离
-        let scrollTop = wrapperScroll[0].scrollTop;
+        let scrollTop = wrapperScroll.scrollTop;
+        if (scrollTop >= 200) this.isBack = true;
+        else this.isBack = false;
         //变量clientHeight是可视区的高度
-        let clientHeight = wrapperScroll[0].clientHeight;
+        let clientHeight = wrapperScroll.clientHeight;
         //变量scrollHeight是滚动条的总高度
-        let scrollHeight = wrapperScroll[0].scrollHeight;
-        console.log("scrollTop" + scrollTop);
-        console.log("clientHeight" + clientHeight);
-        console.log("scrollHeight" + scrollHeight);
+        let scrollHeight = wrapperScroll.scrollHeight;
         if (scrollTop + clientHeight >= scrollHeight) {
           refresh();
         }
@@ -144,6 +149,17 @@ export default {
           func.apply(this, args);
         }, delay);
       };
+    },
+    //回顶效果带过渡
+    backTop() {
+      let wrapperScroll = document.getElementsByClassName("wrapper")[0];
+      let timer = setInterval(() => {
+        if (wrapperScroll.scrollTop > 0) wrapperScroll.scrollTop -= 50;
+        else {
+          wrapperScroll.scrollTop = 0;
+          clearInterval(timer);
+        }
+      }, 30);
     },
   },
 };
@@ -176,6 +192,7 @@ export default {
   background-color: #ffffff;
 }
 .morearticle {
+  position: relative;
   border-radius: 4px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -213,6 +230,23 @@ a {
   margin-bottom: 10px;
   background-color: #ffffff;
 }
+.backtop {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: deepskyblue;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 1px gray;
+  bottom: 60px;
+  right: 30px;
+}
+.backtop :hover {
+  cursor: pointer;
+}
 .readMore {
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -227,5 +261,18 @@ a {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   margin-top: 50px;
+}
+/* 回顶的动画效果 */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 1s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 1s;
 }
 </style>
