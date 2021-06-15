@@ -1,8 +1,14 @@
 <template>
-  <a class="toMoreArticles" :href="info.targetHref" target="_block">
-    <img class="moreArticlesIcon" :src="require('@/assets/' + info.iconSrc)" />
-    <div class="articleContents">{{ info.articleContents }}</div>
-  </a>
+  <div class="MoreArticleItem">
+    <a class="toMoreArticles" :href="info.targetHref" target="_block">
+      <img
+        class="moreArticlesIcon"
+        :src="require('@/assets/' + info.iconSrc)"
+      />
+      <div class="articleContents">{{ info.articleContents }}</div>
+    </a>
+    <div class="triangle"></div>
+  </div>
 </template>
 
 <script>
@@ -22,13 +28,32 @@ export default {
 </script>
 
 <style scoped>
+.MoreArticleItem {
+  display: flex;
+  width: 90%;
+  transition: all 0.3s ease-in-out;
+}
+.MoreArticleItem:hover {
+  transform: scale(1.03);
+}
+.triangle {
+  width: 0px; /*设置宽高为0，所以div的内容为空，从才能形成三角形尖角*/
+  height: 0px;
+  border-left: 50px solid #e7e7e7;
+  border-top: 50px solid transparent; /*transparent 表示透明*/
+  border-bottom: 50px solid transparent;
+  margin: 10px 0;
+}
 a:hover {
-  color: aqua;
+  color: #00a8e4;
 }
 a {
+  width: 75%;
+  background-color: #e7e7e7;
   text-decoration: none;
   color: black;
   margin: 10px;
+  margin-right: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 .toMoreArticles {
@@ -42,6 +67,10 @@ a {
   margin: 10px;
 }
 .articleContents {
+  height: 80px; /*div宽度根据具体情况在父组件使用深度作用选择器调整 */
   margin: 10px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 </style>

@@ -1,13 +1,5 @@
 <template>
-  <div class="main" :style="{ fontSize: fontSize + 'vw' }">
-    <el-button-group class="FontSizeButton">
-      <el-button type="primary" @click="FrontSizeMinus()"
-        >Aa<i class="el-icon-minus"></i
-      ></el-button>
-      <el-button type="primary" @click="FrontSizePlus()"
-        >Aa<i class="el-icon-plus"></i
-      ></el-button>
-    </el-button-group>
+  <div class="main">
     <div class="NewsArticles">
       <div class="article">
         <h3>{{ title }}</h3>
@@ -18,13 +10,25 @@
         <div class="morearticle">
           <p>其他新闻</p>
           <!--跳转至其他文章-->
-          <div class="articleList">
-            <more-article-item
-              v-for="info in infos"
-              :key="info.id"
-              :info="info"
-            ></more-article-item>
+          <div class="wrapper">
+            <div class="articleList">
+              <more-article-item
+                v-for="info in infos"
+                :key="info.id"
+                :info="info"
+              ></more-article-item>
+            </div>
           </div>
+          <transition name="fade">
+            <div class="backtop" v-show="isBack" @click="backTop">
+              <i class="el-icon-caret-top"></i>
+            </div>
+          </transition>
+          <div
+            v-loading="loading"
+            class="loading"
+            element-loading-spinner="el-icon-loading"
+          ></div>
           <!--跳转到新闻目录-->
           <div class="readMore">
             <router-link to="/News">阅读更多新闻</router-link>
@@ -47,7 +51,6 @@ export default {
   },
   data() {
     return {
-      fontSize: 1.5,
       title: "文章标题",
       msg_center: [
         "原标题：拜登正式接受美国民主党总统候选人提名",
@@ -79,33 +82,84 @@ export default {
           iconSrc: "logo.png",
           articleContents: "文章内容",
         },
+        {
+          id: 4,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 5,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 6,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
+        {
+          id: 7,
+          targetHref: "http://www.baidu.com",
+          iconSrc: "logo.png",
+          articleContents: "文章内容",
+        },
       ],
+      loading: false,
+      isBack: false,
     };
   },
+  mounted() {
+    this.scroll();
+  },
   methods: {
-    FrontSizeMinus: function () {
-      var num = this.fontSize * 10;
-      num -= 1;
-      num /= 10;
-      if (num < 1) {
-        num = 1;
-        this.$alert("已经达到字体最小", "提示", {
-          confirmButtonText: "确定",
-        });
-      }
-      this.fontSize = num;
+    scroll() {
+      //监听滚动事件
+      let refresh = this.debounce(this.changeLoading);
+      let wrapperScroll = document.getElementsByClassName("wrapper")[0];
+      wrapperScroll.addEventListener("scroll", () => {
+        //变量scrollTop是滚动条滚动时，距离顶部的距离
+        let scrollTop = wrapperScroll.scrollTop;
+        if (scrollTop >= 200) this.isBack = true;
+        else this.isBack = false;
+        //变量clientHeight是可视区的高度
+        let clientHeight = wrapperScroll.clientHeight;
+        //变量scrollHeight是滚动条的总高度
+        let scrollHeight = wrapperScroll.scrollHeight;
+        if (scrollTop + clientHeight >= scrollHeight) {
+          refresh();
+        }
+      });
     },
-    FrontSizePlus: function () {
-      var num = this.fontSize * 10;
-      num += 1;
-      num /= 10;
-      if (num > 2) {
-        num = 2;
-        this.$alert("已经达到字体最大", "提示", {
-          confirmButtonText: "确定",
-        });
-      }
-      this.fontSize = num;
+    changeLoading() {
+      //定义滑到底部后的操作函数  后期为获取新一页新闻消息
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
+    },
+    //防抖函数
+    debounce(func, delay = 200) {
+      let timer = null;
+      return function (...args) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    },
+    //回顶效果带过渡
+    backTop() {
+      let wrapperScroll = document.getElementsByClassName("wrapper")[0];
+      let timer = setInterval(() => {
+        if (wrapperScroll.scrollTop > 0) wrapperScroll.scrollTop -= 50;
+        else {
+          wrapperScroll.scrollTop = 0;
+          clearInterval(timer);
+        }
+      }, 30);
     },
   },
 };
@@ -113,10 +167,12 @@ export default {
 
 <style scoped>
 .main {
+  font-size: 20px;
   padding-top: 2.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f4f5f5;
 }
 .NewsArticles {
   padding-top: 1.5%;
@@ -127,19 +183,21 @@ export default {
   align-items: baseline;
 }
 .article {
+  margin-left: 6%;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   height: auto;
   min-height: 700px;
   flex-basis: 50%;
-  background-color: rgb(211, 211, 211); /* 颜色未定 ,后期统一背板颜色 */
+  background-color: #ffffff;
 }
 .morearticle {
+  position: relative;
   border-radius: 4px;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   flex-basis: 30%;
   height: auto;
-  background-color: rgb(211, 211, 211);
 }
 pre {
   white-space: pre-wrap; /*css-3*/
@@ -153,19 +211,41 @@ a {
   text-align: center;
 }
 .msgleft {
+  padding: 10px;
   text-align: left;
 }
 .rightPart {
   display: flex;
   height: auto;
-  flex-basis: 30%;
+  flex-basis: 32%;
   flex-direction: column;
+}
+.wrapper {
+  height: 480px;
+  overflow: auto;
 }
 .articleList {
   display: flex;
   flex-direction: column;
-  height: auto;
   margin-bottom: 10px;
+  background-color: #ffffff;
+}
+.backtop {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: deepskyblue;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 1px gray;
+  bottom: 60px;
+  right: 30px;
+}
+.backtop :hover {
+  cursor: pointer;
 }
 .readMore {
   border-radius: 4px;
@@ -173,13 +253,26 @@ a {
   display: block;
   min-height: 30px;
   height: auto;
-  background-color: rgb(180, 180, 180);
   margin: 10px;
+  background-color: #ffffff;
 }
 .otherRecommended {
+  background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   margin-top: 50px;
-  background-color: rgb(211, 211, 211);
+}
+/* 回顶的动画效果 */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 1s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 1s;
 }
 </style>
