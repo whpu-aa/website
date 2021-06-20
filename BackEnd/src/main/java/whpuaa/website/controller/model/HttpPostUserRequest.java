@@ -1,26 +1,25 @@
-package whpuaa.website.user;
+package whpuaa.website.controller.model;
 
 import java.util.List;
 import java.util.Map;
 
-public class UserModifyParams {
+public class HttpPostUserRequest {
     private String username;
-    private String name;
     private String password;
-    private String description;
+    private String name;
     private List<String> permission;
+    private String description;
     private Map<String, String> details;
 
-    public UserModifyParams() {
-
+    public HttpPostUserRequest() {
     }
 
-    public UserModifyParams(String username, String name, String password, String description, List<String> permission, Map<String, String> details) {
+    public HttpPostUserRequest(String username, String password, String name, List<String> permission, String description, Map<String, String> details) {
         this.username = username;
-        this.name = name;
         this.password = password;
-        this.description = description;
+        this.name = name;
         this.permission = permission;
+        this.description = description;
         this.details = details;
     }
 
@@ -32,14 +31,6 @@ public class UserModifyParams {
         this.username = username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -48,12 +39,12 @@ public class UserModifyParams {
         this.password = password;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<String> getPermission() {
@@ -62,6 +53,14 @@ public class UserModifyParams {
 
     public void setPermission(List<String> permission) {
         this.permission = permission;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Map<String, String> getDetails() {

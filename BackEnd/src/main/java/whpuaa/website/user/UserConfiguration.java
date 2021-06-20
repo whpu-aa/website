@@ -8,11 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class UserConfiguration {
     @Bean
-    public UserService userService() {
-        return new UserServiceImpl();
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

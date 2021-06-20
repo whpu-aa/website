@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import whpuaa.website.user.UserRepository;
+import whpuaa.website.user.entity.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -20,7 +20,7 @@ ErrorCode `100000`，通用错误代码，用于请求格式不对。
 3. 否则，视为未登陆状态。
 4. 如果有 token，检查 token 是否合法，以及对应的用户信息是否存在。如果 ok，则进入已验证状态，否则返回`401 Unauthorized`.
 
-## post `/api/token/create`
+## post `/api/token/create` (✅v0.1.0)
 
 创建一个 token.
 
@@ -30,6 +30,7 @@ Request
 interface CreateTokenRequest {
   username: string;
   password: string;
+  expireAfter?: number; // 以天为单位，默认1天
 }
 ```
 
@@ -46,7 +47,7 @@ Response `400`
 
 ErrorCode `100101`，用户名或密码不正确。
 
-## post `/api/token/verify`
+## post `/api/token/verify` (✅v0.1.0)
 
 检查一个 token 是否有效。
 
@@ -69,8 +70,9 @@ interface VerifyTokenResponse {
 Response `400`
 
 ErrorCode `100102`，token 无效。
+ErrorCode `100103`，token 过期了。
 
-## post `/api/token/revoke`
+## post `/api/token/revoke` (✅v0.1.0)
 
 撤销一个 token.
 
@@ -89,6 +91,16 @@ Response `200`
 Response `401`
 
 Response `403`
+
+## post `/api/token/revokeAll`
+
+撤销所有 token.
+
+需要验证。
+
+Response `200`
+
+Response `401`
 
 # 用户
 
@@ -110,7 +122,7 @@ interface User {
 }
 ```
 
-## get `/api/users`
+## get `/api/users` (✅v0.1.0)
 
 获取用户列表。
 
@@ -126,10 +138,13 @@ interface GetUserListQueryParams {
 Response `200`
 
 ```ts
-type GetUserListResponse = User[];
+interface GetUserListResponse {
+  totalCount: number;
+  items: User[];
+}
 ```
 
-## get `/api/users/:id`
+## get `/api/users/:id` (✅v0.1.0)
 
 获取一个用户。
 
@@ -139,7 +154,7 @@ Response `200`
 type GetUserResponse = User;
 ```
 
-## post `/api/users`
+## post `/api/users` (✅v0.1.0)
 
 创建一个用户。
 
@@ -148,10 +163,10 @@ type GetUserResponse = User;
 ```ts
 interface PostUserRequest {
   username: string; // 用户名
-  name: string; // 名字
   password: string; // 密码
-  permission: string[]; // 拥有的权限。
+  name?: string; // 名字，不填就是空字符串
   description?: string; // 描述，不填就是空字符串。
+  permission?: string[]; // 拥有的权限，不填就是没权限。
   details?: Record<string, string>; // 其他的信息，一个string map。不填就是空map。
 }
 ```
@@ -170,7 +185,7 @@ Response `401`
 
 Response `403`
 
-## patch `/api/users/:id`
+## patch `/api/users/:id` (✅v0.1.0)
 
 修改一个用户。
 
@@ -179,8 +194,8 @@ Response `403`
 ```ts
 interface PatchUserRequest {
   username?: string; // 用户名，仅管理员可设置
-  name?: string; // 名字，仅管理员可设置
   password?: string; // 密码，仅管理员可设置
+  name?: string; // 名字，仅管理员可设置
   permission?: string[]; // 权限，仅管理员可设置
   description?: string; // 描述。
   details?: Record<string, string>; // 其他的信息，一个string map。设为null来删除某个字段。
@@ -203,7 +218,7 @@ Response `401`
 
 Response `403`
 
-## delete `/api/users/:id`
+## delete `/api/users/:id` (✅v0.1.0)
 
 删除一个新闻。
 
@@ -213,7 +228,7 @@ Response `200`
 
 Response `400`
 
-ErrorCode `100204` 不能删除根用户。
+ErrorCode `100203` 不能删除根用户。
 
 ## get `/api/users/:id/avatar`
 
@@ -326,7 +341,10 @@ interface GetNewsListQueryParams {
 Response `200`
 
 ```ts
-type GetNewsListResponse = NewsDigest[];
+interface GetNewsListResponse {
+  totalCount: number;
+  items: NewsDigest[];
+}
 ```
 
 ## get `/api/news/:id`
