@@ -87,6 +87,11 @@
         >
         </el-time-select>
         <el-button @click="setFliter" icon="el-icon-search" circle></el-button>
+        <el-button
+          @click="dialog = true"
+          icon="el-icon-plus"
+          circle
+        ></el-button>
       </el-col>
       <el-col :span="4" class="fliter-event"
         ><div>任务</div>
@@ -101,6 +106,58 @@
         </el-checkbox-group>
       </el-col>
     </el-row>
+
+    <el-drawer
+      title="我嵌套了 Form !"
+      :before-close="handleClose"
+      :visible.sync="dialog"
+      size="40%"
+      direction="rtl"
+      custom-class="demo-drawer"
+      ref="drawer"
+    >
+      <div class="demo-drawer__content">
+        <span>请选择标签</span>
+        <el-form :model="form">
+          <el-form-item label-width="80px">
+            <el-checkbox-group
+              class="fliter-event-group-aside"
+              v-model="form.check"
+            >
+              <el-checkbox
+                class="fliter-event-box-1"
+                label="开会"
+              ></el-checkbox>
+              <el-checkbox
+                class="fliter-event-box-2"
+                label="讲题"
+              ></el-checkbox>
+              <el-checkbox
+                class="fliter-event-box-3"
+                label="母鸡吖"
+              ></el-checkbox>
+              <el-checkbox
+                class="fliter-event-box-4"
+                label="别的"
+              ></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+          <el-form-item label="位置" label-width="80px" size="100%">
+            <el-input
+              class="aside-input"
+              v-model="form.pos"
+              placeholder="请输入位置"
+            ></el-input>
+          </el-form-item>
+        </el-form>
+        <div class="demo-drawer__footer">
+          <el-button>取 消</el-button>
+          <el-button type="primary" @click="$refs.drawer.closeDrawer()">{{
+            loading ? "提交中 ..." : "确 定"
+          }}</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -110,6 +167,12 @@ export default {
     return {
       day: new Date().toISOString().substring(8, 10), //亮的那个
       MouthValue: new Date().toISOString().substring(0, 7),
+
+      dialog: false,
+      form: {
+        check: "",
+      },
+
       fliterStartTime: "",
       fliterEndTime: "",
       timeFliter: ["08:00", "22:00"],
@@ -389,5 +452,22 @@ export default {
   transition: all 0.25s;
   background-clip: content-box;
   background-color: #f985ab;
+}
+
+.el-form-item >>> .el-form-item__content {
+  margin-left: 0 !important;
+}
+.fliter-event-group-aside {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.aside-input >>> .el-input__inner {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  margin-left: 2rem;
+  border-bottom: 1px solid #dcdfe6;
 }
 </style>
